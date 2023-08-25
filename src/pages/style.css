@@ -1,0 +1,9 @@
+.aProduct{
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    width: 100px;
+}
+.shape-avatar{
+    width: 300px;
+}

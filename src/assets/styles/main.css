@@ -2469,7 +2469,7 @@ section.ant-layout.layout-content .ant-layout-content.content-ant {
   color: #8c8c8c;
 }
 
-.card-Billing-info.ant-card {
+.card-Products-info.ant-card {
   box-shadow: none;
   background-color: #fafafa;
   border: 1px solid #f5f5f5;
@@ -2485,7 +2485,7 @@ section.ant-layout.layout-content .ant-layout-content.content-ant {
 .fill-danger {
   fill: #ff4d4f;
 }
-.card-Billing-info.ant-card .darkbtn {
+.card-Products-info.ant-card .darkbtn {
   color: #8c8c8c;
 }
 
@@ -2493,7 +2493,7 @@ section.ant-layout.layout-content .ant-layout-content.content-ant {
   display: flex;
 }
 
-.card-Billing-info .col-action button {
+.card-Products-info .col-action button {
   height: 34px;
   font-size: 12px;
   padding: 0 15px;
@@ -2524,7 +2524,7 @@ section.ant-layout.layout-content .ant-layout-content.content-ant {
   margin-bottom: 14px;
 }
 
-.card-Billing-info.ant-card .ant-descriptions-header {
+.card-Products-info.ant-card .ant-descriptions-header {
   margin-bottom: 0px;
 }
 

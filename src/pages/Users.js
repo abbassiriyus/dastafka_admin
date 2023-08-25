@@ -1,342 +1,144 @@
-/*!
-=========================================================
-* Muse Ant Design Dashboard - v1.0.0
-=========================================================
-* Product Page: https://www.creative-tim.com/product/muse-ant-design-dashboard
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/muse-ant-design-dashboard/blob/main/LICENSE.md)
-* Coded by Creative Tim
-=========================================================
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
 import {
   Row,
   Col,
   Card,
   Radio,
   Table,
-  message,
   Button,
   Avatar,
   Typography,
 } from "antd";
+import { Content } from "antd/lib/layout/layout";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-
-// Images
-import face from "../assets/images/face-1.jpg";
-import face2 from "../assets/images/face-2.jpg";
-import face3 from "../assets/images/face-3.jpg";
-import face4 from "../assets/images/face-4.jpg";
-import face5 from "../assets/images/face-5.jpeg";
-import face6 from "../assets/images/face-6.jpeg";
+import url from "./host.js";
+import "./user.css";
 
 const { Title } = Typography;
 
-const formProps = {
-  name: "file",
-  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-  headers: {
-    authorization: "authorization-text",
-  },
-  onChange(info) {
-    if (info.file.status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (info.file.status === "done") {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-};
-// table code start
+
+
+function newUser() {
+  document.querySelector('.modalMaybe').style="background-color:blue"
+}
+function Tables() {
+  var [data,setData]=useState([])
+  var [table,setInfo]=useState([])
+
+  const onChange = (e) => console.log(`radio checked:${e.target.value}`);
 const columns = [
   {
-    title: "AUTHOR",
-    dataIndex: "name",
-    key: "name",
-    width: "32%",
+    title: "patronymic",
+    dataIndex: "patronymic",
+    key: "patronymic",
+    width: "12%",
   },
   {
-    title: "FUNCTION",
-    dataIndex: "function",
-    key: "function",
-  },
-
-  {
-    title: "STATUS",
-    key: "status",
-    dataIndex: "status",
+    title: "Surname",
+    dataIndex: "surname",
+    width: "12%",
   },
   {
-    title: "EMPLOYED",
-    key: "employed",
-    dataIndex: "employed",
-  },
-];
-
-const data = [
-  {
-    key: "1",
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-            src={face2}
-          ></Avatar>
-          <div className="avatar-info">
-            <Title level={5}>Michael John</Title>
-            <p>michael@mail.com</p>
-          </div>
-        </Avatar.Group>{" "}
-      </>
-    ),
-    function: (
-      <>
-        <div className="author-info">
-          <Title level={5}>Manager</Title>
-          <p>Organization</p>
-        </div>
-      </>
-    ),
-
-    status: (
-      <>
-        <Button type="primary" className="tag-primary">
-          ONLINE
-        </Button>
-      </>
-    ),
-    employed: (
-      <>
-        <div className="ant-employed">
-          <span>23/04/18</span>
-          <a href="#pablo">Edit</a>
-        </div>
-      </>
-    ),
-  },
-
-  {
-    key: "2",
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-            src={face3}
-          ></Avatar>
-          <div className="avatar-info">
-            <Title level={5}>Alexa Liras</Title>
-            <p>alexa@mail.com</p>
-          </div>
-        </Avatar.Group>{" "}
-      </>
-    ),
-    function: (
-      <>
-        <div className="author-info">
-          <Title level={5}>Programator</Title>
-          <p>Developer</p>
-        </div>
-      </>
-    ),
-
-    status: (
-      <>
-        <Button className="tag-badge">ONLINE</Button>
-      </>
-    ),
-    employed: (
-      <>
-        <div className="ant-employed">
-          <span>23/12/20</span>
-          <a href="#pablo">Edit</a>
-        </div>
-      </>
-    ),
-  },
-
-  {
-    key: "3",
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-            src={face}
-          ></Avatar>
-          <div className="avatar-info">
-            <Title level={5}>Laure Perrier</Title>
-            <p>laure@mail.com</p>
-          </div>
-        </Avatar.Group>{" "}
-      </>
-    ),
-    function: (
-      <>
-        <div className="author-info">
-          <Title level={5}>Executive</Title>
-          <p>Projects</p>
-        </div>
-      </>
-    ),
-
-    status: (
-      <>
-        <Button type="primary" className="tag-primary">
-          ONLINE
-        </Button>
-      </>
-    ),
-    employed: (
-      <>
-        <div className="ant-employed">
-          <span>03/04/21</span>
-          <a href="#pablo">Edit</a>
-        </div>
-      </>
-    ),
+    title: "username",
+    key: "username",
+    dataIndex: "username",
+    width: "12%",
   },
   {
-    key: "4",
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-            src={face4}
-          ></Avatar>
-          <div className="avatar-info">
-            <Title level={5}>Miriam Eric</Title>
-            <p>miriam@mail.com</p>
-          </div>
-        </Avatar.Group>{" "}
-      </>
-    ),
-    function: (
-      <>
-        <div className="author-info">
-          <Title level={5}>Marketing</Title>
-          <p>Organization</p>
-        </div>
-      </>
-    ),
-
-    status: (
-      <>
-        <Button type="primary" className="tag-primary">
-          ONLINE
-        </Button>
-      </>
-    ),
-    employed: (
-      <>
-        <div className="ant-employed">
-          <span>03/04/21</span>
-          <a href="#pablo">Edit</a>
-        </div>
-      </>
-    ),
+    title: "phone",
+    key: "phone",
+    dataIndex: "phone",
+    width: "12%",
   },
   {
-    key: "5",
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-            src={face5}
-          ></Avatar>
-          <div className="avatar-info">
-            <Title level={5}>Richard Gran</Title>
-            <p>richard@mail.com</p>
-          </div>
-        </Avatar.Group>{" "}
-      </>
-    ),
-    function: (
-      <>
-        <div className="author-info">
-          <Title level={5}>Manager</Title>
-          <p>Organization</p>
-        </div>
-      </>
-    ),
-
-    status: (
-      <>
-        <Button className="tag-badge">ONLINE</Button>
-      </>
-    ),
-    employed: (
-      <>
-        <div className="ant-employed">
-          <span>23/03/20</span>
-          <a href="#pablo">Edit</a>
-        </div>
-      </>
-    ),
+    title: "email",
+    key: "email",
+    dataIndex: "email",
+    width: "12%",
   },
-
   {
-    key: "6",
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-            src={face6}
-          ></Avatar>
-          <div className="avatar-info">
-            <Title level={5}>John Levi</Title>
-            <p>john@mail.com</p>
-          </div>
-        </Avatar.Group>{" "}
-      </>
-    ),
-    function: (
-      <>
-        <div className="author-info">
-          <Title level={5}>Tester</Title>
-          <p>Developer</p>
-        </div>
-      </>
-    ),
-
-    status: (
-      <>
-        <Button className="tag-badge">ONLINE</Button>
-      </>
-    ),
-    employed: (
-      <>
-        <div className="ant-employed">
-          <span>14/04/17</span>
-          <a href="#pablo">Edit</a>
-        </div>
-      </>
-    ),
+    title: "inn",
+    key: "inn",
+    dataIndex: "inn",
+    width: "12%",
   },
-];
-// project table start
+  {
+    title: "document_mashina",
+    key: "document_mashina",
+    render:(_,item)=><a href={item.document_mashina}> {item.document_mashina} a</a>,
+    width: "2%",
+  },
+  {
+    title: "prava",
+    key: "prava",
+    dataIndex: "prava",
+    width: "12%",
+  },
+  {
+    title: "delete",
+    key: "delete",
+    render: (_,item)=><Radio.Button onClick={()=>{DeleteData(item.id)}} >delete</Radio.Button>,
+    width: "12%",
+  },
+  {
+    title: "edit",
+    key: "edit",
+    render: (_,item)=><Radio.Button onClick={()=>{alert(item.id)}} >edit</Radio.Button>,
+    width: "10%",
+  },
+  {
+    title: "information",
+    key: "information",
+    render: (_,item)=><Radio.Button onClick={()=>{alert(item)}}>information</Radio.Button>,
+    width: "10%",
+  }
+]; 
+//function Information() {
+ // axios.information(`${url}/api/position`).then(res=>{
+  //  alert("succesful")
+  //})
+//}
+function DeleteData(key){
+  axios.delete(`${url}/auth/users/${key}`).then(res=>{
+    alert("o`chirildi")
+    axios.get(`${url}/auth/users`).then(res1=>{
+      setData(res1.data)
+    })
+  
+  })
+}
+function postData() {
+  var data=new FormData()
+  data.append("patronymic",document.querySelector("#patronymic").value)
+  data.append("surname",document.querySelector("#surname").value)
+  data.append("username",document.querySelector("#username").value)
+  data.append("phone",document.querySelector("#phone").value)
+  data.append("email",document.querySelector("#email").value)
+  data.append("login",document.querySelector("#login").value)
+  data.append("position_id",document.querySelector("#position").value)
+  data.append("password",document.querySelector("#password").value)
+axios.post(`${url}/auth/users`,data).then(res=>{
+alert("saqlandi")
+axios.get(`${url}/auth/users`).then(res=>{
+  setData(res.data)
+  console.log(res.data);
+})
+})
+.catch(err=>{
+  alert("Ma`lumot yetarli emas")
+})
+  
+}
 
 
-function Tables() {
-  const onChange = (e) => console.log(`radio checked:${e.target.value}`);
+
+useEffect(()=>{
+  axios.get(`${url}/auth/users`).then(res=>{
+    setData(res.data)
+    console.log(res.data);
+  })
+},[])
 
   return (
     <>
@@ -346,12 +148,12 @@ function Tables() {
             <Card
               bordered={false}
               className="criclebox tablespace mb-24"
-              title="Authors Table"
+              title="All users"
               extra={
                 <>
                   <Radio.Group onChange={onChange} defaultValue="a">
-                    <Radio.Button value="a">All</Radio.Button>
-                    <Radio.Button value="b">ONLINE</Radio.Button>
+                    {/* <Radio.Button value="a">All</Radio.Button> */}
+                    <Radio.Button onClick={()=>{document.querySelector(".modalMaybe").style="display:block"}} value="b">create</Radio.Button>
                   </Radio.Group>
                 </>
               }
@@ -365,10 +167,41 @@ function Tables() {
                 />
               </div>
             </Card>
-
-
           </Col>
         </Row>
+
+
+        <center><div className="modalMaybe" >
+          <div className="twoOneModal">
+            <div className="one">
+          <label htmlFor="patronymic">Patronymic</label><br />
+          <input type="text" placeholder="patronymic" id="patronymic"/>
+          <label htmlFor="surname">Surname</label><br />
+          <input type="text" placeholder="surname" id="surname"/>
+          <label htmlFor="username">Username</label><br />
+          <input type="text" placeholder="username" id="username"/>
+          <label htmlFor="phone">Phone</label><br />
+          <input type="text" placeholder="phone" id="phone"/>
+         
+          </div>
+          
+          <div className="one">
+          <label htmlFor="email">Email</label><br />
+          <input type="text" placeholder="email" id="email"/>
+          <label htmlFor="position">Position</label><br />
+          <input type="number" placeholder="position" id="position"/>
+          <label htmlFor="login">Login</label><br />
+          <input type="text" placeholder="login" id="login"/>
+          <label htmlFor="password">Password</label><br />
+          <input type="text" placeholder="password" id="password"/>
+          </div>
+          <button className="buttonExit" onClick={()=>{;document.querySelector(".modalMaybe").style="display:none"}}  >n</button>
+          </div><br />
+          <div className="buttonsSend">
+<button className="buttonSend" onClick={()=>{postData();newUser()}}>Create</button>
+
+    </div>
+        </div></center>
       </div>
     </>
   );

@@ -2,7 +2,7 @@
 
 ![version](https://img.shields.io/badge/version-1.0.0-blue.svg) [![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/muse-ant-design-dashboard.svg)](https://github.com/creativetimofficial/muse-ant-design-dashboard/issues?q=is%3Aopen+is%3Aissue) [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/material-tailwind-dashboard-react.svg?maxAge=2592000)](https://github.com/creativetimofficial/muse-ant-design-dashboard/issues?q=is%3Aissue+is%3Aclosed)
 
-![Image](https://s3.amazonaws.com/creativetim_bucket/Billing/496/original/opt_md_ant_react_thumbnail.jpg?1629182839)
+![Image](https://s3.amazonaws.com/creativetim_bucket/Products/496/original/opt_md_ant_react_thumbnail.jpg?1629182839)
 
 Muse Ant Design Dashboard is a _free_ Admin Template based on two popular front-end technologies: _Ant Design & React_. It was built to simplify the developer's work and is comes with a fresh design inspired by Ant Design. All its components are built to fit perfectly with each other, while aligning to the Ant Design concepts.
 
@@ -31,7 +31,7 @@ React
 
 - [Dashboard](https://demos.creative-tim.com/muse-ant-design-dashboard/#/dashboard?ref=readme-madd)
 - [Tables](https://demos.creative-tim.com/muse-ant-design-dashboard/#/tables?ref=readme-madd)
-- [Billing](https://demos.creative-tim.com/muse-ant-design-dashboard/#/Billing?ref=readme-madd)
+- [Products](https://demos.creative-tim.com/muse-ant-design-dashboard/#/Products?ref=readme-madd)
 - [RTL](https://demos.creative-tim.com/muse-ant-design-dashboard/#/rtl?ref=readme-madd)
 - [Profile](https://demos.creative-tim.com/muse-ant-design-dashboard/#/profile?ref=readme-madd)
 - [Sign In](https://demos.creative-tim.com/muse-ant-design-dashboard/#/sign-in?ref=readme-madd)
@@ -72,7 +72,7 @@ Muse Ant Design Dashboard
     │   │   │   ├── chart
     │   │   │   └── layout
     │   │   ├── pages
-    │   │   │   ├── Billing.js
+    │   │   │   ├── Products.js
     │   │   │   ├── Home.js
     │   │   │   ├── Profile.js
     │   │   │   ├── Rtl.js
@@ -122,7 +122,7 @@ If you have questions or need help integrating the product please [contact us](h
 
 ## Useful Links
 
-- [More Billing](https://www.creative-tim.com/templates?ref=readme-madd) from Creative Tim
+- [More Products](https://www.creative-tim.com/templates?ref=readme-madd) from Creative Tim
 
 - [Tutorials](https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w)
 

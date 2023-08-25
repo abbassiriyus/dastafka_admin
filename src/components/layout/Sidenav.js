@@ -64,7 +64,7 @@ function Sidenav({ color }) {
     </svg>,
   ];
 
-  const Billing = [
+  const Products = [
     <svg
       width="20"
       height="20"
@@ -195,27 +195,27 @@ function Sidenav({ color }) {
           </NavLink>
         </Menu.Item>
         <Menu.Item key="3">
-          <NavLink to="/Billing">
+          <NavLink to="/Products">
             <span
               className="icon"
               style={{
-                background: page === "Billing" ? color : "",
+                background: page === "Products" ? color : "",
               }}
             >
-              {Billing}
+              {Products}
             </span>
             <span className="label">Products</span>
           </NavLink>
         </Menu.Item>
         <Menu.Item key="4">
-          <NavLink to="/Rtl">
+          <NavLink to="/Construction">
             <span
               className="icon"
               style={{
-                background: page === "Billing" ? color : "",
+                background: page === "Construction" ? color : "",
               }}
             >
-              {Billing}
+              {Products}
             </span>
             <span className="label">Construction</span>
           </NavLink>

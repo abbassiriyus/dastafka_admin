@@ -255,7 +255,7 @@ export default class SignUp extends Component {
               <Menu.Item>Company</Menu.Item>
               <Menu.Item>About Us</Menu.Item>
               <Menu.Item>Teams</Menu.Item>
-              <Menu.Item>Billing</Menu.Item>
+              <Menu.Item>Products</Menu.Item>
               <Menu.Item>Blogs</Menu.Item>
               <Menu.Item>Pricing</Menu.Item>
             </Menu>
