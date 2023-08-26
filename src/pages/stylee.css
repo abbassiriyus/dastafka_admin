@@ -5,15 +5,19 @@
 }
 .imgNameFour{
     border-radius: 17px;
+    position: relative;
     border: 3px solid rgba(0, 0, 0, 0);
 }
-.imgNameFour:hover{
+/* .imgNameFour:hover{
     border: 3px solid orange;
-}
+} */
 .tickCircle{
     background-color: orange;
     width: 30px;
     height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 50%;
     text-align: center;
 }
