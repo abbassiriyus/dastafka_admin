@@ -23,9 +23,21 @@ function newUser() {
   document.querySelector('.modalMaybe').style="background-color:blue"
 }
 function Tables() {
+
   var [data,setData]=useState([])
   var [table,setInfo]=useState([])
 
+  function abbas(params) {
+console.log(params);  
+console.log(params.email);  
+console.log(params.time_create);
+
+//axios.delete(`${url}/auth/users/${key}`).then(res=>{
+ // alert("o`chirildi")
+ // axios.get(`${url}/auth/users`).then(res1=>{
+ //   setData(res1.data)
+document.querySelector('.modalInformation').style='display:block'
+  }
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
 const columns = [
   {
@@ -90,15 +102,19 @@ const columns = [
   {
     title: "information",
     key: "information",
-    render: (_,item)=><Radio.Button onClick={()=>{alert(item)}}>information</Radio.Button>,
+    render: (_,item)=><Radio.Button onClick={()=>{abbas(item)}}>information</Radio.Button>,
     width: "10%",
   }
 ]; 
+
+
 //function Information() {
  // axios.information(`${url}/api/position`).then(res=>{
-  //  alert("succesful")
+  //  alert("tried to get information of user into the alert")
   //})
 //}
+
+
 function DeleteData(key){
   axios.delete(`${url}/auth/users/${key}`).then(res=>{
     alert("o`chirildi")
@@ -128,7 +144,7 @@ axios.get(`${url}/auth/users`).then(res=>{
 .catch(err=>{
   alert("Ma`lumot yetarli emas")
 })
-  
+
 }
 
 
@@ -182,7 +198,6 @@ useEffect(()=>{
           <input type="text" placeholder="username" id="username"/>
           <label htmlFor="phone">Phone</label><br />
           <input type="text" placeholder="phone" id="phone"/>
-         
           </div>
           
           <div className="one">
@@ -195,13 +210,29 @@ useEffect(()=>{
           <label htmlFor="password">Password</label><br />
           <input type="text" placeholder="password" id="password"/>
           </div>
-          <button className="buttonExit" onClick={()=>{;document.querySelector(".modalMaybe").style="display:none"}}  >n</button>
+          <button className="buttonExit" onClick={()=>{;document.querySelector(".modalMaybe").style="display:none"}}  >x</button>
           </div><br />
           <div className="buttonsSend">
 <button className="buttonSend" onClick={()=>{postData();newUser()}}>Create</button>
 
     </div>
         </div></center>
+
+        <div className="modalInformation">
+          <button className="exitInformation" onClick={()=>{;document.querySelector(".modalInformation").style="display:none"}}>x</button>
+          <div className="photoText">
+            <img src="https://yt3.googleusercontent.com/ytc/AGIKgqMfXWxxgCti89t6mM2KPnHQy5TjuvlFanAxk__4Dg=s900-c-k-c0x00ffffff-no-rj" alt="" />
+          <div className="writtenInfo">
+          <h1><b>Full name: </b> <span>username, surname, patronymic</span></h1>
+          <h1><b>Phone number: </b><span>number</span></h1>
+          <h1><b>Email address: </b><span>email</span></h1>
+          <h1><b>INN: </b><span>inn</span></h1>
+          <h1><b>Requisite: </b><span>recvizit</span></h1>
+          <h1><b>Login/email: </b><span>login</span></h1>
+          <h1><b>Password: </b><span>password</span></h1>
+          </div>
+          </div>
+        </div>
       </div>
     </>
   );

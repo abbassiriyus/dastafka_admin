@@ -72,7 +72,11 @@ const columns = [
     dataIndex: "function",
     key: "function",
   },
-
+  {
+    title:"TARIF",
+    dataIndex: "tarif",
+    key: "tarif",
+  },
   {
     title: "STATUS",
     key: "status",
@@ -112,7 +116,14 @@ const data = [
         </div>
       </>
     ),
-
+    tarif: (
+      <>
+        <div className="author-info">
+          <Title level={5}>Manager</Title>
+          <p>Organization</p>
+        </div>
+      </>
+    ),
     status: (
       <>
         <Button type="primary" className="tag-primary">
