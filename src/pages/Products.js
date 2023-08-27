@@ -29,8 +29,54 @@ const [mark, SetMark]=useState([])
 const [homiy, SetHomiy]=useState([])
 const [selectMarka, SetSelectMarka]=useState(null)
 const [selecthomiy, SetSelectHomiy]=useState(null)
+const [deleteid,setDeleteId]=useState()
+const [isModalOpen12,setIsModalOpen12]=useState(false)
+const showModal1 = () => {
+  setIsModalOpen1(true);
+};
+function deteteData(params) {
+  setDeleteId(params)
+  showModal1()
+  }
+const handleOk1 = () => {
+  setIsModalOpen1(false); 
+  axios.delete(`${url}/api/product/${deleteid}`).then(res=>{
+  message.success('deleted');
+  axios.get(`${url}/api/marka`).then(res=>{
+    SetMark(res.data)
+    axios.get(`${url}/api/homeiy`).then(res1=>{
+      SetHomiy(res1.data)
+  axios.get(`${url}/api/product`).then(res2=>{
+  for (let i = 0; i < res2.data.length; i++) {
+  for (let j = 0; j < res.data.length; j++) {
+  if(res.data[j].id===res2.data[i].marka){
+  res2.data[i].marka_name=res.data[j].title
+  }
+  for (let j = 0; j < res1.data.length; j++) {
+  if(res1.data[j].id===res2.data[i].homiy_id){
+  res2.data[i].homiy=res1.data[j].title
+  res2.data[i].image=res1.data[j].image
+  }}
+  
+  }}
+  console.log(res2.data,"sdsd");
+    setData(res2.data)
+  })
+  
+  
+    })
+  })
+}).catch(err=>{
+  message.error("don't delete")
+})
+};
 
-
+const handleCancel1 = () => {
+  setIsModalOpen1(false);
+};
+const handleCancel12 = () => {
+  setIsModalOpen12(false);
+};
 
 const [isModalOpen, setIsModalOpen] = useState(false);
 const showModal = () => {
@@ -86,9 +132,40 @@ message.error("don't create")
 setIsModalOpen(false)
 })
 }
+function PutProduct() {
+  var data=new FormData()
+  data.append("description",document.querySelector("#description12").value)
+  data.append("s3_sena",document.querySelector("#s3_sena12").value)
+  data.append("s4_sena",document.querySelector("#s4_sena12").value)
+  data.append("marka",selectMarka)
+  data.append("hydrophobic_additive_sena",document.querySelector("#hydrophobic_additive_sena12").value)
+  data.append("fiber_fiber",document.querySelector("#Fiber_fiber12").value)
+  data.append("homiy_id",selecthomiy)
+  axios.put(`${url}/api/product/${deleteid}`,data).then(res=>{
+    message.success("update")
+    setIsModalOpen12(false)
+  }).catch(err=>{
+    message.error("Error don't update")
+    setIsModalOpen12(false)
+  })
+}
+function openPutData(putdata){
+setIsModalOpen12(true)
+ setTimeout(() => {
+  document.querySelector("#description12").value=putdata.description
+  document.querySelector("#s3_sena12").value=putdata.s3_sena
+  document.querySelector("#s4_sena12").value=putdata.s4_sena
+  document.querySelector("#marka12").value=putdata.marka
+  document.querySelector("#hydrophobic_additive_sena12").value=putdata.hydrophobic_additive_sena
+  document.querySelector("#Fiber_fiber12").value=putdata.fiber_fiber
+  document.querySelector("#homiy_id12").value=putdata.homiy_id
+ }, 100);
+setDeleteId(putdata.id)
+}
 useEffect(()=>{
   setCategory(props.category)
 })
+const [isModalOpen1, setIsModalOpen1] = useState(false);
 useEffect(()=>{
 axios.get(`${url}/api/marka`).then(res=>{
   SetMark(res.data)
@@ -157,11 +234,11 @@ const columns = [
   },
   {
     title: "Delete",
-    render:()=><Button danger>Delete</Button>,
+    render:(_,item)=><Button onClick={()=>{deteteData(item.id)}}   danger>Delete</Button>,
   },
   {
     title: "Edit",
-    render:()=><Button type="dashed">Edit</Button>,
+    render:(_,item)=><Button onClick={()=>{openPutData(item)}} type="dashed">Edit</Button>,
   },
 ];
 
@@ -203,7 +280,7 @@ const columns = [
 
           </Col>
         </Row>
-        <Modal title="Create Product" open={isModalOpen} onOk={()=>PostProduct()} onCancel={handleCancel}>
+  <Modal title="Create Product" open={isModalOpen} onOk={()=>PostProduct()} onCancel={handleCancel}>
         <Input placeholder="цена ц3" id="s3_sena" type="number"  showCount maxLength={30}  onChange={onChange} />
     <br />
     <br />
@@ -235,6 +312,46 @@ const columns = [
       <Select  onChange={(value) => {
      SetSelectHomiy(value)
     }} id="homiy_id" style={{width:'100%'}}>
+    {homiy.map(item=>{
+      return <Select.Option value={item.id}>{item.title}</Select.Option>
+    })}
+        </Select>
+      </Modal>
+      <Modal title="Осторожность" visible={isModalOpen1} onOk={()=>handleOk1} onCancel={handleCancel1}>
+    <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
+      </Modal>
+      <Modal title="Create Product" open={isModalOpen12} onOk={()=>PutProduct()} onCancel={handleCancel12}>
+        <Input placeholder="цена ц3" id="s3_sena12" type="number"  showCount maxLength={30}   />
+    <br />
+    <br />
+    <Input placeholder="цена ц4" id="s4_sena12" type="number" showCount maxLength={30}    />
+    <br />
+    <br />
+    <TextArea placeholder="description" id="description12"   />
+  <br />
+  <br />
+  <label htmlFor="">Marka</label>
+  <Select id="marka12"  onChange={(value) => {
+      SetSelectMarka(value)
+    }} style={{width:'100%'}}>
+    {mark.map(item=>{
+      return <Select.Option value={item.id}>{item.title}</Select.Option>
+    })}
+        </Select>
+        <br />
+    <br />
+        <Input  id="hydrophobic_additive_sena12"  placeholder="Гидрофобная добавка цена" type="number" showCount maxLength={30} />
+        <br />
+    <br />
+    <Input placeholder="Фиброволокно цена"  id="Fiber_fiber12" type="number" showCount maxLength={30} />
+    <br />
+    <br />
+
+
+ <label htmlFor="">Homiy</label>
+      <Select  onChange={(value) => {
+     SetSelectHomiy(value)
+    }} id="homiy_id12" style={{width:'100%'}}>
     {homiy.map(item=>{
       return <Select.Option value={item.id}>{item.title}</Select.Option>
     })}
