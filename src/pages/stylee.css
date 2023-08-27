@@ -12,6 +12,9 @@
     border: 3px solid orange;
 } */
 .tickCircle{
+    position: absolute;
+    top: -10px;
+    left: -10px;
     background-color: orange;
     width: 30px;
     height: 30px;

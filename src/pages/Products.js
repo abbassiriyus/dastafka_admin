@@ -5,77 +5,163 @@ import {
   Radio,
   Table,
   message,
-  Avatar,
   Typography,
+  Button,
+  Modal,
+  Input,
+  Select,
+  Image,
 } from "antd";
 
-import face from "../assets/images/face-1.jpg";
-import face2 from "../assets/images/face-2.jpg";
-import face3 from "../assets/images/face-3.jpg";
-import face4 from "../assets/images/face-4.jpg";
-import face5 from "../assets/images/face-5.jpeg";
-import face6 from "../assets/images/face-6.jpeg";
-import CardsProduct from "./CardsProduct.js";
 import "./style.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import url from "./host";
+import TextArea from "antd/es/input/TextArea";
 const { Title } = Typography;
 
-const formProps = {
-  name: "file",
-  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-  headers: {
-    authorization: "authorization-text",
-  },
-  onChange(info) {
-    if (info.file.status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (info.file.status === "done") {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
+
+
+function Tables(props) {
+var [category,setCategory]=useState(props.category)
+var [data, setData]=useState([])
+const [mark, SetMark]=useState([])
+const [homiy, SetHomiy]=useState([])
+const [selectMarka, SetSelectMarka]=useState(null)
+const [selecthomiy, SetSelectHomiy]=useState(null)
+
+
+
+const [isModalOpen, setIsModalOpen] = useState(false);
+const showModal = () => {
+  setIsModalOpen(true);
 };
-
-
-function Tables() {
-
-var [data, setdata]=useState([])
-
-
+const handleOk = () => {
+  setIsModalOpen(false);
+};
+const handleCancel = () => {
+  setIsModalOpen(false);
+};
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
 
 
+function PostProduct(params) {
+  var data=new FormData()
+  data.append("description",document.querySelector("#description").value)
+  data.append("s3_sena",document.querySelector("#s3_sena").value)
+  data.append("s4_sena",document.querySelector("#s4_sena").value)
+  data.append("marka",selectMarka)
+  data.append("hydrophobic_additive_sena",document.querySelector("#hydrophobic_additive_sena").value)
+  data.append("fiber_fiber",document.querySelector("#Fiber_fiber").value)
+  data.append("homiy_id",selecthomiy)
+axios.post(`${url}/api/product`,data).then(res=>{
+  message.success("Create new Product")
+  setIsModalOpen(false)
+  axios.get(`${url}/api/marka`).then(res=>{
+    SetMark(res.data)
+    axios.get(`${url}/api/homeiy`).then(res1=>{
+      SetHomiy(res1.data)
+  axios.get(`${url}/api/product`).then(res2=>{
+  for (let i = 0; i < res2.data.length; i++) {
+  for (let j = 0; j < res.data.length; j++) {
+  if(res.data[j].id===res2.data[i].marka){
+  res2.data[i].marka_name=res.data[j].title
+  }
+  for (let j = 0; j < res1.data.length; j++) {
+  if(res1.data[j].id===res2.data[i].homiy_id){
+  res2.data[i].homiy=res1.data[j].title
+  res2.data[i].image=res1.data[j].image
+  }}
+  
+  }}
+  console.log(res2.data,"sdsd");
+    setData(res2.data)
+  })
+  
+  
+    })
+  })
+}).catch(err=>{
+message.error("don't create")
+setIsModalOpen(false)
+})
+}
+useEffect(()=>{
+  setCategory(props.category)
+})
+useEffect(()=>{
+axios.get(`${url}/api/marka`).then(res=>{
+  SetMark(res.data)
+  axios.get(`${url}/api/homeiy`).then(res1=>{
+    SetHomiy(res1.data)
+axios.get(`${url}/api/product`).then(res2=>{
+for (let i = 0; i < res2.data.length; i++) {
+for (let j = 0; j < res.data.length; j++) {
+if(res.data[j].id===res2.data[i].marka){
+res2.data[i].marka_name=res.data[j].title
+}
+for (let j = 0; j < res1.data.length; j++) {
+if(res1.data[j].id===res2.data[i].homiy_id){
+res2.data[i].homiy=res1.data[j].title
+res2.data[i].image=res1.data[j].image
+}}
+
+}}
+console.log(res2.data,"sdsd");
+  setData(res2.data)
+})
 
 
-
+  })
+})
+},[])
 
 
 const columns = [
   {
     title: "Производитель",
-    dataIndex: "name",
-    key: "name",
-    width: "32%",
+    dataIndex: "image",
+    render: (_,item)=><Image style={{height:"30px"}} alt="no image" src={item.image} /> ,
+    width: "5%",
   },
   {
     title: "Марка",
-    dataIndex: "function",
-    key: "function",
+    dataIndex: "marka_name",
+    key: "marka_name",
   },
 
   {
     title: "Опции",
-    key: "status",
-    dataIndex: "status",
+    key: "description",
+    dataIndex: "description",
   },
   {
-    title: "Цена",
-    key: "employed",
-    dataIndex: "employed",
+    title: "Цена Ц3",
+    key: "s3_sena",
+    dataIndex: "s3_sena",
+  },
+  {
+    title: "Цена Ц4",
+    key: "s4_sena",
+    dataIndex: "s4_sena",
+  },
+  {
+    title: "Гидрофобная добавка",
+    key: "hydrophobic_additive_sena",
+    dataIndex: "hydrophobic_additive_sena",
+  },
+  {
+    title: "Фиброволокно",
+    key: "fiber_fiber",
+    dataIndex: "fiber_fiber",
+  },
+  {
+    title: "Delete",
+    render:()=><Button danger>Delete</Button>,
+  },
+  {
+    title: "Edit",
+    render:()=><Button type="dashed">Edit</Button>,
   },
 ];
 
@@ -83,19 +169,23 @@ const columns = [
   return (
     <>
       <div className="tabled">
-        
-        <CardsProduct/> <br />  
+    
+      
+        <br />  
         <Row gutter={[24, 0]}>
           <Col xs="24" xl={24}>
             <Card
               bordered={false}
               className="criclebox tablespace mb-24"
-              title="Authors Table"
+              title="Product table"
               extra={
-                <>
+                <> 
                   <Radio.Group onChange={()=>onChange} defaultValue="a">
-                    <Radio.Button value="a">All</Radio.Button>
-                    <Radio.Button value="b">ONLINE</Radio.Button>
+                 {category.map(item=>{
+                  return <Radio.Button value={item.id}>{item.title}</Radio.Button>
+                 })}   
+                  <Button style={{marginLeft:'20px'}} onClick={showModal} type="primary" >Create Product
+      </Button>
                   </Radio.Group>
                 </>
               }
@@ -113,6 +203,44 @@ const columns = [
 
           </Col>
         </Row>
+        <Modal title="Create Product" open={isModalOpen} onOk={()=>PostProduct()} onCancel={handleCancel}>
+        <Input placeholder="цена ц3" id="s3_sena" type="number"  showCount maxLength={30}  onChange={onChange} />
+    <br />
+    <br />
+    <Input placeholder="цена ц4" id="s4_sena" type="number" showCount maxLength={30}   onChange={onChange} />
+    <br />
+    <br />
+    <TextArea placeholder="description" id="description"  onChange={onChange} />
+  <br />
+  <br />
+  <label htmlFor="">Marka</label>
+  <Select id="marka"  onChange={(value) => {
+      SetSelectMarka(value)
+    }} style={{width:'100%'}}>
+    {mark.map(item=>{
+      return <Select.Option value={item.id}>{item.title}</Select.Option>
+    })}
+        </Select>
+        <br />
+    <br />
+        <Input  id="hydrophobic_additive_sena"  placeholder="Гидрофобная добавка цена" type="number" showCount maxLength={30}  allowClear onChange={onChange} />
+        <br />
+    <br />
+    <Input placeholder="Фиброволокно цена"  id="Fiber_fiber" type="number" showCount maxLength={30}  onChange={onChange} />
+    <br />
+    <br />
+
+
+ <label htmlFor="">Homiy</label>
+      <Select  onChange={(value) => {
+     SetSelectHomiy(value)
+    }} id="homiy_id" style={{width:'100%'}}>
+    {homiy.map(item=>{
+      return <Select.Option value={item.id}>{item.title}</Select.Option>
+    })}
+        </Select>
+      </Modal>
+
       </div>
     </>
   );

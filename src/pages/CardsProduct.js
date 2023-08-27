@@ -3,16 +3,22 @@ import { message, Button, Card, Checkbox, Col, Input, Modal, Row, Image } from '
 import "./stylee.css";
 import url from './host.js';
 import axios from 'axios';
+import Products from "./Products.js"
 const { TextArea } = Input;
 export default function CardsProduct() {
   var [category, setCategory] = useState([])
   var [checkFile, setCheckFile] = useState(false)
+  var [checkFile1, setCheckFile1] = useState(false)
+
 
 
   var [data, setdata] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen2, setIsModalOpen2] = useState(false);
+
   const [isModalOpen1, setIsModalOpen1] = useState(false);
-const [deleteid,setDeleteId]=useState(-1)
+  
+  const [deleteid,setDeleteId]=useState(-1)
   const showModal1 = () => {
     setIsModalOpen1(true);
   };
@@ -48,6 +54,28 @@ const [deleteid,setDeleteId]=useState(-1)
     setIsModalOpen(false);
     
   };
+  const showModal2 = (params) => {
+    setIsModalOpen2(true);
+   
+  
+setTimeout(() => { 
+  setCheckFile1(false)
+  document.querySelector("#file1").type="text"
+  setDeleteId(params)
+  var a=category.filter(item=>item.id==params)
+  document.querySelector("#title1").value=a[0].title
+  if(a[0].image.includes("http")){
+    document.querySelector("#file1").value=a[0].image  
+  }else{
+    document.querySelector("#file1").value=url+'/'+a[0].image  
+  }
+  document.querySelector("#deck1").value=a[0].description
+}, 100);
+  };
+
+  const handleCancel2 = () => {
+    setIsModalOpen2(false);
+  };
   
 function setCheck(key) {
 for (let i = 0; i < category.length; i++) {
@@ -67,9 +95,9 @@ function postData(){
   data.append("image",document.querySelector("#file").value)
   }
   data.append("description",document.querySelector("#deck").value)
-axios.post(`${url}/api/category`,data).then(res=>{
-  message.success(" Created ")
-  axios.get(`${url}/api/category`).then(res => {
+  axios.post(`${url}/api/category`,data).then(res=>{
+   message.success(" Created ")
+   axios.get(`${url}/api/category`).then(res => {
     var a = res.data
     for (let i = 0; i < a.length; i++) {
       if (i == 0) {
@@ -96,9 +124,47 @@ function onFile(e){
     document.querySelector("#file").type="text"
   }
 }
+function onFile1(e){
+  setCheckFile1(e.target.checked)
+   if(e.target.checked){
+   document.querySelector("#file1").type="file"
+   }else{
+     document.querySelector("#file1").type="text"
+   }
+ }
 function deteteData(params) {
 setDeleteId(params)
 showModal1()
+}
+function putData() {
+
+  var data=new FormData()
+  data.append("title",document.querySelector("#title1").value)
+  if(checkFile1){
+  data.append("image",document.querySelector("#file1").files[0])
+  }else{
+  data.append("image",document.querySelector("#file1").value)
+  }
+  data.append("description",document.querySelector("#deck1").value)
+  axios.put(`${url}/api/category/${deleteid}`,data).then(res=>{
+   message.success(" Update ")
+   handleCancel2()
+   axios.get(`${url}/api/category`).then(res => {
+    var a = res.data
+    for (let i = 0; i < a.length; i++) {
+      if (i == 0) {
+        a[i].check = true
+      } else {
+        a[i].check = false
+      }
+    }
+    setCategory(res.data)
+  })
+  setIsModalOpen(false);
+}).catch(err=>{
+ message.error("don't update")
+  setIsModalOpen(false);
+})
 }
   useEffect(() => {
     axios.get(`${url}/api/category`).then(res => {
@@ -118,8 +184,8 @@ showModal1()
 
   return (
     <div>
-     
-     <Button type="primary" onClick={()=>showModal()}>
+     <h2>Category Product</h2>
+     <Button style={{marginBottom:"20px"}} type="primary" onClick={()=>showModal()}>
        Create Category
       </Button>
       <Modal title="Basic Modal" visible={isModalOpen} onOk={()=>postData()} onCancel={()=>handleCancel()}>
@@ -133,27 +199,35 @@ showModal1()
     <TextArea showCount id='deck' maxLength={400}  placeholder='deckription' />
       </Modal>
 
-      {category.length === 0 ? (<div>no category beton</div>) : (<Row gutter={18}>{category.map((item, key) => {
+      {category.length === 0 ? (<div>no category beton</div>) : (<Row  gutter={18}>{category.map((item, key) => {
         return <Col onClick={() => { setCheck(key) }} span={4}>
           <div className="imgNameFour">
             <Card bordered={false} >
               
               <div className="tickCircle">{item.check?(<i class='bx bx-check'></i>):(<div></div>)}</div>
-              <center><Image width={'90%'} src={item.image.includes("http") ? item.image : `${url}/${item.image}`} alt="no image" className='imgProductFour' />
+              <center><Image width={'100%'} src={item.image.includes("http") ? item.image : `${url}/${item.image}`} alt="no image" className='imgProductFour' />
                 <h4>{item.title}</h4>
                 <p>{item.description}</p>
-                <div className="icons"  style={{fontSize:'23px',display:'flex',justifyContent:'space-around'}}><i class='bx bxs-trash' style={{cursor:'pointer'}} onClick={()=>{deteteData(item.id)}} ></i><i class='bx bx-edit' ></i></div>
+                <div className="icons"  style={{fontSize:'23px',display:'flex',justifyContent:'space-around'}}><i class='bx bxs-trash' style={{cursor:'pointer'}} onClick={()=>{deteteData(item.id)}} ></i><i class='bx bx-edit' onClick={()=>showModal2(item.id)} ></i></div>
                 </center>
             </Card>
           </div>
         </Col>
       })} </Row>)}
-
-
+      <Modal title="Basic Modal" visible={isModalOpen2} onOk={()=>putData()} onCancel={()=>handleCancel2()}>
+      <Input id='title1' showCount maxLength={50} placeholder='title'  />
+    <br />
+    <br />
+    <Checkbox onChange={(e)=>onFile1(e)}>file</Checkbox>
+    <Input type='text' id='file1' placeholder='image'  />
+    <br />
+    <br />
+    <TextArea showCount id='deck1' maxLength={400}  placeholder='deckription' />
+      </Modal>
       <Modal title="Осторожность" visible={isModalOpen1} onOk={handleOk1} onCancel={handleCancel1}>
     <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
       </Modal>
-      
+      <Products category={category} />
     </div>
   )
 }
