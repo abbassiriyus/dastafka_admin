@@ -199,11 +199,15 @@ function putData() {
     <TextArea showCount id='deck' maxLength={400}  placeholder='deckription' />
       </Modal>
 
-      {category.length === 0 ? (<div>no category beton</div>) : (<Row  gutter={18}>{category.map((item, key) => {
+      {category.length === 0 ? (<div>no category beton</div>) : (<Row gutter={{
+        xs: 8,
+        sm: 16,
+        md: 24,
+        lg: 32,
+      }}>{category.map((item, key) => {
         return <Col onClick={() => { setCheck(key) }} span={4}>
           <div className="imgNameFour">
             <Card bordered={false} >
-              
               <div className="tickCircle">{item.check?(<i class='bx bx-check'></i>):(<div></div>)}</div>
               <center><Image width={'100%'} height={'120px'} src={item.image.includes("http") ? item.image : `${url}/${item.image}`} alt="no image" className='imgProductFour' />
                 <h4>{item.title}</h4>

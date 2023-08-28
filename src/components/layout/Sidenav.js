@@ -220,6 +220,19 @@ function Sidenav({ color }) {
             <span className="label">Construction</span>
           </NavLink>
         </Menu.Item>
+        <Menu.Item key="7">
+          <NavLink to="/configProduct">
+            <span
+              className="icon"
+              style={{
+                background: page === "configProduct" ? color : "",
+              }}
+            >
+              {Products}
+            </span>
+            <span className="label">Config Product</span>
+          </NavLink>
+        </Menu.Item>
         <Menu.Item className="menu-item-header" key="5">
           Account Pages
         </Menu.Item>

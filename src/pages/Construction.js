@@ -651,15 +651,6 @@ function Tables() {
                 />
               </div>
               <div className="uploadfile pb-15 shadow-none">
-                <Upload {...formProps}>
-                  <Button
-                    type="dashed"
-                    className="ant-full-box"
-                    icon={<ToTopOutlined />}
-                  >
-                    Click to Upload
-                  </Button>
-                </Upload>
               </div>
             </Card>
           </Col>
