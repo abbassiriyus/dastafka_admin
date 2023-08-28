@@ -37,6 +37,8 @@ import {
 import { NavLink, Link } from "react-router-dom";
 import styled from "styled-components";
 import avtar from "../../assets/images/team-2.jpg";
+import axios from "axios";
+import url from "../../pages/host";
 
 const ButtonContainer = styled.div`
   .ant-btn-primary {
@@ -262,9 +264,13 @@ function Header({
 
   const [visible, setVisible] = useState(false);
   const [sidenavType, setSidenavType] = useState("transparent");
-
+const [user,setUser]=useState([])
   useEffect(() => window.scrollTo(0, 0));
-
+useEffect(()=>{
+  axios.get(`${url}/auth/oneuser`, { headers: { "Authorization": 'Bearer ' + sessionStorage.getItem("token") } }).then(res=>{
+   setUser(res.data) 
+  })
+})
   const showDrawer = () => setVisible(true);
   const hideDrawer = () => setVisible(false);
 
