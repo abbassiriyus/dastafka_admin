@@ -269,6 +269,8 @@ const [user,setUser]=useState([])
 useEffect(()=>{
   axios.get(`${url}/auth/oneuser`, { headers: { "Authorization": 'Bearer ' + sessionStorage.getItem("token") } }).then(res=>{
    setUser(res.data) 
+  }).catch(err=>{
+    
   })
 })
   const showDrawer = () => setVisible(true);

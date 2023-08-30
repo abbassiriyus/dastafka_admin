@@ -439,7 +439,6 @@ function Tables(props) {
                 <Table
                   columns={columns}
                   dataSource={data}
-                  pagination={false}
                   className="ant-border-space"
                 />
               </div>
