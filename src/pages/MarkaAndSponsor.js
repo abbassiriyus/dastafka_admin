@@ -29,6 +29,9 @@ export default function MarkaAndSponsor() {
   const [isModalOpen51, setIsModalOpen51] = useState(false);
   const [isModalOpen52, setIsModalOpen52] = useState(false);
   const [isModalOpen53, setIsModalOpen53] = useState(false);
+  const [isModalOpen61, setIsModalOpen61] = useState(false);
+  const [isModalOpen62, setIsModalOpen62] = useState(false);
+  const [isModalOpen63, setIsModalOpen63] = useState(false);
   const [SelectPreferences, SetSelectPreferences] = useState("");
 
   var [checkFile, setCheckFile] = useState(false)
@@ -67,12 +70,28 @@ function onFile1(e){
        document.querySelector("#file31").type="text"
      }
    }
+   function onFile61(e){
+    setCheckFile(e.target.checked)
+     if(e.target.checked){
+     document.querySelector("#file61").type="file"
+     }else{
+       document.querySelector("#file61").type="text"
+     }
+   }
    function onFile33(e){
     setCheckFile(e.target.checked)
      if(e.target.checked){
      document.querySelector("#file33").type="file"
      }else{
        document.querySelector("#file33").type="text"
+     }
+   }
+   function onFile63(e){
+    setCheckFile(e.target.checked)
+     if(e.target.checked){
+     document.querySelector("#file63").type="file"
+     }else{
+       document.querySelector("#file63").type="text"
      }
    }
    function onFile53(e){
@@ -161,6 +180,18 @@ function handleOk32(){
   }).catch(err=>{
       message.error("not delete")
       setIsModalOpen32(false)
+      })  
+}
+function handleOk62(){
+  axios.delete(`${url}/api/news/${selectid}`).then(res=>{
+      message.success("delete data")
+      setIsModalOpen62(false)
+      axios.get(`${url}/api/news`).then(res=>{
+          setNews(res.data)
+      })
+  }).catch(err=>{
+      message.error("not delete")
+      setIsModalOpen62(false)
       })  
 }
 function handleOk42(){
@@ -278,6 +309,51 @@ function createPreferences() {
   setIsModalOpen31(false)
   })
 }
+function createNews() {
+  var postdata=new FormData()
+  postdata.append("title",document.querySelector("#title61").value)
+  postdata.append("description",document.querySelector("#link61").value)
+  if(checkFile){
+  postdata.append("image",document.querySelector("#file61").files[0])   
+  }else{
+  postdata.append("image",document.querySelector("#file61").value)    
+  }
+  postdata.append("min_description",document.querySelector("#deck61").value)
+  
+  axios.post(`${url}/api/news`,postdata).then(res=>{
+      message.success("create new data")
+      setIsModalOpen61(false)
+  axios.get(`${url}/api/news`).then(res=>{
+      setNews(res.data)
+  })
+  }).catch(err=>{
+  message.error("not create")
+  setIsModalOpen61(false)
+  })
+}
+function PutNews() {
+  var postdata=new FormData()
+  postdata.append("title",document.querySelector("#title63").value)
+  postdata.append("description",document.querySelector("#link63").value)
+  if(checkFile){
+  postdata.append("image",document.querySelector("#file63").files[0])   
+  }else{
+  postdata.append("image",document.querySelector("#file63").value)    
+  }
+  postdata.append("min_description",document.querySelector("#deck63").value)
+  
+  axios.put(`${url}/api/news/${selectid}`,postdata).then(res=>{
+      message.success("create new data")
+      setIsModalOpen63(false)
+  axios.get(`${url}/api/news`).then(res=>{
+      setNews(res.data)
+  })
+  }).catch(err=>{
+  message.error("not create")
+  setIsModalOpen63(false)
+  })
+}
+
 function postPred(){
     var postdata=new FormData()
     postdata.append("title",document.querySelector("#title21").value)
@@ -584,7 +660,7 @@ const preferencescolumn = [
       title: 'Image',
       dataIndex: 'name',
       width:'10%',
-      render: (_,text) => <Image src={text.image} height={"40px"}/>,
+      render: (_,text) =>  <Image src={text.image.includes("http")?text.image:`${url}/${text.image}`} height={"40px"}/>,
     },
     {
       title: 'Title',
@@ -609,13 +685,15 @@ const preferencescolumn = [
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-        <Button  type="dashed" onClick={()=>{setIsModalOpen43(true);setSelectId(record.id);
+        <Button  type="dashed" onClick={()=>{setIsModalOpen63(true);setSelectId(record.id);
        setTimeout(() => {
-        document.querySelector("#sena43").value=record.sena;
-        document.querySelector("#gradus43").value=record.gradus;
+        document.querySelector("#title63").value=record.title;
+        document.querySelector("#link63").value=record.description;
+        document.querySelector("#file63").value=record.image;
+        document.querySelector("#deck63").value=record.min_description;
        }, 100);
         }}>Edit</Button>
-        <Button danger onClick={()=>{setIsModalOpen42(true);setSelectId(record.id)}} >Delete</Button>
+        <Button danger onClick={()=>{setIsModalOpen62(true);setSelectId(record.id)}} >Delete</Button>
         </Space>
       ),
     },
@@ -741,7 +819,7 @@ axios.get(`${url}/api/news`).then(res5=>{
     <Table pagination={{pageSize:'4'}} columns={aksiyacolumn} style={{width:'100%'}} dataSource={aksiya} /></div>
 
     <div style={{width:'100%'}}>
-   <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}> <h2 >Новости</h2> <Button type='primary'>create</Button>  </div>
+   <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}> <h2 >Новости</h2> <Button onClick={()=>{setIsModalOpen61(true)}} type='primary'>create</Button>  </div>
     <Table pagination={{pageSize:'4'}} columns={newscolumn} style={{width:'100%'}} dataSource={news} /></div>
 
     
@@ -775,7 +853,7 @@ axios.get(`${url}/api/news`).then(res5=>{
     </Modal>
 
 {/* Марка */}
-    <Modal title="Марка Создавать" visible={isModalOpen11} onOk={()=>CreateMarka()} onCancel={()=>setIsModalOpen11()}>
+    <Modal title="Марка Создавать" visible={isModalOpen11} onOk={()=>CreateMarka()} onCancel={()=>setIsModalOpen11(false)}>
       <Input id='title11' showCount maxLength={50} placeholder='title'  />
     </Modal>
  <Modal title="Осторожность" visible={isModalOpen12} onOk={()=>handleOk12()} onCancel={()=>setIsModalOpen12(false)}>
@@ -922,6 +1000,44 @@ axios.get(`${url}/api/news`).then(res5=>{
     <Checkbox onChange={(e)=>onFile53(e)}>file</Checkbox>
     <Input type='text' id='file53' placeholder='image'  />
     </Modal>
+
+
+
+{/* Новости */}
+    <Modal title="Новости Создавать" visible={isModalOpen61} onOk={()=>createNews()} onCancel={()=>setIsModalOpen61(false)}>
+      <Input id='title61' showCount maxLength={50} placeholder='title'  />
+    <br />
+    <br />
+    <TextArea id='link61' 
+    
+    placeholder='description'  />
+    <br />
+    <br />
+    <TextArea id='deck61' showCount maxLength={400} placeholder='min_description'  />
+    <br />
+    <br />
+    <br />
+    <br />
+    <Checkbox onChange={(e)=>onFile61(e)}>file</Checkbox>
+    <Input type='text' id='file61' placeholder='image'  />
+ </Modal>
+ <Modal title="Осторожность" visible={isModalOpen62} onOk={()=>handleOk62()} onCancel={()=>setIsModalOpen62(false)}>
+    <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
+    </Modal>
+<Modal title="Новости изменять" visible={isModalOpen63} onOk={()=>PutNews()} onCancel={()=>setIsModalOpen63(false)}>
+<Input id='title63' showCount maxLength={50} placeholder='title'  />
+    <br />
+    <br />
+    <TextArea id='link63' placeholder='description'  />
+    <br />
+    <br />
+    <TextArea id='deck63' showCount maxLength={400} placeholder='min_description'  />
+    <br />
+    <br />
+    <Checkbox onChange={(e)=>onFile63(e)}>file</Checkbox>
+    <Input type='text' id='file63' placeholder='image'  />
+    </Modal>
+
 
 
 
