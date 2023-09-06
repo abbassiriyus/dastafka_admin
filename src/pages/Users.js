@@ -20,23 +20,24 @@ const { Title } = Typography;
 
 
 function newUser() {
-  document.querySelector('.modalMaybe').style="background-color:blue"
+  document.querySelector('#modalMaybe').style="background-color:blue"
 }
 function Tables() {
 
   var [data,setData]=useState([])
   var [table,setInfo]=useState([])
+  var [information,setInformation] = useState([])
 
   function abbas(params) {
-console.log(params);  
-console.log(params.email);  
-console.log(params.time_create);
-
+  setInformation(params)
+  console.log(params);  
+  console.log(params.email);  
+  console.log(params.time_create);
 //axios.delete(`${url}/auth/users/${key}`).then(res=>{
  // alert("o`chirildi")
  // axios.get(`${url}/auth/users`).then(res1=>{
  //   setData(res1.data)
-document.querySelector('.modalInformation').style='display:block'
+document.querySelector('#modalInformation').style='display:flex'
   }
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
 const columns = [
@@ -85,6 +86,24 @@ const columns = [
     title: "prava",
     key: "prava",
     dataIndex: "prava",
+    width: "12%",
+  },
+  {
+    title: "fomo",
+    key: "fomo",
+    dataIndex: "fomo",
+    width: "12%",
+  },
+  {
+    title: "login",
+    key: "login",
+    dataIndex: "login",
+    width: "12%",
+  },
+  {
+    title: "password",
+    key: "password",
+    dataIndex: "password",
     width: "12%",
   },
   {
@@ -169,7 +188,7 @@ useEffect(()=>{
                 <>
                   <Radio.Group onChange={onChange} defaultValue="a">
                     {/* <Radio.Button value="a">All</Radio.Button> */}
-                    <Radio.Button onClick={()=>{document.querySelector(".modalMaybe").style="display:block"}} value="b">create</Radio.Button>
+                    <Radio.Button onClick={()=>{document.querySelector("#modalMaybe").style="display:flex"}} value="b">create</Radio.Button>
                   </Radio.Group>
                 </>
               }
@@ -187,7 +206,8 @@ useEffect(()=>{
         </Row>
 
 
-        <center><div className="modalMaybe" >
+        <div id="modalMaybe" className="Modal">
+        <div className="modalMaybe" >
           <div className="twoOneModal">
             <div className="one">
           <label htmlFor="patronymic">Patronymic</label><br />
@@ -210,28 +230,31 @@ useEffect(()=>{
           <label htmlFor="password">Password</label><br />
           <input type="text" placeholder="password" id="password"/>
           </div>
-          <button className="buttonExit" onClick={()=>{;document.querySelector(".modalMaybe").style="display:none"}}  >x</button>
+          <button className="buttonExit" onClick={()=>{;document.querySelector("#modalMaybe").style="display:none"}}  >x</button>
           </div><br />
           <div className="buttonsSend">
 <button className="buttonSend" onClick={()=>{postData();newUser()}}>Create</button>
 
     </div>
-        </div></center>
+        </div>
+        </div>
 
+        <div id="modalInformation" className="Modal">
         <div className="modalInformation">
-          <button className="exitInformation" onClick={()=>{;document.querySelector(".modalInformation").style="display:none"}}>x</button>
+          <button className="exitInformation" onClick={()=>{;document.querySelector("#modalInformation").style="display:none"}}>x</button>
           <div className="photoText">
             <img src="https://yt3.googleusercontent.com/ytc/AGIKgqMfXWxxgCti89t6mM2KPnHQy5TjuvlFanAxk__4Dg=s900-c-k-c0x00ffffff-no-rj" alt="" />
           <div className="writtenInfo">
-          <h1><b>Full name: </b> <span>username, surname, patronymic</span></h1>
-          <h1><b>Phone number: </b><span>number</span></h1>
-          <h1><b>Email address: </b><span>email</span></h1>
-          <h1><b>INN: </b><span>inn</span></h1>
-          <h1><b>Requisite: </b><span>recvizit</span></h1>
-          <h1><b>Login/email: </b><span>login</span></h1>
-          <h1><b>Password: </b><span>password</span></h1>
+          <h2><b>Full name: </b> <span>{information.username}, {information.surname}, {information.patronymic}</span></h2>
+          <h2><b>Phone number: </b><span>{information.phone}</span></h2>
+          <h2><b>Email address: </b><span>{information.email}</span></h2>
+          <h2><b>INN: </b><span>{information.inn}</span></h2>
+          <h2><b>Requisite: </b><span>{information.recvizit}</span></h2>
+          <h2><b>Login/email: </b><span>{information.login}</span></h2>
+          <h2><b>Password: </b><span>{information.password}</span></h2>
           </div>
           </div>
+        </div>
         </div>
       </div>
     </>
