@@ -9,30 +9,32 @@
     box-shadow:2px 2px 6px 2px rgb(221, 220, 220);
 }
 .twoOneModal{
-    display: flex;
+    /* display: flex; */
     align-items: center;
     justify-content: space-around;
 }
 .one{
     display: block;
-    width: 50%;
+    width: 100%;
     padding: 10px;
     margin-left: 30px;
 }
 .modalMaybe input{
-    background-color: white;
+    /* background-color: white;
     margin: auto;
     border: 1px solid gray;
     border-radius: 1.5px;
     text-align: center;
-    margin: auto;
+    margin: auto; */
+    width: 85% !important;
     /*min-width: 140px;*/
 }
 .modalMaybe input[type=text]:focus{
     box-shadow: 2px 3px 5px 2px rgba(0, 132, 255, 0.322);
 }
 .buttonSend{
-    width: 95%;
+    width: 85%;
+    border: none;
     min-width: 290px;
     height: 40px;
     border: 1.5px solid gray;
@@ -66,14 +68,17 @@
     border-radius: 1.5px;
     width:25px;
     height: 25px;
-    border: 1.5px solid gray;
+    /* border: 1.5px solid gray; */
     font-size: 14px;
     text-align: center;
     background-color: white;
     color: rgb(56, 55, 55);
-    position: relative;
-    top: -90px;
-    right: -5px;
+    position: absolute;
+    top: 20px;
+    display: flex;
+    align-items: center;justify-content: center;
+    border: none;
+    right: 20px;
 }
 .buttonExit:hover{
     box-shadow: 1px 0.7px 3px 0.5px rgba(0, 132, 255, 0.322);

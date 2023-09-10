@@ -7,6 +7,7 @@ import {
   Button,
   Avatar,
   Typography,
+  Input,
 } from "antd";
 import { Content } from "antd/lib/layout/layout";
 import axios from "axios";
@@ -207,33 +208,31 @@ useEffect(()=>{
 
 
         <div id="modalMaybe" className="Modal">
-        <div className="modalMaybe" >
+        <div className="modalMaybe" style={{position:'relative'}}  >
           <div className="twoOneModal">
             <div className="one">
-          <label htmlFor="patronymic">Patronymic</label><br />
-          <input type="text" placeholder="patronymic" id="patronymic"/>
-          <label htmlFor="surname">Surname</label><br />
-          <input type="text" placeholder="surname" id="surname"/>
-          <label htmlFor="username">Username</label><br />
-          <input type="text" placeholder="username" id="username"/>
-          <label htmlFor="phone">Phone</label><br />
-          <input type="text" placeholder="phone" id="phone"/>
+          <br /><label htmlFor="patronymic">Patronymic</label><br />
+          <Input type="text" placeholder="patronymic" id="patronymic"/>
+          <br /><label htmlFor="surname">Surname</label><br />
+          <Input type="text" placeholder="surname" id="surname"/>
+          <br /><label htmlFor="username">Username</label><br />
+          <Input type="text" placeholder="username" id="username"/>
+          <br /><label htmlFor="phone">Phone</label><br />
+          <Input type="text" placeholder="phone" id="phone"/>
+         
+          <br /><label htmlFor="email">Email</label><br />
+          <Input type="text" placeholder="email" id="email"/>
+          <br /><label htmlFor="position">Position</label><br />
+          <Input type="number" placeholder="position" id="position"/>
+          <br /><label htmlFor="login">Login</label><br />
+          <Input type="text" placeholder="login" id="login"/>
+          <br /><label htmlFor="password">Password</label><br />
+          <Input type="text" placeholder="password" id="password"/>
           </div>
-          
-          <div className="one">
-          <label htmlFor="email">Email</label><br />
-          <input type="text" placeholder="email" id="email"/>
-          <label htmlFor="position">Position</label><br />
-          <input type="number" placeholder="position" id="position"/>
-          <label htmlFor="login">Login</label><br />
-          <input type="text" placeholder="login" id="login"/>
-          <label htmlFor="password">Password</label><br />
-          <input type="text" placeholder="password" id="password"/>
-          </div>
-          <button className="buttonExit" onClick={()=>{;document.querySelector("#modalMaybe").style="display:none"}}  >x</button>
+          <Button className="buttonExit" onClick={()=>{;document.querySelector("#modalMaybe").style="display:none"}}  >x</Button>
           </div><br />
           <div className="buttonsSend">
-<button className="buttonSend" onClick={()=>{postData();newUser()}}>Create</button>
+<Button className="buttonSend" type="primary" onClick={()=>{postData();newUser()}}>Create</Button>
 
     </div>
         </div>
