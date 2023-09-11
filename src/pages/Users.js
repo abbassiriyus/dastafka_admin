@@ -253,7 +253,7 @@ useEffect(()=>{
         <div className="modalInformation">
           <button className="exitInformation" onClick={()=>{;document.querySelector("#modalInformation").style="display:none"}}>x</button>
           <div className="photoText">
-            <img src="https://yt3.googleusercontent.com/ytc/AGIKgqMfXWxxgCti89t6mM2KPnHQy5TjuvlFanAxk__4Dg=s900-c-k-c0x00ffffff-no-rj" alt="" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1200px-User_icon_2.svg.png" alt="" />
           <div className="writtenInfo">
           <h2><b>Full name: </b> <span>{information.username}, {information.surname}, {information.patronymic}</span></h2>
           <h2><b>Phone number: </b><span>{information.phone}</span></h2>
