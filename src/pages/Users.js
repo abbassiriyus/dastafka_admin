@@ -177,7 +177,7 @@ useEffect(()=>{
 },[])
 
   return (
-    <>
+    <div>
       <div className="tabled">
         <Row gutter={[24, 0]}>
           <Col xs="24" xl={24}>
@@ -186,12 +186,12 @@ useEffect(()=>{
               className="criclebox tablespace mb-24"
               title="All users"
               extra={
-                <>
+                <div>
                   <Radio.Group onChange={onChange} defaultValue="a">
                     {/* <Radio.Button value="a">All</Radio.Button> */}
                     <Radio.Button onClick={()=>{document.querySelector("#modalMaybe").style="display:flex"}} value="b">create</Radio.Button>
                   </Radio.Group>
-                </>
+                </div>
               }
             >
               <div className="table-responsive">
@@ -256,7 +256,7 @@ useEffect(()=>{
         </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
