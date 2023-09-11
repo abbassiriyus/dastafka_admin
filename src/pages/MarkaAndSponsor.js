@@ -13,6 +13,8 @@ export default function MarkaAndSponsor() {
   const [isModalOpen3, setIsModalOpen3] = useState(false);
   const [aksiya,setAksiya]=useState([])
   const [isModalOpen2, setIsModalOpen2] = useState(false);
+  // const [isModalOpen3, setIsModalOpen3] = useState(false);
+
   const [isModalOpen1, setIsModalOpen1] = useState(false);
   const [isModalOpen11, setIsModalOpen11] = useState(false);
   const [isModalOpen12, setIsModalOpen12] = useState(false);
@@ -130,7 +132,7 @@ function onFile3(e){
   };
   const showModal3 = (key) => {
     setSelectId(key.id) 
-    setIsModalOpen2(true);
+    setIsModalOpen3(true);
    setTimeout(() => {
     document.querySelector('#title3').value=key.title
     document.querySelector('#link3').value=key.link
@@ -141,7 +143,7 @@ function onFile3(e){
   };
 
   const handleCancel3 = () => {
-    setIsModalOpen2(false);
+    setIsModalOpen3(false);
     setCheckFile(false)
     document.querySelector("#file3").type="text"
   };
@@ -840,7 +842,7 @@ axios.get(`${url}/api/news`).then(res5=>{
  <Modal title="Осторожность" visible={isModalOpen1} onOk={handleOk1} onCancel={handleCancel1}>
     <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
       </Modal>
-<Modal title="Производитель изменять" visible={isModalOpen2} onOk={()=>PutHomeiy()} onCancel={()=>handleCancel3()}>
+<Modal title="Производитель изменять" visible={isModalOpen3} onOk={()=>PutHomeiy()} onCancel={()=>handleCancel3()}>
       <Input id='title3' showCount maxLength={50} placeholder='title'  />
     <br />
     <br />

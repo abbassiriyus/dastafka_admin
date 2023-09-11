@@ -205,7 +205,7 @@ function putData() {
         md: 24,
         lg: 32,
       }}>{category.map((item, key) => {
-        return <Col onClick={() => { setCheck(key) }} span={4}>
+        return <Col onClick={() => { setCheck(key) }} span={4} xs={24} xl={4} sm={6} md={6} >
           <div className="imgNameFour">
             <Card bordered={false} >
               <div className="tickCircle">{item.check?(<i class='bx bx-check'></i>):(<div></div>)}</div>
