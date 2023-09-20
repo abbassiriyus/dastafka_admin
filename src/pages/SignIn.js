@@ -1,9 +1,7 @@
 
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import {
   Layout,
-  Menu,
   Button,
   Row,
   Col,
@@ -13,18 +11,13 @@ import {
   Switch,
 } from "antd";
 import signinbg from "../assets/images/img-signin.jpg";
-import {
-  DribbbleOutlined,
-  TwitterOutlined,
-  InstagramOutlined,
-  GithubOutlined,
-} from "@ant-design/icons";
 import axios from "axios";
+import url from "./host";
 function onChange(checked) {
   console.log(`switch to ${checked}`);
 }
 const { Title } = Typography;
-const {  Footer, Content } = Layout;
+const {  Content } = Layout;
 
 
 export default class SignIn extends Component {
@@ -41,7 +34,7 @@ function loginIn() {
   var data =new FormData()
   data.append("login",document.querySelector("#email").value)
   data.append("password",document.querySelector("#parol").value)
-  axios.post('https://dastafka-back.onrender.com/auth/login',data).then(res=>{
+  axios.post(`${url}/auth/login`,data).then(res=>{
     sessionStorage.setItem('token',res.data.access)
     window.location.reload()
   }).catch(err=>{

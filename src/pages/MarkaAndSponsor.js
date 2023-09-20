@@ -10,13 +10,13 @@ export default function MarkaAndSponsor() {
   const [preferences,setPreferences]=useState([])
   const [sovuqlik,setSovuqlik]=useState([])
   const [news,setNews]=useState([])
-  const [isModalOpen3, setIsModalOpen3] = useState(false);
   const [aksiya,setAksiya]=useState([])
   const [isModalOpen2, setIsModalOpen2] = useState(false);
   // const [isModalOpen3, setIsModalOpen3] = useState(false);
 
   const [isModalOpen1, setIsModalOpen1] = useState(false);
   const [isModalOpen11, setIsModalOpen11] = useState(false);
+  const [isModalOpen3, setIsModalOpen3] = useState(false);
   const [isModalOpen12, setIsModalOpen12] = useState(false);
   const [isModalOpen13, setIsModalOpen13] = useState(false);
   const [isModalOpen21, setIsModalOpen21] = useState(false);
@@ -516,7 +516,7 @@ const homiycolumn = [
     title: 'Image',
     dataIndex: 'name',
   
-    render: (_,text) =><Image src={text.image.includes("http")?text.image:`${url}/${text.image}`} height={"40px"}/>,
+    render: (_,text) =><Image src={text.image} height={"40px"}/>,
   },
   {
     title: 'Title',
@@ -544,7 +544,7 @@ const skachat_pridlachenucolumn = [
       title: 'Image',
       dataIndex: 'name',
     
-      render: (_,text) => <Image src={text.image.includes("http")?text.image:`${url}/${text.image}`} height={"40px"}/>,
+      render: (_,text) => <Image src={text.image} height={"40px"}/>,
     },
     {
       title: 'Title',
@@ -595,7 +595,7 @@ const preferencescolumn = [
     {
       title: 'Image',
       dataIndex: 'name',
-      render: (_,text) => <Image src={text.image.includes("http")?text.image:`${url}/${text.image}`} height={"40px"}/>,
+      render: (_,text) => <Image src={text.image} height={"40px"}/>,
     },
     {
       title: 'Title',
@@ -609,7 +609,7 @@ const preferencescolumn = [
       },
     {
       title: 'Для лиц',
-      render: (_,item)=> <div>{item.liso=="f"?("физических лиц"):("юридических лиц")}</div>
+      render: (_,item)=> <div>{item.liso==="f"?("физических лиц"):("юридических лиц")}</div>
     },
     {
       title: 'Action',
@@ -662,7 +662,7 @@ const preferencescolumn = [
       title: 'Image',
       dataIndex: 'name',
       width:'10%',
-      render: (_,text) =>  <Image src={text.image.includes("http")?text.image:`${url}/${text.image}`} height={"40px"}/>,
+      render: (_,text) =>  <Image src={text.image} height={"40px"}/>,
     },
     {
       title: 'Title',
@@ -705,7 +705,7 @@ const preferencescolumn = [
       title: 'Image',
       dataIndex: 'name',
     
-      render: (_,text) => <Image src={text.image.includes("http")?text.image:`${url}/${text.image}`} height={"40px"}/>,
+      render: (_,text) => <Image src={text.image} height={"40px"}/>,
     },
     {
       title: 'Title',
@@ -1038,6 +1038,8 @@ axios.get(`${url}/api/news`).then(res5=>{
     <br />
     <Checkbox onChange={(e)=>onFile63(e)}>file</Checkbox>
     <Input type='text' id='file63' placeholder='image'  />
+    
+    
     </Modal>
 
 

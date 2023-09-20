@@ -1,3 +1,3 @@
 // var url="https://dastafka-back.onrender.com"
-var url="http://localhost:5000"
+var url="http://siriyuuc.beget.tech"
 module.exports=url

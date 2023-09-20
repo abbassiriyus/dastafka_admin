@@ -3,20 +3,22 @@ import {
   Col,
   Card,
   Radio,
+
   Table,
   Button,
   Avatar,
   Typography,
   Input,
+
 } from "antd";
-import { Content } from "antd/lib/layout/layout";
+
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 import url from "./host.js";
 import "./user.css";
 
-const { Title } = Typography;
+
 
 
 
@@ -31,13 +33,6 @@ function Tables() {
 
   function abbas(params) {
   setInformation(params)
-  console.log(params);  
-  console.log(params.email);  
-  console.log(params.time_create);
-//axios.delete(`${url}/auth/users/${key}`).then(res=>{
- // alert("o`chirildi")
- // axios.get(`${url}/auth/users`).then(res1=>{
- //   setData(res1.data)
 document.querySelector('#modalInformation').style='display:flex'
   }
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
@@ -128,11 +123,6 @@ const columns = [
 ]; 
 
 
-//function Information() {
- // axios.information(`${url}/api/position`).then(res=>{
-  //  alert("tried to get information of user into the alert")
-  //})
-//}
 
 
 function DeleteData(key){
@@ -196,11 +186,13 @@ useEffect(()=>{
               extra={
                 <div>
                   <Radio.Group onChange={onChange} defaultValue="a">
+
                      <Radio.Button onClick={()=>all1(0)} value="a1">Все</Radio.Button> 
                      <Radio.Button onClick={()=>all1(2)} value="a2">Юридическое лицо</Radio.Button> 
                      <Radio.Button onClick={()=>all1(1)} value="a3">Физическое лицо</Radio.Button> 
                      <Radio.Button onClick={()=>all1(3)} value="a4">Менеджер</Radio.Button> 
                     <Radio.Button onClick={()=>{document.querySelector("#modalMaybe").style="display:flex"}} value="b">create</Radio.Button>
+
                   </Radio.Group>
                 </div>
               }
@@ -248,7 +240,6 @@ useEffect(()=>{
     </div>
         </div>
         </div>
-
         <div id="modalInformation" className="Modal">
         <div className="modalInformation">
           <button className="exitInformation" onClick={()=>{;document.querySelector("#modalInformation").style="display:none"}}>x</button>
@@ -266,6 +257,7 @@ useEffect(()=>{
           </div>
         </div>
         </div>
+
       </div>
     </div>
   );

@@ -349,3 +349,36 @@ margin-left: 30px;
     color: #ac1966;
     text-decoration: none;
   }
+  
+  .modalInformation{
+    position: absolute;
+    top: 10%;
+width: 80%;
+left: 10%;
+min-height: 500px;
+  }
+  .exitInformation{
+    position: absolute;
+    right:20px;
+    top: 20px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;justify-content: center;align-items: center;
+  }
+  .one_user{
+    display: flex;
+  }
+  .img_oneuser{
+    width: 20%;
+    min-width: 200px;
+    height: 70%;
+    border-right: 2px solid gray;
+  }
+  .img_oneuser a{
+    font-size: 23px;
+  }
+  .all_input{
+    width: 70%;
+    min-width: 400px;
+  }

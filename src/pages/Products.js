@@ -5,12 +5,11 @@ import {
   Radio,
   Table,
   message,
-  Typography,
   Button,
   Modal,
   Input,
   Select,
-  Image,
+  Image
 } from "antd";
 
 import "./style.css";
@@ -18,7 +17,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import url from "./host";
 import TextArea from "antd/es/input/TextArea";
-const { Title } = Typography;
 
 
 
@@ -61,7 +59,7 @@ function Tables(props) {
                   }
                 }
                 for (let j = 0; j < category.length; j++) {
-                  if (category[j].id == res2.data[i].category) {
+                  if (category[j].id*1 === res2.data[i].category*1) {
                     res2.data[i].category = category[j].title
                   }
                 }
@@ -92,9 +90,6 @@ function Tables(props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
-  };
-  const handleOk = () => {
-    setIsModalOpen(false);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -132,7 +127,7 @@ function Tables(props) {
                   }
                 }
                 for (let j = 0; j < category.length; j++) {
-                  if (category[j].id == res2.data[i].category) {
+                  if (category[j].id*1 === res2.data[i].category*1) {
                     res2.data[i].category = category[j].title
                   }
                 }
@@ -182,7 +177,7 @@ function Tables(props) {
                   }
                 }
                 for (let j = 0; j < category.length; j++) {
-                  if (category[j].id == res2.data[i].category) {
+                  if (category[j].id*1 === res2.data[i].category*1) {
                     res2.data[i].category = category[j].title
                   }
                 }
