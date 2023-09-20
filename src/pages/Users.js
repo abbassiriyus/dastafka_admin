@@ -215,22 +215,22 @@ useEffect(()=>{
           <div className="twoOneModal">
             <div className="one">
           <br /><label htmlFor="patronymic">Patronymic</label><br />
-          <Input type="text" placeholder="patronymic" id="patronymic"/>
+          <input type="text" placeholder="patronymic" id="patronymic"/>
           <br /><label htmlFor="surname">Surname</label><br />
-          <Input type="text" placeholder="surname" id="surname"/>
+          <input type="text" placeholder="surname" id="surname"/>
           <br /><label htmlFor="username">Username</label><br />
-          <Input type="text" placeholder="username" id="username"/>
+          <input type="text" placeholder="username" id="username"/>
           <br /><label htmlFor="phone">Phone</label><br />
-          <Input type="text" placeholder="phone" id="phone"/>
+          <input type="text" placeholder="phone" id="phone"/>
          
           <br /><label htmlFor="email">Email</label><br />
-          <Input type="text" placeholder="email" id="email"/>
+          <input type="text" placeholder="email" id="email"/>
           <br /><label htmlFor="position">Position</label><br />
-          <Input type="number" placeholder="position" id="position"/>
+          <input type="number" placeholder="position" id="position"/>
           <br /><label htmlFor="login">Login</label><br />
-          <Input type="text" placeholder="login" id="login"/>
+          <input type="text" placeholder="login" id="login"/>
           <br /><label htmlFor="password">Password</label><br />
-          <Input type="text" placeholder="password" id="password"/>
+          <input type="text" placeholder="password" id="password"/>
           </div>
           <Button className="buttonExit" onClick={()=>{;document.querySelector("#modalMaybe").style="display:none"}}  >x</Button>
           </div><br />

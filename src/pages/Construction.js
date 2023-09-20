@@ -718,96 +718,96 @@ axios.get(`${url}/api/mashina`).then(res8=>{
 
 {/* Position */}
 <Modal title="Position Создавать" visible={isModalOpen} onOk={()=>CreatePosition()} onCancel={()=>setIsModalOpen(false)}>
-      <Input id='title' showCount maxLength={50} placeholder='title'  />
+      <input id='title' showCount maxLength={50} placeholder='title'  />
     </Modal>
  <Modal title="Осторожность" visible={isModalOpen2} onOk={()=>handleOk2()} onCancel={()=>setIsModalOpen2(false)}>
     <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
 </Modal>
   <Modal title="Position изменять" visible={isModalOpen3} onOk={()=>PutPosition()} onCancel={()=>setIsModalOpen3(false)}>
-      <Input id='title3' showCount maxLength={50} placeholder='position Name'  />
+      <input id='title3' showCount maxLength={50} placeholder='position Name'  />
     </Modal>
 
 
     {/* Company */}
 <Modal title="Осторожность" visible={isModalOpen4} onOk={()=>createCompany()} onCancel={()=>setIsModalOpen4(false)}>
-   <Input id='email' showCount maxLength={50} placeholder='email'  />
+   <input id='email' showCount maxLength={50} placeholder='email'  />
     <br />
     <br />
-    <Input id='whatsapp' showCount maxLength={50} placeholder='whatsapp'  />
+    <input id='whatsapp' showCount maxLength={50} placeholder='whatsapp'  />
     <br />
     <br />
-    <Input id='phone' showCount maxLength={50} placeholder='phone'  />
+    <input id='phone' showCount maxLength={50} placeholder='phone'  />
     <br />
     <br />
-    <Input id='telegram' showCount maxLength={50} placeholder='telegram'  />
+    <input id='telegram' showCount maxLength={50} placeholder='telegram'  />
     <br />
     <br />
     <br />
     <br />
     <Checkbox onChange={(e)=>onFile61(e)}>file</Checkbox>
-    <Input type='text' id='logo' placeholder='logo'  />
+    <input type='text' id='logo' placeholder='logo'  />
 </Modal>
  <Modal title="Осторожность" visible={isModalOpen5} onOk={()=>updateCompany()} onCancel={()=>setIsModalOpen5(false)}>
-   <Input id='email1' showCount maxLength={50} placeholder='email'  />
+   <input id='email1' showCount maxLength={50} placeholder='email'  />
     <br />
     <br />
-    <Input id='whatsapp1' showCount maxLength={50} placeholder='whatsapp'  />
+    <input id='whatsapp1' showCount maxLength={50} placeholder='whatsapp'  />
     <br />
     <br />
-    <Input id='phone1'  showCount maxLength={50} placeholder='phone'  />
+    <input id='phone1'  showCount maxLength={50} placeholder='phone'  />
     <br />
     <br />
-    <Input id='telegram1' showCount maxLength={50} placeholder='telegram'  />
+    <input id='telegram1' showCount maxLength={50} placeholder='telegram'  />
     <br />
     <br />
     <br />
     <br />
     <Checkbox onChange={(e)=>onFile62(e)}>file</Checkbox>
-    <Input type='text' id='logo1' placeholder='logo'  />
+    <input type='text' id='logo1' placeholder='logo'  />
 </Modal>
 
 
 {/* Filial */}
 <Modal title="Осторожность" visible={isModalOpen11} onOk={()=>createFilial()} onCancel={()=>setIsModalOpen11(false)}>
-    <Input id='latitude11' showCount maxLength={50} placeholder='latitude'  />
+    <input id='latitude11' showCount maxLength={50} placeholder='latitude'  />
     <br />
     <br />
-    <Input id='title11' showCount maxLength={50} placeholder='title'  />
+    <input id='title11' showCount maxLength={50} placeholder='title'  />
     <br />
     <br />
-    <Input id='longitude11' showCount maxLength={50} placeholder='longitude'  />
+    <input id='longitude11' showCount maxLength={50} placeholder='longitude'  />
     <br />
     <br />
     <br />
     <br />
     <Checkbox onChange={(e)=>onFile11(e)}>file</Checkbox>
-    <Input type='text' id='image11' placeholder='image'  />
+    <input type='text' id='image11' placeholder='image'  />
 </Modal>
 <Modal title="Осторожность" visible={isModalOpen12} onOk={()=>deleteFilial()} onCancel={()=>setIsModalOpen12(false)}>
     <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
 </Modal>
  <Modal title="Осторожность" visible={isModalOpen13} onOk={()=>updateFilial()} onCancel={()=>setIsModalOpen13(false)}>
- <Input id='latitude13' showCount maxLength={50} placeholder='latitude'  />
+ <input id='latitude13' showCount maxLength={50} placeholder='latitude'  />
     <br />
     <br />
-    <Input id='title13' showCount maxLength={50} placeholder='title'  />
+    <input id='title13' showCount maxLength={50} placeholder='title'  />
     <br />
     <br />
-    <Input id='longitude13' showCount maxLength={50} placeholder='longitude'  />
+    <input id='longitude13' showCount maxLength={50} placeholder='longitude'  />
     <br />
     <br />
     <br />
     <br />
     <Checkbox onChange={(e)=>onFile13(e)}>file</Checkbox>
-    <Input type='text' id='image13' placeholder='image'  />
+    <input type='text' id='image13' placeholder='image'  />
 </Modal>
 
 {/* Shving */}
 <Modal title="Осторожность" visible={isModalOpen21} onOk={()=>createShving()} onCancel={()=>setIsModalOpen21(false)}>
-    <Input id='m21' showCount maxLength={50} placeholder='m'  />
+    <input id='m21' showCount maxLength={50} placeholder='m'  />
     <br />
     <br />
-    <Input id='sena21' showCount maxLength={50} placeholder='sena'  />
+    <input id='sena21' showCount maxLength={50} placeholder='sena'  />
     <br />
     <br />
     <TextArea id='description21' showCount maxLength={400} placeholder='description'  />
@@ -816,16 +816,16 @@ axios.get(`${url}/api/mashina`).then(res8=>{
     <br />
     <br />
     <Checkbox onChange={(e)=>onFile21(e)}>file</Checkbox>
-    <Input type='text' id='image21' placeholder='image'  />
+    <input type='text' id='image21' placeholder='image'  />
 </Modal>
 <Modal title="Осторожность" visible={isModalOpen22} onOk={()=>deleteShving()} onCancel={()=>setIsModalOpen22(false)}>
     <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
 </Modal>
  <Modal title="Осторожность" visible={isModalOpen23} onOk={()=>putShving()} onCancel={()=>setIsModalOpen23(false)}>
- <Input id='m23' showCount maxLength={50} placeholder='m'  />
+ <input id='m23' showCount maxLength={50} placeholder='m'  />
     <br />
     <br />
-    <Input id='sena23' showCount maxLength={50} placeholder='sena'  />
+    <input id='sena23' showCount maxLength={50} placeholder='sena'  />
     <br />
     <br />
     <TextArea id='description23' showCount maxLength={400} placeholder='description'  />
@@ -834,16 +834,16 @@ axios.get(`${url}/api/mashina`).then(res8=>{
     <br />
     <br />
     <Checkbox onChange={(e)=>onFile23(e)}>file</Checkbox>
-    <Input type='text' id='image23' placeholder='image'  />
+    <input type='text' id='image23' placeholder='image'  />
 </Modal>
 
 
 {/* Машина */}
 <Modal title="Осторожность" visible={isModalOpen31} onOk={()=>createMashina()} onCancel={()=>setIsModalOpen31(false)}>
-    <Input id='m31' showCount maxLength={50} placeholder='m3'  />
+    <input id='m31' showCount maxLength={50} placeholder='m3'  />
     <br />
     <br />
-    <Input id='sena31' showCount maxLength={50} placeholder='sena'  />
+    <input id='sena31' showCount maxLength={50} placeholder='sena'  />
     <br />
     <br />
     <TextArea id='description31' showCount maxLength={400} placeholder='description'  />
@@ -852,16 +852,16 @@ axios.get(`${url}/api/mashina`).then(res8=>{
     <br />
     <br />
     <Checkbox onChange={(e)=>onFile31(e)}>file</Checkbox>
-    <Input type='text' id='image31' placeholder='image'  />
+    <input type='text' id='image31' placeholder='image'  />
 </Modal>
 <Modal title="Осторожность" visible={isModalOpen32} onOk={()=>deleteMashina()} onCancel={()=>setIsModalOpen32(false)}>
     <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
 </Modal>
  <Modal title="Осторожность" visible={isModalOpen33} onOk={()=>putMashina()} onCancel={()=>setIsModalOpen33(false)}>
- <Input id='m33' showCount maxLength={50} placeholder='m3'  />
+ <input id='m33' showCount maxLength={50} placeholder='m3'  />
     <br />
     <br />
-    <Input id='sena33' showCount maxLength={50} placeholder='sena'  />
+    <input id='sena33' showCount maxLength={50} placeholder='sena'  />
     <br />
     <br />
     <TextArea id='description33' showCount maxLength={400} placeholder='description'  />
@@ -870,29 +870,29 @@ axios.get(`${url}/api/mashina`).then(res8=>{
     <br />
     <br />
     <Checkbox onChange={(e)=>onFile33(e)}>file</Checkbox>
-    <Input type='text' id='image33' placeholder='image'  />
+    <input type='text' id='image33' placeholder='image'  />
 </Modal>
 
  {/* Sena */}
 <Modal title="Осторожность" visible={isModalOpen41} onOk={()=>createSena()} onCancel={()=>setIsModalOpen41(false)}>
-    <Input id='usluga' showCount maxLength={50} placeholder='usluga'  />
+    <input id='usluga' showCount maxLength={50} placeholder='usluga'  />
     <br />
     <br />
-    <Input id='suv_bilan' showCount maxLength={50} placeholder='suv_bilan'  />
+    <input id='suv_bilan' showCount maxLength={50} placeholder='suv_bilan'  />
     <br />
     <br />
-    <Input id='pustoy_smena' showCount maxLength={50} placeholder='pustoy_smena'  />
+    <input id='pustoy_smena' showCount maxLength={50} placeholder='pustoy_smena'  />
     <br />
     <br />
 </Modal>
  <Modal title="Осторожность" visible={isModalOpen43} onOk={()=>putSena()} onCancel={()=>setIsModalOpen43(false)}>
- <Input id='usluga1' showCount maxLength={50} placeholder='usluga'  />
+ <input id='usluga1' showCount maxLength={50} placeholder='usluga'  />
     <br />
     <br />
-    <Input id='suv_bilan1' showCount maxLength={50} placeholder='suv_bilan'  />
+    <input id='suv_bilan1' showCount maxLength={50} placeholder='suv_bilan'  />
     <br />
     <br />
-    <Input id='pustoy_smena1' showCount maxLength={50} placeholder='pustoy_smena'  />
+    <input id='pustoy_smena1' showCount maxLength={50} placeholder='pustoy_smena'  />
     <br />
     <br />
 </Modal>

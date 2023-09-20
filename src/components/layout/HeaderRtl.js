@@ -418,7 +418,7 @@ function Header({
             {profile}
             <span>Sign in</span>
           </Link>
-          <Input
+          <input
             className="header-search"
             placeholder="Type here..."
             prefix={<SearchOutlined />}

@@ -426,7 +426,7 @@ function Tables(props) {
                     <Button style={{ marginLeft: '20px' }} onClick={showModal} type="primary" >Create Product
                     </Button>
                   </Radio.Group>
-                  <Input onKeyUp={(e) => { handleSearch(e.target.value) }} style={{ marginBottom: '10px', marginTop: '10px' }} type="text" />
+                  <input onKeyUp={(e) => { handleSearch(e.target.value) }} style={{ marginBottom: '10px', marginTop: '10px' }} type="text" />
                 </div>
               }
             >
@@ -443,10 +443,10 @@ function Tables(props) {
           </Col>
         </Row>
         <Modal title="Create Product" open={isModalOpen} onOk={() => PostProduct()} onCancel={handleCancel}>
-          <Input placeholder="цена ц3" id="s3_sena" type="number" showCount maxLength={30} onChange={onChange} />
+          <input placeholder="цена ц3" id="s3_sena" type="number" showCount maxLength={30} onChange={onChange} />
           <br />
           <br />
-          <Input placeholder="цена ц4" id="s4_sena" type="number" showCount maxLength={30} onChange={onChange} />
+          <input placeholder="цена ц4" id="s4_sena" type="number" showCount maxLength={30} onChange={onChange} />
           <br />
           <br />
           <TextArea placeholder="description" id="description" onChange={onChange} />
@@ -472,10 +472,10 @@ function Tables(props) {
           </Select>
           <br />
           <br />
-          <Input id="hydrophobic_additive_sena" placeholder="Гидрофобная добавка цена" type="number" showCount maxLength={30} allowClear onChange={onChange} />
+          <input id="hydrophobic_additive_sena" placeholder="Гидрофобная добавка цена" type="number" showCount maxLength={30} allowClear onChange={onChange} />
           <br />
           <br />
-          <Input placeholder="Фиброволокно цена" id="Fiber_fiber" type="number" showCount maxLength={30} onChange={onChange} />
+          <input placeholder="Фиброволокно цена" id="Fiber_fiber" type="number" showCount maxLength={30} onChange={onChange} />
           <br />
           <br />
 
@@ -493,10 +493,10 @@ function Tables(props) {
           <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
         </Modal>
         <Modal title="Create Product" open={isModalOpen12} onOk={() => PutProduct()} onCancel={handleCancel12}>
-          <Input placeholder="цена ц3" id="s3_sena12" type="number" showCount maxLength={30} />
+          <input placeholder="цена ц3" id="s3_sena12" type="number" showCount maxLength={30} />
           <br />
           <br />
-          <Input placeholder="цена ц4" id="s4_sena12" type="number" showCount maxLength={30} />
+          <input placeholder="цена ц4" id="s4_sena12" type="number" showCount maxLength={30} />
           <br />
           <br />
           <TextArea placeholder="description" id="description12" />
@@ -522,10 +522,10 @@ function Tables(props) {
           </Select>
           <br />
           <br />
-          <Input id="hydrophobic_additive_sena12" placeholder="Гидрофобная добавка цена" type="number" showCount maxLength={30} />
+          <input id="hydrophobic_additive_sena12" placeholder="Гидрофобная добавка цена" type="number" showCount maxLength={30} />
           <br />
           <br />
-          <Input placeholder="Фиброволокно цена" id="Fiber_fiber12" type="number" showCount maxLength={30} />
+          <input placeholder="Фиброволокно цена" id="Fiber_fiber12" type="number" showCount maxLength={30} />
           <br />
           <br />
 

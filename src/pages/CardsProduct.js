@@ -189,11 +189,11 @@ function putData() {
        Create Category
       </Button>
       <Modal title="Basic Modal" visible={isModalOpen} onOk={()=>postData()} onCancel={()=>handleCancel()}>
-      <Input id='title' showCount maxLength={50} placeholder='title'  />
+      <input id='title' showCount maxLength={50} placeholder='title'  />
     <br />
     <br />
     <Checkbox onChange={(e)=>onFile(e)}>file</Checkbox>
-    <Input type='text' id='file' placeholder='image'  />
+    <input type='text' id='file' placeholder='image'  />
     <br />
     <br />
     <TextArea showCount id='deck' maxLength={400}  placeholder='deckription' />
@@ -219,11 +219,11 @@ function putData() {
         </Col>
       })} </Row>)}
       <Modal title="Basic Modal" visible={isModalOpen2} onOk={()=>putData()} onCancel={()=>handleCancel2()}>
-      <Input id='title1' showCount maxLength={50} placeholder='title'  />
+      <input id='title1' showCount maxLength={50} placeholder='title'  />
     <br />
     <br />
     <Checkbox onChange={(e)=>onFile1(e)}>file</Checkbox>
-    <Input type='text' id='file1' placeholder='image'  />
+    <input type='text' id='file1' placeholder='image'  />
     <br />
     <br />
     <TextArea showCount id='deck1' maxLength={400}  placeholder='deckription' />

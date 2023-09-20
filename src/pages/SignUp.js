@@ -204,7 +204,7 @@ export default class SignUp extends Component {
                     { required: true, message: "Please input your username!" },
                   ]}
                 >
-                  <Input placeholder="Name" />
+                  <input placeholder="Name" />
                 </Form.Item>
                 <Form.Item
                   name="email"
@@ -212,7 +212,7 @@ export default class SignUp extends Component {
                     { required: true, message: "Please input your email!" },
                   ]}
                 >
-                  <Input placeholder="email" />
+                  <input placeholder="email" />
                 </Form.Item>
                 <Form.Item
                   name="password"
@@ -220,7 +220,7 @@ export default class SignUp extends Component {
                     { required: true, message: "Please input your password!" },
                   ]}
                 >
-                  <Input placeholder="Passwoed" />
+                  <input placeholder="Passwoed" />
                 </Form.Item>
 
                 <Form.Item name="remember" valuePropName="checked">

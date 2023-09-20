@@ -73,7 +73,7 @@ function loginIn() {
                       },
                     ]}
                   >
-                    <Input placeholder="Email" id-="email" />
+                    <input placeholder="Email" id-="email" />
                   </Form.Item>
 
                   <Form.Item
@@ -87,7 +87,7 @@ function loginIn() {
                       },
                     ]}
                   >
-                    <Input placeholder="Password" id="parol" />
+                    <input placeholder="Password" id="parol" />
                   </Form.Item>
 
                   <Form.Item

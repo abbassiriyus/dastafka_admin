@@ -829,53 +829,53 @@ axios.get(`${url}/api/news`).then(res5=>{
  </div>)}
  {/* Производитель */}
  <Modal title="Производитель Создавать" visible={isModalOpen2} onOk={()=>createHomiy()} onCancel={()=>handleCancel2()}>
-      <Input id='title' showCount maxLength={50} placeholder='title'  />
+      <input id='title' showCount maxLength={50} placeholder='title'  />
     <br />
     <br />
-    <Input id='link' showCount maxLength={50} placeholder='link'  />
+    <input id='link' showCount maxLength={50} placeholder='link'  />
     <br />
     <br />
     <Checkbox onChange={(e)=>onFile1(e)}>file</Checkbox>
-    <Input type='text' id='file' placeholder='image'  />
+    <input type='text' id='file' placeholder='image'  />
 
  </Modal>
  <Modal title="Осторожность" visible={isModalOpen1} onOk={handleOk1} onCancel={handleCancel1}>
     <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
       </Modal>
 <Modal title="Производитель изменять" visible={isModalOpen3} onOk={()=>PutHomeiy()} onCancel={()=>handleCancel3()}>
-      <Input id='title3' showCount maxLength={50} placeholder='title'  />
+      <input id='title3' showCount maxLength={50} placeholder='title'  />
     <br />
     <br />
-    <Input id='link3' showCount maxLength={50} placeholder='link'  />
+    <input id='link3' showCount maxLength={50} placeholder='link'  />
     <br />
     <br />
     <Checkbox onChange={(e)=>onFile3(e)}>file</Checkbox>
-    <Input type='text' id='file3' placeholder='image'  />
+    <input type='text' id='file3' placeholder='image'  />
   
     </Modal>
 
 {/* Марка */}
     <Modal title="Марка Создавать" visible={isModalOpen11} onOk={()=>CreateMarka()} onCancel={()=>setIsModalOpen11(false)}>
-      <Input id='title11' showCount maxLength={50} placeholder='title'  />
+      <input id='title11' showCount maxLength={50} placeholder='title'  />
     </Modal>
  <Modal title="Осторожность" visible={isModalOpen12} onOk={()=>handleOk12()} onCancel={()=>setIsModalOpen12(false)}>
     <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
 </Modal>
 
       <Modal title="Марка изменять" visible={isModalOpen13} onOk={()=>PutMarka()} onCancel={()=>setIsModalOpen13(false)}>
-      <Input id='title13' showCount maxLength={50} placeholder='title'  />
+      <input id='title13' showCount maxLength={50} placeholder='title'  />
     </Modal>
 
 {/* Скачать приложение */}
     <Modal title="Скачать приложение Создавать" visible={isModalOpen21} onOk={()=>postPred()} onCancel={()=>setIsModalOpen21(false)}>
-      <Input id='title21' showCount maxLength={50} placeholder='title'  />
+      <input id='title21' showCount maxLength={50} placeholder='title'  />
     <br />
     <br />
     <TextArea id='link21' showCount maxLength={50} placeholder='deskription'  />
     <br />
     <br />
     <Checkbox onChange={(e)=>onFile21(e)}>file</Checkbox>
-    <Input type='text' id='file21' placeholder='image'  />
+    <input type='text' id='file21' placeholder='image'  />
 
  </Modal>
  <Modal title="Осторожность" visible={isModalOpen22} onOk={()=>handleOk22()} onCancel={()=>setIsModalOpen22(false)}>
@@ -883,20 +883,20 @@ axios.get(`${url}/api/news`).then(res5=>{
       </Modal>
 
       <Modal title="Скачать приложение изменять" visible={isModalOpen23} onOk={()=>PutPred()} onCancel={()=>setIsModalOpen23(false)}>
-      <Input id='title23' showCount maxLength={50} placeholder='title'  />
+      <input id='title23' showCount maxLength={50} placeholder='title'  />
     <br />
     <br />
     <TextArea id='link23' showCount maxLength={50} placeholder='deskription'  />
     <br />
     <br />
     <Checkbox onChange={(e)=>onFile23(e)}>file</Checkbox>
-    <Input type='text' id='file23' placeholder='image'  />
+    <input type='text' id='file23' placeholder='image'  />
   
     </Modal>
 
     {/* Наши приемущества */}
  <Modal title="Наши приемущества Создавать" visible={isModalOpen31} onOk={()=>createPreferences()} onCancel={()=>setIsModalOpen31(false)}>
-      <Input id='title31' showCount maxLength={50} placeholder='title'  />
+      <input id='title31' showCount maxLength={50} placeholder='title'  />
     <br />
     <br />
     <TextArea id='link31' showCount maxLength={400} placeholder='description'  />
@@ -912,14 +912,14 @@ axios.get(`${url}/api/news`).then(res5=>{
     <br />
     <br />
     <Checkbox onChange={(e)=>onFile31(e)}>file</Checkbox>
-    <Input type='text' id='file31' placeholder='image'  />
+    <input type='text' id='file31' placeholder='image'  />
 
  </Modal>
  <Modal title="Осторожность" visible={isModalOpen32} onOk={()=>handleOk32()} onCancel={()=>setIsModalOpen32(false)}>
     <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
     </Modal>
 <Modal title="Наши приемущества изменять" visible={isModalOpen33} onOk={()=>PutPreferences()} onCancel={()=>setIsModalOpen33(false)}>
-      <Input id='title33' showCount maxLength={50} placeholder='title'  />
+      <input id='title33' showCount maxLength={50} placeholder='title'  />
     <br />
     <br />
     <TextArea id='link33' showCount maxLength={400} placeholder='description'  />
@@ -935,15 +935,15 @@ axios.get(`${url}/api/news`).then(res5=>{
     <br />
     <br />
     <Checkbox onChange={(e)=>onFile33(e)}>file</Checkbox>
-    <Input type='text' id='file33' placeholder='image'  />
+    <input type='text' id='file33' placeholder='image'  />
 
     </Modal>
 {/* Противоморозная добавка */}
 <Modal title="Противоморозная добавка Создавать" visible={isModalOpen41} onOk={()=>craeteHarorat()} onCancel={()=>setIsModalOpen41(false)}>
-      <Input id='sena41' type='number' showCount maxLength={50} placeholder='gradus'  />
+      <input id='sena41' type='number' showCount maxLength={50} placeholder='gradus'  />
       <br />
       <br />
-      <Input id='gradus41' type='number' showCount maxLength={50} placeholder='sena'  />
+      <input id='gradus41' type='number' showCount maxLength={50} placeholder='sena'  />
     
     </Modal>
  <Modal title="Осторожность" visible={isModalOpen42} onOk={()=>handleOk42()} onCancel={()=>setIsModalOpen42(false)}>
@@ -951,25 +951,25 @@ axios.get(`${url}/api/news`).then(res5=>{
 </Modal>
 
       <Modal title="Противоморозная добавка изменять" visible={isModalOpen43} onOk={()=>putHarorat()} onCancel={()=>setIsModalOpen43(false)}>
-      <Input id='sena43' type='number' showCount maxLength={50} placeholder='Sena'  />
+      <input id='sena43' type='number' showCount maxLength={50} placeholder='Sena'  />
       <br />
       <br />
-      <Input id='gradus43' type='number' showCount maxLength={50} placeholder='Gradus'  />
+      <input id='gradus43' type='number' showCount maxLength={50} placeholder='Gradus'  />
 
     </Modal>
 
 
 {/* Наши акции */}
 <Modal title="Наши акции Создавать" visible={isModalOpen51} onOk={()=>craeteAksiya()} onCancel={()=>setIsModalOpen51(false)}>
-<Input id='title51' showCount maxLength={50}  placeholder='title'  />
+<input id='title51' showCount maxLength={50}  placeholder='title'  />
     <br />
     <br />
     <label htmlFor="">Дата начала</label>
-    <Input id='start_day51' type="date"  placeholder='title'  />
+    <input id='start_day51' type="date"  placeholder='title'  />
     <br />
     <br />
     <label htmlFor="">Дата окончания</label>
-    <Input id='end_day51' type="date" placeholder='start day' />
+    <input id='end_day51' type="date" placeholder='start day' />
     <br />
     <br />
 
@@ -977,22 +977,22 @@ axios.get(`${url}/api/news`).then(res5=>{
     <br />
     <br />
     <Checkbox onChange={(e)=>onFile51(e)}>file</Checkbox>
-    <Input type='text' id='file51' placeholder='image'  />
+    <input type='text' id='file51' placeholder='image'  />
     </Modal>
  <Modal title="Осторожность" visible={isModalOpen52} onOk={()=>handleOk52()} onCancel={()=>setIsModalOpen52(false)}>
     <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
 </Modal>
 
       <Modal title="Наши акции изменять" visible={isModalOpen53} onOk={()=>putAksiya()} onCancel={()=>setIsModalOpen53(false)}>
-      <Input id='title53' showCount maxLength={50}  placeholder='title'  />
+      <input id='title53' showCount maxLength={50}  placeholder='title'  />
     <br />
     <br />
     <label htmlFor="">Дата начала</label>
-    <Input id='start_day53' type="date"  placeholder='title'  />
+    <input id='start_day53' type="date"  placeholder='title'  />
     <br />
     <br />
     <label htmlFor="">Дата окончания</label>
-    <Input id='end_day53' type="date" placeholder='start day' />
+    <input id='end_day53' type="date" placeholder='start day' />
     <br />
     <br />
 
@@ -1000,14 +1000,14 @@ axios.get(`${url}/api/news`).then(res5=>{
     <br />
     <br />
     <Checkbox onChange={(e)=>onFile53(e)}>file</Checkbox>
-    <Input type='text' id='file53' placeholder='image'  />
+    <input type='text' id='file53' placeholder='image'  />
     </Modal>
 
 
 
 {/* Новости */}
     <Modal title="Новости Создавать" visible={isModalOpen61} onOk={()=>createNews()} onCancel={()=>setIsModalOpen61(false)}>
-      <Input id='title61' showCount maxLength={50} placeholder='title'  />
+      <input id='title61' showCount maxLength={50} placeholder='title'  />
     <br />
     <br />
     <TextArea id='link61' 
@@ -1021,13 +1021,13 @@ axios.get(`${url}/api/news`).then(res5=>{
     <br />
     <br />
     <Checkbox onChange={(e)=>onFile61(e)}>file</Checkbox>
-    <Input type='text' id='file61' placeholder='image'  />
+    <input type='text' id='file61' placeholder='image'  />
  </Modal>
  <Modal title="Осторожность" visible={isModalOpen62} onOk={()=>handleOk62()} onCancel={()=>setIsModalOpen62(false)}>
     <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
     </Modal>
 <Modal title="Новости изменять" visible={isModalOpen63} onOk={()=>PutNews()} onCancel={()=>setIsModalOpen63(false)}>
-<Input id='title63' showCount maxLength={50} placeholder='title'  />
+<input id='title63' showCount maxLength={50} placeholder='title'  />
     <br />
     <br />
     <TextArea id='link63' placeholder='description'  />
@@ -1037,7 +1037,7 @@ axios.get(`${url}/api/news`).then(res5=>{
     <br />
     <br />
     <Checkbox onChange={(e)=>onFile63(e)}>file</Checkbox>
-    <Input type='text' id='file63' placeholder='image'  />
+    <input type='text' id='file63' placeholder='image'  />
     
     
     </Modal>
