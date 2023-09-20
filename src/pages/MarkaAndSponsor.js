@@ -138,7 +138,7 @@ function onFile3(e){
     document.querySelector('#link3').value=key.link
     console.log(key);
     document.querySelector('#file3').value=key.image
-   }, 100);
+   }, 900);
    
   };
 
@@ -566,7 +566,7 @@ const skachat_pridlachenucolumn = [
         document.querySelector("#title23").value=record.title;
         document.querySelector("#link23").value=record.deskription;
         document.querySelector("#file23").value=record.image;
-       }, 100);
+       }, 900);
         }}>Edit</Button>
         <Button danger onClick={()=>{setIsModalOpen22(true);setSelectId(record.id)}} >Delete</Button>
         </Space>
@@ -585,7 +585,7 @@ const markcolumn = [{
         <Space size="middle">
          <Button  type="dashed" onClick={()=>{setSelectId(record.id);setIsModalOpen13(true);setTimeout(() => {
             document.querySelector("#title13").value=record.title
-         }, 100);}}>Edit</Button>
+         }, 900);}}>Edit</Button>
         <Button danger onClick={()=>{setSelectId(record.id);setIsModalOpen12(true)}} >Delete</Button>
         </Space>
       ),
@@ -622,7 +622,7 @@ const preferencescolumn = [
         document.querySelector("#link33").value=record.description;
         document.querySelector("#liso33").value=record.liso;
         document.querySelector("#file33").value=record.image;
-       }, 100);
+       }, 900);
         }}>Edit</Button>
         <Button danger onClick={()=>{setIsModalOpen32(true);setSelectId(record.id)}} >Delete</Button>
         </Space>
@@ -650,7 +650,7 @@ const preferencescolumn = [
        setTimeout(() => {
         document.querySelector("#sena43").value=record.sena;
         document.querySelector("#gradus43").value=record.gradus;
-       }, 100);
+       }, 900);
         }}>Edit</Button>
         <Button danger onClick={()=>{setIsModalOpen42(true);setSelectId(record.id)}} >Delete</Button>
         </Space>
@@ -693,7 +693,7 @@ const preferencescolumn = [
         document.querySelector("#link63").value=record.description;
         document.querySelector("#file63").value=record.image;
         document.querySelector("#deck63").value=record.min_description;
-       }, 100);
+       }, 900);
         }}>Edit</Button>
         <Button danger onClick={()=>{setIsModalOpen62(true);setSelectId(record.id)}} >Delete</Button>
         </Space>
@@ -740,7 +740,7 @@ const preferencescolumn = [
         document.querySelector("#link53").value=record.description;
         document.querySelector("#file53").value=record.image;
 
-       }, 100);
+       }, 900);
         }}>Edit</Button>
         <Button danger onClick={()=>{setIsModalOpen52(true);setSelectId(record.id)}} >Delete</Button>
         </Space>

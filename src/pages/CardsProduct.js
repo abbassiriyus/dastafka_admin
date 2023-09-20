@@ -70,7 +70,7 @@ setTimeout(() => {
     document.querySelector("#file1").value=url+'/'+a[0].image  
   }
   document.querySelector("#deck1").value=a[0].description
-}, 100);
+}, 900);
   };
 
   const handleCancel2 = () => {

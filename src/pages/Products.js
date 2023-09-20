@@ -210,7 +210,7 @@ function Tables(props) {
       document.querySelector("#hydrophobic_additive_sena12").value = putdata.hydrophobic_additive_sena
       document.querySelector("#Fiber_fiber12").value = putdata.fiber_fiber
       document.querySelector("#homiy_id12").value = putdata.homiy_id
-    }, 100);
+    }, 900);
     setDeleteId(putdata.id)
   }
   useEffect(() => {

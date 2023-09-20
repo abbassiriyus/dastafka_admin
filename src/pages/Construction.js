@@ -427,7 +427,7 @@ const senacolumn = [
     document.querySelector("#usluga1").value=record.usluga
     document.querySelector("#suv_bilan1").value=record.suv_bilan
     document.querySelector("#pustoy_smena1").value=record.pustoy_smena
-   }, 100);
+   }, 900);
      }}
      >Edit</Button>
     </Space>
@@ -469,7 +469,7 @@ const mashinacolumn = [
     document.querySelector("#sena33").value=record.sena
     document.querySelector("#description33").value=record.description
     document.querySelector("#image33").value=record.image
-   }, 100);
+   }, 900);
      }}
      >Edit</Button>
     <Button danger onClick={()=>{
@@ -516,7 +516,7 @@ const shvingcolumn = [
     document.querySelector("#sena23").value=record.sena
     document.querySelector("#description23").value=record.description
     document.querySelector("#image23").value=record.image
-   }, 100);
+   }, 900);
      }}
      >Edit</Button>
     <Button danger onClick={()=>{
@@ -564,7 +564,7 @@ const filialcolumn = [
     document.querySelector("#title13").value=record.title
     document.querySelector("#longitude13").value=record.longitude
     document.querySelector("#image13").value=record.image
-   }, 100);
+   }, 900);
      }}
      >Edit</Button>
     <Button danger onClick={()=>{
@@ -588,7 +588,7 @@ const positoincolumn = [{
     <Space size="middle">
      <Button  type="dashed" onClick={()=>{setSelectId(record.id);setIsModalOpen3(true);setTimeout(() => {
         document.querySelector("#title3").value=record.position_name
-     }, 100);}}>Edit</Button>
+     }, 900);}}>Edit</Button>
     <Button danger onClick={()=>{setSelectId(record.id);setIsModalOpen2(true)}} >Delete</Button>
     </Space>
   ),
@@ -638,12 +638,12 @@ axios.get(`${url}/api/mashina`).then(res8=>{
         document.querySelector("#phone1").value=company[0].phone
         document.querySelector("#telegram1").value=company[0].telegram
         document.querySelector("#logo1").value=company[0].logo
-      }, 100);
+      }, 900);
     }} class="fa fa-pencil"></i>
 	</div>
 	
 	<div class="profile" style={{textAlign:'center'}}>
-		<Image height={'120px'}  src={company[0].logo.includes("http")?company[0].logo:`${url}/${company[0].logo}`} class="thumbnail" />
+		<Image height={'120px'}  src={company[0].logo} class="thumbnail" />
 <p class="title">telegram:{company[0].telegram}</p>
 <p class="title">email:{company[0].email}</p>
 <p class="title">whatsapp:{company[0].whatsapp}</p>
