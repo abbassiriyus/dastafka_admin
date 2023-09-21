@@ -704,18 +704,20 @@ const preferencescolumn = [
     {
       title: 'Image',
       dataIndex: 'name',
-    
+      width:'10%',
       render: (_,text) => <Image src={text.image} height={"40px"}/>,
     },
     {
       title: 'Title',
       dataIndex: 'title',
       key: 'title',
+      width:'20%',
     },
     {
       title: 'description',
       dataIndex: 'description',
       key: 'description',
+      width:'60%',
     },
     {
         title: 'start_day',
