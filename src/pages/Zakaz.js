@@ -325,6 +325,12 @@ export default function Zakaz() {
     setIsModalOpen(true);
   };
 
+  function ZakazTugadi(){
+    axios.get(`${url}/voditel_zakaz/finishing`).then(res=>{
+    
+    })
+  }
+
   return (
     <div>
       {page == 1 ? (
@@ -346,8 +352,8 @@ export default function Zakaz() {
               <Card title="Доставка" bordered={false}>
                 <p>{item.zakaz_id}</p>
                 <p>{item.car_id}</p>
-                <p>{item.operator_id}</p>
-                <Radio.Button style={{marginTop:'10px'}}>Zakaz tugatish</Radio.Button>
+                <div style={{display:'flex',gap:'1px'}}>Operator:{Users.map(item1=>{return<p>{item.operator_id==item1.id?item1.surname:""}</p>})}</div>
+                <Radio.Button onClick={()=>ZakazTugadi(item)} style={{marginTop:'10px'}}>Завершение заказа</Radio.Button>
                 <Radio.Button style={{marginTop:'10px'}}>Edit</Radio.Button>
               </Card>
             </Col>  
