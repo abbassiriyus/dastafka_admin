@@ -1,12 +1,43 @@
-import { Card, Col, Radio, Row, Table } from 'antd';
+import { Button, Card, Col, Modal, Radio, Row, Table, message } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import url from './host';
 
 export default function Work() {
 const [data,setData]=useState([])
+const [loading,setLoading]=useState(true)
+const [isModalOpen1,setIsModalOpen1]=useState(false)
+const [id,setId]=useState(0)
 function all1(params) {
-    
+  setLoading(true)
+if(params==0){
+
+  getData()
+}else{
+
+  axios.get(`${url}/api/work`).then(res=>{
+    axios.get(`${url}/api/shving`).then(res1=>{
+        axios.get(`${url}/api/mashina`).then(res2=>{
+    for (let i = 0; i < res.data.length; i++) {
+      res.data[i].mashina1=""
+      res.data[i].shving1=""
+     for (let j = 0; j < res1.data.length; j++) {
+       if(res.data[i].mashina==res1.data[j].id){
+    res.data[i].mashina1=res1.data[j]
+       }    
+        }
+    for (let j = 0; j < res2.data.length; j++) {
+      if(res.data[i].shving==res1.data[j].id){
+        res.data[i].shving1=res1.data[j]
+           }   
+    }
+    }
+    setLoading(false)
+ var a=res.data.filter(item=>item.type==params)
+        setData(a)
+    })})})
+}
+
 }
 const columns = [
     {
@@ -53,34 +84,52 @@ const columns = [
       title: "document_mashina",
       key: "document_mashina",
       render: (_, item) => (
-        <a href={item.document_mashina}> {item.document_mashina?item.document_mashina:"document not"} </a>
+        <Button danger onClick={()=>{setId(item.id);setIsModalOpen1(true)}} >delete</Button>
       ),
       width: "2%",
     }
   ];
+  function getData() {
+    axios.get(`${url}/api/work`).then(res=>{
+      axios.get(`${url}/api/shving`).then(res1=>{
+          axios.get(`${url}/api/mashina`).then(res2=>{
+      for (let i = 0; i < res.data.length; i++) {
+        res.data[i].mashina1=""
+        res.data[i].shving1=""
+       for (let j = 0; j < res1.data.length; j++) {
+         if(res.data[i].mashina==res1.data[j].id){
+      res.data[i].mashina1=res1.data[j]
+         }    
+          }
+      for (let j = 0; j < res2.data.length; j++) {
+        if(res.data[i].shving==res1.data[j].id){
+          res.data[i].shving1=res1.data[j]
+             }   
+      }
+      }
+      setLoading(false)
+          setData(res.data)
+      })})})
+  }
+  function handleOk1(){
+    setLoading(true)
+    axios.delete(`${url}/api/work/${id}`).then(res=>{
+     setIsModalOpen1(false)   
+     getData()
+      message.success("delete worker") 
+    }).catch(err=>{
+      message.error(err)
+      setIsModalOpen1(false)
+      setLoading(false)
+    })
+  }
 const onChange = (e) => console.log(`radio checked:${e.target.value}`);
 useEffect(()=>{
-axios.get(`${url}/api/work`).then(res=>{
-axios.get(`${url}/api/shving`).then(res1=>{
-    axios.get(`${url}/api/mashina`).then(res2=>{
-for (let i = 0; i < res.data.length; i++) {
- for (let j = 0; j < res1.data.length; j++) {
-   if(res.data[i].mashina==res1.data[j].id){
-res.data[i].mashina1=res1.data[j]
-   }    
-    }
-for (let j = 0; j < res2.data.length; j++) {
-  if(res.data[i].shving==res1.data[j].id){
-    res.data[i].shving1=res1.data[j]
-       }   
-}
-}
-console.log(res.data);
-    setData(res.data)
-})})})
+getData()
 },[])
   return (
     <div>
+  {loading?(<div style={{width:'100%',height:"100vh",background:"#00000024",position:'absolute',top:'0px',left:'0px',zIndex:'213123'}}><p></p></div>):(<></>)}
     <div className="tabled">
       <Row gutter={[24, 0]}>
         <Col xs="24" xl={24}>
@@ -94,23 +143,14 @@ console.log(res.data);
                   <Radio.Button onClick={() => all1(0)} value="a1">
                     Все
                   </Radio.Button>
-                  <Radio.Button onClick={() => all1(2)} value="a2">
-                    Юридическое лицо
+                  <Radio.Button onClick={() => all1(1)} value="a2">
+                  Без машины
                   </Radio.Button>
-                  <Radio.Button onClick={() => all1(1)} value="a3">
-                    Физическое лицо
+                  <Radio.Button onClick={() => all1(2)} value="a3">
+                  Фирма
                   </Radio.Button>
                   <Radio.Button onClick={() => all1(3)} value="a4">
-                    Менеджер
-                  </Radio.Button>
-                  <Radio.Button
-                    onClick={() => {
-                      document.querySelector("#modalMaybe").style =
-                        "display:flex";
-                    }}
-                    value="b"
-                  >
-                    create
+                  Машина
                   </Radio.Button>
                 </Radio.Group>
               </div>
@@ -127,7 +167,9 @@ console.log(res.data);
           </Card>
         </Col>
       </Row>
-
+      <Modal title="Осторожность" visible={isModalOpen1} onOk={() => handleOk1()} onCancel={()=>setIsModalOpen1(false)}>
+          <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
+        </Modal>
     </div>
     
     </div>
