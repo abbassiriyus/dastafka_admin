@@ -719,13 +719,32 @@ export default function MarkaAndSponsor() {
   ];
   const markcolumn = [
     {
-      title: "Title",
-      dataIndex: "title",
-      key: "title",
+      title: 'Image',
+      dataIndex: 'name',
+      width:'10%',
+      render: (_,text) => <Image src={text.image} height={"40px"}/>,
     },
     {
-      title: "Action",
-      key: "action",
+      title: 'Title',
+      dataIndex: 'title',
+      key: 'title',
+      render:(_,item)=><p style={{textWrap: "wrap"}}>{item.title}</p>,
+      width:'20%',
+    },
+    {
+        title: 'Опции',
+        dataIndex: 'description',
+        key: 'description',
+        render:(_,item)=><p style={{textWrap: "wrap"}}>{item.description}</p>,
+        width:'40%',
+      },
+    {
+      title: 'Для лиц',
+      render: (_,item)=> <div>{item.liso==="f"?("физических лиц"):("юридических лиц")}</div>
+    },
+    {
+      title: 'Action',
+      key: 'action',
       render: (_, record) => (
         <Space size="middle">
           <Button
@@ -928,10 +947,10 @@ export default function MarkaAndSponsor() {
       width: "20%",
     },
     {
-      title: "description",
-      dataIndex: "description",
-      key: "description",
-      width: "60%",
+      title: 'description',
+      dataIndex: 'description',
+      key: 'description',
+      render:(_,item)=><p style={{textWrap: "wrap"}}>{item.description}</p>,
     },
     {
       title: "start_day",
