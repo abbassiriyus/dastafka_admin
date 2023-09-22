@@ -404,40 +404,18 @@ useEffect(()=>{
                   <Title level={5}>Navbar Fixed </Title>
                   <Switch onChange={(e) => handleFixedNavbar(e)} />
                 </div>
-                <div className="ant-docment">
-                  <ButtonContainer>
-                    <Button type="black" size="large">
-                      FREE DOWNLOAD
-                    </Button>
-                    <Button size="large">VIEW DOCUMENTATION</Button>
-                  </ButtonContainer>
-                </div>
-                <div className="viewstar">
-                  <a href="#pablo">{<StarOutlined />} Star</a>
-                  <a href="#pablo"> 190</a>
-                </div>
-
-                <div className="ant-thank">
-                  <Title level={5} className="mb-2">
-                    Thank you for sharing!
-                  </Title>
-                  <ButtonContainer className="social">
-                    <Button type="black">{<TwitterOutlined />}TWEET</Button>
-                    <Button type="black">{<FacebookFilled />}SHARE</Button>
-                  </ButtonContainer>
-                </div>
               </div>
             </div>
           </Drawer>
-          <Link to="/sign-in" className="btn-sign-in">
+          <Link onClick={()=>{localStorage.clear();sessionStorage.clear();window.location="/login"}} className="btn-sign-in">
             {profile}
-            <span>Sign in</span>
+            <span>Sign out</span>
           </Link>
-          <input
+{/*          <input
             className="header-search"
             placeholder="Type here..."
             prefix={<SearchOutlined />}
-          />
+                    />*/}
         </Col>
       </Row>
     </>

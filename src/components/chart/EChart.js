@@ -47,6 +47,7 @@ function EChart() {
           height={220}
         />
       </div>
+      {/*
       <div className="chart-vistior">
         <Title level={5}>Active Users</Title>
         <Paragraph className="lastweek">
@@ -66,7 +67,7 @@ function EChart() {
             </Col>
           ))}
         </Row>
-      </div>
+      </div>*/}
     </>
   );
 }

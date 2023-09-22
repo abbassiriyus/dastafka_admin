@@ -1,8 +1,26 @@
+import axios from "axios";
+import url from "../../../pages/host"
+
+var diogramma=[]
+
+
+axios.get(`${url}/api/zakaz`).then(res=>{
+  for (let j = 0; j < 12; j++) {
+   diogramma.push(0)
+    for (let i = 0; i < res.data.length; i++) {
+    if (res.data[i].time_create.slice(5,7)==`${j}`.padStart(2,"0")) {
+      diogramma[j]=diogramma[j]+res.data[i].price
+    }
+    }
+}
+})
+
+
 const eChart = {
   series: [
     {
       name: "Sales",
-      data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
+      data: diogramma,
       color: "#fff",
     },
   ],
@@ -48,6 +66,9 @@ const eChart = {
         "Aug",
         "Sep",
         "Oct",
+        "Nov",
+        "Dec",
+        "Jan",
       ],
       labels: {
         show: true,
@@ -56,6 +77,9 @@ const eChart = {
         maxWidth: 160,
         style: {
           colors: [
+            "#fff",
+            "#fff",
+            "#fff",
             "#fff",
             "#fff",
             "#fff",
@@ -96,7 +120,7 @@ const eChart = {
     tooltip: {
       y: {
         formatter: function (val) {
-          return "$ " + val + " thousands";
+          return "$ " + val +" Money";
         },
       },
     },

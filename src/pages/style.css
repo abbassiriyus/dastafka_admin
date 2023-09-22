@@ -7,6 +7,12 @@
 .shape-avatar{
     width: 300px;
 }
+@media (max-width:1425px) {
+  #diagrammaCard{
+    max-width: 100% !important;
+    flex: 50% !important;
+    }
+}
 
 * {
     border: 0;

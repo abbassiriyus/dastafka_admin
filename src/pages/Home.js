@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Card,
@@ -34,6 +34,8 @@ import team2 from "../assets/images/team-2.jpg";
 import team3 from "../assets/images/team-3.jpg";
 import team4 from "../assets/images/team-4.jpg";
 import card from "../assets/images/info-card-1.jpg";
+import axios from "axios";
+import url from "./host";
 
 function Home() {
   const { Title, Text } = Typography;
@@ -41,6 +43,55 @@ function Home() {
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
 
   const [reverse, setReverse] = useState(false);
+  var [Users,setUsers]=useState(0)
+  var [Car_id,setCar_id]=useState(0)
+  var [Product,setProduct] =useState(0)
+  var [Zakaz,setZakaz]=useState(0)
+
+  useEffect(()=>{
+    axios.get(`${url}/auth/users`).then(res=>{
+      const Filter=res.data.filter(item=>item.position_id==3)
+      var a=new Date()
+      var date=`${a.getMonth()+1}`.padStart(2,"0")
+      var users=0
+      for (let i = 0; i < res.data.length; i++) {
+        if(res.data[i].time_create.slice(5,7)==date){
+          var b=res.data[i]?1:0       
+          users=users+b*1
+        }
+      }
+      setUsers(users)
+
+      var car_id=0
+      for (let i = 0; i < Filter.length; i++) {
+        if(Filter[i].time_create.slice(5,7)==date){
+          var b=Filter[i]?1:0       
+          car_id=car_id+b 
+        }
+      }
+      setCar_id(car_id)
+
+      axios.get(`${url}/api/product`).then(res1=>{
+        var product=0
+        for (let i = 0; i < res1.data.length; i++) {
+          if(res1.data[i].time_create.slice(5,7)==date){
+            var b=res1.data[i]?1:0       
+            product=product+b 
+          }
+        }
+        setProduct(product)
+      })
+      axios.get(`${url}/api/zakaz`).then(res2=>{
+        var zakaz=0
+        for (let i = 0; i < res2.data.length; i++) {
+          if(res2.data[i].time_create.slice(5,7)==date){     
+            zakaz=zakaz+res2.data[i].price
+          }
+        }
+        setZakaz(zakaz)
+      })
+    })
+  },[])
 
   const dollor = [
     <svg
@@ -130,30 +181,30 @@ function Home() {
   ];
   const count = [
     {
-      today: "Today’s Sales",
-      title: "$53,000",
-      persent: "+30%",
-      icon: dollor,
-      bnb: "bnb2",
-    },
-    {
-      today: "Today’s Users",
-      title: "3,200",
-      persent: "+20%",
+      today: "Month peoples numbers",
+      title: `${Users}`,
+      // persent: "+30%",
       icon: profile,
       bnb: "bnb2",
     },
     {
-      today: "New Clients",
-      title: "+1,200",
-      persent: "-20%",
+      today: "Month drivers numbers",
+      title: `${Car_id}`,
+      // persent: "+20%",
+      icon: profile,
+      bnb: "bnb2",
+    },
+    {
+      today: "Month Products numbers",
+      title: `${Product}`,
+      // persent: "-20%",
       icon: heart,
       bnb: "redtext",
     },
     {
-      today: "New Orders",
-      title: "$13,200",
-      persent: "10%",
+      today: "Monthly orders are paid",
+      title: `$${Zakaz}`,
+      // persent: "10%",
       icon: cart,
       bnb: "bnb2",
     },
@@ -281,35 +332,7 @@ function Home() {
     },
   ];
 
-  const timelineList = [
-    {
-      title: "$2,400 - Redesign store",
-      time: "09 JUN 7:20 PM",
-      color: "green",
-    },
-    {
-      title: "New order #3654323",
-      time: "08 JUN 12:20 PM",
-      color: "green",
-    },
-    {
-      title: "Company server payments",
-      time: "04 JUN 3:10 PM",
-    },
-    {
-      title: "New card added for order #4826321",
-      time: "02 JUN 2:45 PM",
-    },
-    {
-      title: "Unlock folders for development",
-      time: "18 MAY 1:30 PM",
-    },
-    {
-      title: "New order #46282344",
-      time: "14 MAY 3:30 PM",
-      color: "gray",
-    },
-  ];
+
 
   const uploadProps = {
     name: "file",
@@ -335,6 +358,7 @@ function Home() {
         <Row className="rowgap-vbox" gutter={[24, 0]}>
           {count.map((c, index) => (
             <Col
+              id="diagrammaCard"
               key={index}
               xs={24}
               sm={24}
@@ -363,18 +387,18 @@ function Home() {
         </Row>
 
         <Row gutter={[24, 0]}>
-          <Col xs={24} sm={24} md={12} lg={12} xl={10} className="mb-24">
+          <Col style={{maxWidth:'100%',flex:'100%'}} xs={24} sm={24} md={12} lg={12} xl={10} className="mb-24">
             <Card bordered={false} className="criclebox h-full">
               <Echart />
             </Card>
           </Col>
-          <Col xs={24} sm={24} md={12} lg={12} xl={14} className="mb-24">
+          <Col style={{maxWidth:'100%',flex:'100%'}} xs={24} sm={24} md={12} lg={12} xl={14} className="mb-24">
             <Card bordered={false} className="criclebox h-full">
               <LineChart />
             </Card>
           </Col>
         </Row>
-
+        {/*
         <Row gutter={[24, 0]}>
           <Col xs={24} sm={24} md={12} lg={12} xl={16} className="mb-24">
             <Card bordered={false} className="criclebox cardbody h-full">
@@ -475,8 +499,9 @@ function Home() {
               </div>
             </Card>
           </Col>
-        </Row>
-
+        </Row>*/}
+        
+        {/*
         <Row gutter={[24, 0]}>
           <Col xs={24} md={12} sm={24} lg={12} xl={14} className="mb-24">
             <Card bordered={false} className="criclebox h-full">
@@ -542,6 +567,8 @@ function Home() {
             </Card>
           </Col>
         </Row>
+        */}
+        
       </div>
     </>
   );

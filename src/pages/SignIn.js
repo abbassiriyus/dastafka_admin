@@ -46,8 +46,9 @@ function loginIn() {
         <Layout className="layout-default layout-signin" style={{minHeight:'100vh',display:'flex',alignItems:'center',width:'100%'}}>
           
           <Content className="signin" style={{width:'100%'}}>
-            <Row gutter={[24, 0]} justify="space-around">
+            <Row style={{alignItems:'center',flexWrap:'wrap'}} gutter={[24, 0]} justify="space-around">
               <Col
+                style={{width:'500px',flex:'100%',maxWidth: '500px',marginInlineStart:'0px'}}
                 xs={{ span: 24, offset: 0 }}
                 lg={{ span: 6, offset: 2 }}
                 md={{ span: 12 }}
@@ -73,7 +74,7 @@ function loginIn() {
                       },
                     ]}
                   >
-                    <input placeholder="Email" id-="email" />
+                    <input style={{width:'100%'}} placeholder="Email" id-="email" />
                   </Form.Item>
 
                   <Form.Item
@@ -87,7 +88,7 @@ function loginIn() {
                       },
                     ]}
                   >
-                    <input placeholder="Password" id="parol" />
+                    <input style={{width:'100%'}} placeholder="Password" id="parol" />
                   </Form.Item>
 
                   <Form.Item
@@ -114,12 +115,12 @@ function loginIn() {
               </Col>
               <Col
                 className="sign-img"
-                style={{ padding: 12 }}
+                style={{ padding: 12,flex:'100%' ,maxWidth: '30%'}}
                 xs={{ span: 24 }}
                 lg={{ span: 12 }}
                 md={{ span: 12 }}
               >
-                <img src={signinbg} alt="" />
+                <img src={signinbg} style={{maxWidth: '100%'}} alt="" />
               </Col>
             </Row>
           </Content>

@@ -9,6 +9,7 @@ import {
   Avatar,
   Typography,
   Input,
+  Modal,
 
 } from "antd";
 
@@ -30,6 +31,8 @@ function Tables() {
   var [data,setData]=useState([])
   var [table,setInfo]=useState([])
   var [information,setInformation] = useState([])
+  var [userModal,setUserModal] =useState(false)
+  var [userId,setUserId]=useState()
 
   function abbas(params) {
   setInformation(params)
@@ -111,7 +114,7 @@ const columns = [
   {
     title: "edit",
     key: "edit",
-    render: (_,item)=><Radio.Button onClick={()=>{alert(item.id)}} >edit</Radio.Button>,
+    render: (_,item)=><Radio.Button onClick={()=>{UserEditOpen(item)}}>edit</Radio.Button>,
     width: "10%",
   },
   {
@@ -122,16 +125,54 @@ const columns = [
   }
 ]; 
 
+function UserEditOpen(item){
+setUserModal(true)
+setUserId(item.id)
+setTimeout(() => {
+document.querySelector("#patronymic1").value=item.patronymic
+document.querySelector("#surname1").value=item.surname
+document.querySelector("#username1").value=item.username
+document.querySelector("#phone1").value=item.phone
+document.querySelector("#email1").value=item.email
+document.querySelector("#login1").value=item.login
+document.querySelector("#position1").value=item.position_id
+document.querySelector("#password1").value=item.password
+}, 1000);
+}
 
+function putUser(){
+  var data=new FormData()
+  data.append("patronymic",document.querySelector("#patronymic1").value)
+  data.append("surname",document.querySelector("#surname1").value)
+  data.append("username",document.querySelector("#username1").value)
+  data.append("phone",document.querySelector("#phone1").value)
+  data.append("email",document.querySelector("#email1").value)
+  data.append("login",document.querySelector("#login1").value)
+  data.append("position_id",document.querySelector("#position1").value)
+  data.append("password",document.querySelector("#password1").value)
+axios.put(`${url}/auth/users/${userId}`,data).then(res=>{
+alert("Сохранено в нашей базе данных")
+setUserModal(false)
+axios.get(`${url}/auth/users`).then(res=>{
+  setData(res.data)
+  console.log(res.data);
+})
+})
+.catch(err=>{
+  alert("Недостаточно информации")
+})
+}
 
 
 function DeleteData(key){
   axios.delete(`${url}/auth/users/${key}`).then(res=>{
-    alert("o`chirildi")
+    alert("Удалено")
     axios.get(`${url}/auth/users`).then(res1=>{
       setData(res1.data)
     })
   
+  }).catch(err=>{
+    alert("Не удалось удалить")
   })
 }
 function postData() {
@@ -145,14 +186,14 @@ function postData() {
   data.append("position_id",document.querySelector("#position").value)
   data.append("password",document.querySelector("#password").value)
 axios.post(`${url}/auth/users`,data).then(res=>{
-alert("saqlandi")
+alert("Сохранено в нашей базе данных")
 axios.get(`${url}/auth/users`).then(res=>{
   setData(res.data)
   console.log(res.data);
 })
 })
 .catch(err=>{
-  alert("Ma`lumot yetarli emas")
+  alert("Недостаточно информации")
 })
 
 }
@@ -226,7 +267,11 @@ useEffect(()=>{
           <br /><label htmlFor="email">Email</label><br />
           <input type="text" placeholder="email" id="email"/>
           <br /><label htmlFor="position">Position</label><br />
-          <input type="number" placeholder="position" id="position"/>
+          <select style={{width:'85%',height:'35px',border:'1px solid grey'}} name="" id="position">
+          <option value={1}>Пользователь</option>
+          <option value={2}>Менеджер</option>
+          <option value={3}>Водитель</option>
+          </select>
           <br /><label htmlFor="login">Login</label><br />
           <input type="text" placeholder="login" id="login"/>
           <br /><label htmlFor="password">Password</label><br />
@@ -259,6 +304,31 @@ useEffect(()=>{
         </div>
 
       </div>
+      <Modal title="User" visible={userModal} onOk={()=>putUser()} onCancel={()=>setUserModal(false)}>
+      <div className="one">
+      <br /><label htmlFor="patronymic1">Patronymic</label><br />
+      <input type="text" placeholder="patronymic" id="patronymic1"/>
+      <br /><label htmlFor="surname1">Surname</label><br />
+      <input type="text" placeholder="surname" id="surname1"/>
+      <br /><label htmlFor="username1">Username</label><br />
+      <input type="text" placeholder="username" id="username1"/>
+      <br /><label htmlFor="phone1">Phone</label><br />
+      <input type="text" placeholder="phone" id="phone1"/>
+     
+      <br /><label htmlFor="email1">Email</label><br />
+      <input type="text" placeholder="email" id="email1"/>
+      <br /><label htmlFor="position1">Position</label><br />
+      <select style={{width:'90%',height:'35px',border:'1px solid grey'}} name="" id="position1">
+      <option value={1}>Пользователь</option>
+      <option value={2}>Менеджер</option>
+      <option value={3}>Водитель</option>
+      </select>
+      <br /><label htmlFor="login1">Login</label><br />
+      <input type="text" placeholder="login" id="login1"/>
+      <br /><label htmlFor="password1">Password</label><br />
+      <input type="text" placeholder="password" id="password1"/>
+      </div>
+      </Modal>
     </div>
   );
 }

@@ -20,11 +20,11 @@ function LineChart() {
 
   return (
     <>
-      <div className="linechart">
+      <div style={{maxWidth:'100%'}}  className="linechart">
         <div>
-          <Title level={5}>Active Users</Title>
+          <Title level={5}>Products and orders</Title>
           <Paragraph className="lastweek">
-            than last week <span className="bnb2">+30%</span>
+            than month {/*<span className="bnb2">+30%</span>*/}
           </Paragraph>
         </div>
         <div className="sales">
