@@ -34,7 +34,9 @@ function App() {
            <Route exact path="/work" component={Work} />
 
 
-           <Redirect from="*" to="/dashboard" /></Main>
+           <Redirect from="*" to="/dashboard" />
+           
+           </Main>
          ):(
       <div>
             <Route exact path="/login" component={SignIn} />
