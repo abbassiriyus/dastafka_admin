@@ -66,19 +66,16 @@ axios.get(`${url}/api/shving`).then(res1=>{
 for (let i = 0; i < res.data.length; i++) {
  for (let j = 0; j < res1.data.length; j++) {
    if(res.data[i].mashina==res1.data[j].id){
-res.data[i].mashia1=res1.data[j]
+res.data[i].mashina1=res1.data[j]
    }    
     }
-for (let k = 0; k < res2.data.length; k++) {
-
-    
+for (let j = 0; j < res2.data.length; j++) {
+  if(res.data[i].shving==res1.data[j].id){
+    res.data[i].shving1=res1.data[j]
+       }   
 }
 }
-
-
-
-
-
+console.log(res.data);
     setData(res.data)
 })})})
 },[])
