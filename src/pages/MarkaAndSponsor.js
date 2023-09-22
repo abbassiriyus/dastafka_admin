@@ -11,6 +11,9 @@ import {
   message,
 } from "antd";
 import axios from "axios";
+import {CiEdit} from "react-icons/ci"
+import {MdDelete} from "react-icons/md"
+import {AiOutlineClose} from "react-icons/ai"
 import url from "./host";
 const { TextArea } = Input;
 export default function MarkaAndSponsor() {
@@ -45,12 +48,14 @@ export default function MarkaAndSponsor() {
   const [isModalOpen62, setIsModalOpen62] = useState(false);
   const [isModalOpen63, setIsModalOpen63] = useState(false);
   const [isModalOpen64, setIsModalOpen64] = useState(false);
+  const [isModalOpen65, setIsModalOpen65] = useState(false);
   const [HomiyImage, setHomiyImage] = useState();
   const [SelectPreferences, SetSelectPreferences] = useState("");
 
   var [checkFile, setCheckFile] = useState(false);
   var [selectid, setSelectId] = useState(0);
   var [HomiyId, setHomiyID] = useState();
+  var [HomiyImageId, setHomiyImageID] = useState();
   var [HomiyAllimg, setHomiyAllimg] = useState([]);
   const [loading, setLoading] = useState(false);
   function onFile1(e) {
@@ -142,6 +147,14 @@ export default function MarkaAndSponsor() {
       document.querySelector("#HomiyImage").type = "file";
     } else {
       document.querySelector("#HomiyImage").type = "text";
+    }
+  }
+  function onFileHomiyImage1(e) {
+    setCheckFile(e.target.checked);
+    if (e.target.checked) {
+      document.querySelector("#HomiyImage1").type = "file";
+    } else {
+      document.querySelector("#HomiyImage1").type = "text";
     }
   }
   const showModal2 = () => {
@@ -593,7 +606,18 @@ export default function MarkaAndSponsor() {
   const HomiyImageClose = () => {
     setIsModalOpen64(false);
   };
-
+  const putHomiyImageModal = (item) => {
+    setTimeout(() => {
+      document.querySelector("#HomiyImage1").value=item.image
+    }, 1000);
+    setHomiyImageID(item.id)
+    document.querySelector("#ModalHomiy").style =
+      "position: fixed;right:-100%;";
+    setIsModalOpen65(true);
+  };
+  const putHomiyImageClose = () => {
+    setIsModalOpen65(false);
+  };
   function HomiyImageAllOpen(item) {
     setHomiyID(item.id);
     setHomiyAllimg(item.imageall);
@@ -611,18 +635,57 @@ export default function MarkaAndSponsor() {
     formdata.append("homeiy_id", HomiyId);
 
     axios
-      .post(`${url}/api/homiy_image`, formdata)
+      .post(`${url}/api/homiy_image/`, formdata)
       .then((res) => {
         alert("Добавлен");
         setIsModalOpen64(false);
-        axios.get(`${url}/api/homiy_image`).then((homiyimage) => {
-          setHomiyImage(homiyimage.data);
-        });
+        axios.get(`${url}/api/homeiy`).then((res1) => {
+            setHomiy(res1.data);
+        })
       })
       .catch((err) => {
         alert("Не присоединился");
       });
   }
+  function deleteHomiyImage(id){
+    axios.delete(`${url}/api/homiy_image/${id}`).then((res)=>{
+    alert("Удалено")
+    document.querySelector("#ModalHomiy").style =
+      "position: fixed;right:-100%;";
+      axios.get(`${url}/api/homeiy`).then((res1) => {
+        setHomiy(res1.data);
+    })
+    }).catch(err=>{
+    alert("Не удалось удалить")
+    })
+  }
+
+  
+  function putHomiyImage() {
+    var formdata = new FormData();
+    formdata.append(
+      "image",
+      checkFile
+        ? document.querySelector("#HomiyImage1").files[0]
+        : document.querySelector("#HomiyImage1").value
+    );
+    formdata.append("homeiy_id", HomiyId);
+
+    axios
+      .put(`${url}/api/homiy_image/${HomiyImageId}`, formdata)
+      .then((res) => {
+        alert("Измененный");
+        // window.location.reload()
+        setIsModalOpen65(false);
+        axios.get(`${url}/api/homeiy`).then((res1) => {
+            setHomiy(res1.data);
+        })
+      })
+      .catch((err) => {
+        alert("Это не изменилось");
+      });
+  }
+  
   const homiycolumn = [
     {
       title: "Image",
@@ -1654,10 +1717,11 @@ export default function MarkaAndSponsor() {
       {/* Homiy Image */}
       <div id="ModalHomiy" className="ModalHomiy">
         <div className="ModalHomiyDiv">
-          <Space className="site-button-ghost-wrapper" wrap>
+          <Space style={{display:'flex',alignItems:'center',justifyContent:'space-between'}} className="site-button-ghost-wrapper" wrap>
             <Button onClick={() => HomiyImageModal()} type="primary" ghost>
               Image
             </Button>
+            <Button onClick={()=>{document.querySelector("#ModalHomiy").style="position:fixed,right:-100%"}}  type="primary" ghost><AiOutlineClose style={{marginRight:'0px'}}/></Button>
           </Space>
 
           {HomiyAllimg.map((item) => {
@@ -1665,8 +1729,8 @@ export default function MarkaAndSponsor() {
               <div className="ModalHomiyDivImg">
               <div className="ModalHomiyDivImg_div">
               <Space className="site-button-ghost-wrapper">
-                <Button style={{padding:'5px',lineHeight:"0px",height:'20px'}}  type="primary" ghost>s</Button>
-                <Button style={{padding:'5px',lineHeight:"0px",height:'20px'}} type="primary" danger ghost>s</Button>
+                <Button onClick={()=>putHomiyImageModal(item)} style={{padding:'5px',lineHeight:"0px",height:'20px'}}  type="primary" ghost><CiEdit style={{marginRight:'0px'}}/></Button>
+                <Button onClick={()=>deleteHomiyImage(item.id)} style={{padding:'5px',lineHeight:"0px",height:'20px',marginRight:'0px'}} type="primary" danger ghost><MdDelete style={{marginRight:'0px'}}/></Button>
                 </Space>
                 </div>
                 <Image src={item.image} />
@@ -1676,7 +1740,7 @@ export default function MarkaAndSponsor() {
         </div>
       </div>
       <Modal
-        title="Производитель изменять"
+        title="Homiy image"
         visible={isModalOpen64}
         onOk={() => postHomiyImage()}
         onCancel={() => HomiyImageClose()}
@@ -1684,6 +1748,15 @@ export default function MarkaAndSponsor() {
         <Checkbox onChange={(e) => onFileHomiyImage(e)}>file</Checkbox>
         <input type="text" id="HomiyImage" placeholder="image" />
       </Modal>
+      <Modal
+      title="Homiy image"
+      visible={isModalOpen65}
+      onOk={() => putHomiyImage()}
+      onCancel={() => putHomiyImageClose()}
+    >
+      <Checkbox onChange={(e) => onFileHomiyImage1(e)}>file</Checkbox>
+      <input type="text" id="HomiyImage1" placeholder="image" />
+    </Modal>
     </div>
   );
 }
