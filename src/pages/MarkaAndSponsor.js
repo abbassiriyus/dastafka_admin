@@ -522,11 +522,13 @@ const homiycolumn = [
     title: 'Title',
     dataIndex: 'title',
     key: 'title',
+    render:(_,item)=><p style={{textWrap: "wrap"}}>{item.title}</p>,
   },
   {
     title: 'web-sayt',
     dataIndex: 'link',
     key: 'link',
+    render:(_,item)=><p style={{textWrap: "wrap"}}>{item.link}</p>,
   },
   {
     title: 'Action',
@@ -543,18 +545,22 @@ const skachat_pridlachenucolumn = [
     {
       title: 'Image',
       dataIndex: 'name',
-    
+      width:'10%',
       render: (_,text) => <Image src={text.image} height={"40px"}/>,
     },
     {
       title: 'Title',
       dataIndex: 'title',
+      render:(_,item)=><p style={{textWrap: "wrap"}}>{item.title}</p>,
       key: 'title',
+      width:'10%',
     },
     {
       title: 'Опции',
       dataIndex: 'deskription',
       key: 'deskription',
+      render:(_,item)=><p style={{textWrap: "wrap"}}>{item.deskription}</p>,
+      width:'40%',
     },
     {
       title: 'Action',
@@ -595,17 +601,22 @@ const preferencescolumn = [
     {
       title: 'Image',
       dataIndex: 'name',
+      width:'10%',
       render: (_,text) => <Image src={text.image} height={"40px"}/>,
     },
     {
       title: 'Title',
       dataIndex: 'title',
       key: 'title',
+      render:(_,item)=><p style={{textWrap: "wrap"}}>{item.title}</p>,
+      width:'20%',
     },
     {
         title: 'Опции',
         dataIndex: 'description',
         key: 'description',
+        render:(_,item)=><p style={{textWrap: "wrap"}}>{item.description}</p>,
+        width:'40%',
       },
     {
       title: 'Для лиц',
@@ -717,7 +728,7 @@ const preferencescolumn = [
       title: 'description',
       dataIndex: 'description',
       key: 'description',
-      width:'60%',
+      render:(_,item)=><p style={{textWrap: "wrap"}}>{item.description}</p>,
     },
     {
         title: 'start_day',
@@ -818,7 +829,7 @@ axios.get(`${url}/api/news`).then(res5=>{
 добавка</h2> <Button onClick={()=>setIsModalOpen41(true)} type='primary'>create</Button></div>
     <Table pagination={{pageSize:'4'}} columns={sovuqlikcolumn} style={{width:'100%'}} dataSource={sovuqlik} /></div>
 
-<div style={{width:'100%',maxWidth:'700px'}}>
+<div style={{width:'100%'}}>
    <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}> <h2 >Наши акции</h2> <Button onClick={()=>{setIsModalOpen51(true)}} type='primary'>create</Button>  </div>
     <Table pagination={{pageSize:'4'}} columns={aksiyacolumn} style={{width:'100%'}} dataSource={aksiya} /></div>
 
