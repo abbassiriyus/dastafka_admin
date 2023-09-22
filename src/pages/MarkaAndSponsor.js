@@ -639,6 +639,7 @@ export default function MarkaAndSponsor() {
       .then((res) => {
         alert("Добавлен");
         setIsModalOpen64(false);
+        window.location.reload()
         axios.get(`${url}/api/homeiy`).then((res1) => {
             setHomiy(res1.data);
         })
@@ -652,6 +653,7 @@ export default function MarkaAndSponsor() {
     alert("Удалено")
     document.querySelector("#ModalHomiy").style =
       "position: fixed;right:-100%;";
+      window.location.reload()
       axios.get(`${url}/api/homeiy`).then((res1) => {
         setHomiy(res1.data);
     })
@@ -675,7 +677,7 @@ export default function MarkaAndSponsor() {
       .put(`${url}/api/homiy_image/${HomiyImageId}`, formdata)
       .then((res) => {
         alert("Измененный");
-        // window.location.reload()
+        window.location.reload()
         setIsModalOpen65(false);
         axios.get(`${url}/api/homeiy`).then((res1) => {
             setHomiy(res1.data);
