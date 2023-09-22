@@ -14,6 +14,7 @@ import {
   Space,
 } from "antd";
 import url from "./host";
+import { AiOutlineStar } from "react-icons/ai";
 
 export default function Zakaz() {
   var [data, setData] = useState([]);
@@ -21,14 +22,16 @@ export default function Zakaz() {
   var [table, setInfo] = useState([]);
   var [information, setInformation] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen1, setIsModalOpen1] = useState(false);
   // var [zakazId, setZakazId] = useState();
   var [Catgeory, setCatgeory] = useState([]);
   var [page, setPage] = useState(0);
   var [VoditelId, setVoditelId] = useState([]);
-  var [Voditel,setVoditel]=useState([])
-  var [mashina,setMashina]=useState([])
-  var [Users,setUsers]=useState([])
-  var [Zakaz_id,setZakaz_id]=useState([])
+  var [Voditel, setVoditel] = useState([]);
+  var [mashina, setMashina] = useState([]);
+  var [Users, setUsers] = useState([]);
+  var [Users1, setUsers1] = useState([]);
+  var [Zakaz_id, setZakaz_id] = useState([]);
 
   function abbas(params) {
     setInformation(params);
@@ -36,14 +39,14 @@ export default function Zakaz() {
   }
 
   function Page(item) {
-    setVoditelId(item)
-    axios.get(`${url}/api/voditel_zakaz`).then(res=>{
-      const Filter=res.data.filter(item1=>item1.zakaz_id==item.id)
-      setVoditel(Filter)
+    setVoditelId(item);
+    axios.get(`${url}/api/voditel_zakaz`).then((res) => {
+      const Filter = res.data.filter((item1) => item1.zakaz_id == item.id);
+      setVoditel(Filter);
       // res.data.map(item1=>{
 
       // })
-    })
+    });
     setPage(1);
   }
 
@@ -296,26 +299,61 @@ export default function Zakaz() {
     axios.get(`${url}/api/category`).then((res) => {
       setCatgeory(res.data);
     });
-    axios.get(`${url}/api/mashina`).then((res) => {
-      setMashina(res.data);
+    axios.get(`${url}/auth/users`).then((res) => {
+      const Filter = res.data.filter((item) => item.position_id == 2);
+      setUsers(Filter);
     });
     axios.get(`${url}/auth/users`).then((res) => {
-      const Filter=res.data.filter(item=>item.position_id==2)
-      setUsers(Filter);
+      const Filter = res.data.filter((item) => item.position_id == 3);
+      setMashina(Filter);
+      setUsers1(res.data);
     });
   }, []);
 
   function postZakaz() {
     var formdata = new FormData();
-    formdata.append("status", document.querySelector("#statusZakaz").value);
+    formdata.append("car_id", document.querySelector("#CarVod").value);
+    formdata.append(
+      "operator_id",
+      document.querySelector("#OperatorVod").value
+    );
+    formdata.append("zakaz_id", VoditelId.id);
 
     axios
-      .put(`${url}/api/voditel_zakaz`, formdata)
+      .post(`${url}/api/voditel_zakaz`, formdata)
       .then((res) => {
-        alert("ishladi");
+        alert("Добавлен");
+        setIsModalOpen(false)
+        axios.get(`${url}/api/voditel_zakaz`).then((res) => {
+          const Filter = res.data.filter(
+            (item1) => item1.zakaz_id == VoditelId.id
+          );
+          setVoditel(Filter);
+        });
       })
       .catch((err) => {
-        alert("Xato");
+        alert("Не присоединился");
+      });
+  }
+  function putZakaz() {
+    var formdata = new FormData();
+    formdata.append("car_id", document.querySelector("#CarVod1").value);
+    formdata.append("finishing", document.querySelector("#OperatorFini").value);
+    
+    axios
+      .put(`${url}/api/voditel_zakaz/${Zakaz_id}`, formdata)
+      .then((res) => {
+        alert("Измененный");
+        setIsModalOpen1(false)
+        axios.get(`${url}/api/voditel_zakaz`).then((res) => {
+          const Filter = res.data.filter(
+            (item1) => item1.zakaz_id == VoditelId.id
+          );
+          setVoditel(Filter);
+        });
+      })
+      .catch((err) => {
+        alert("Не изменилось");
       });
   }
   const showModalClose = () => {
@@ -324,11 +362,20 @@ export default function Zakaz() {
   const showModal = (item) => {
     setIsModalOpen(true);
   };
+  const showModalClose1 = () => {
+    setIsModalOpen1(false);
+  };
+  const showModal1 = (item) => {
+    setZakaz_id(item.id)
+    setIsModalOpen1(true);
+    setTimeout(() => {
+      document.querySelector("#OperatorFini").value=item.finishing
+      document.querySelector("#CarVod1").value=item.car_id
+    }, 1000);
+  };
 
-  function ZakazTugadi(){
-    axios.get(`${url}/voditel_zakaz/finishing`).then(res=>{
-    
-    })
+  function ZakazTugadi() {
+    axios.get(`${url}/voditel_zakaz/finishing`).then((res) => {});
   }
 
   return (
@@ -343,23 +390,74 @@ export default function Zakaz() {
           >
             Exit
           </Radio.Button>
-          {Voditel.length!==0?(""):(<Radio.Button onClick={()=>showModal()} ghost>Add</Radio.Button>)}
+          {Voditel.length !== 0 ? (
+            ""
+          ) : (
+            <Radio.Button onClick={() => showModal()} ghost>
+              Add
+            </Radio.Button>
+          )}
 
-          <Row style={{marginTop:'10px'}} gutter={16}>
-          {Voditel.map(item=>{
-            return(
-             <Col span={8}>
-              <Card title="Доставка" bordered={false}>
-                <p>{item.zakaz_id}</p>
-                <p>{item.car_id}</p>
-                <div style={{display:'flex',gap:'1px'}}>Operator:{Users.map(item1=>{return<p>{item.operator_id==item1.id?item1.surname:""}</p>})}</div>
-                <Radio.Button onClick={()=>ZakazTugadi(item)} style={{marginTop:'10px'}}>Завершение заказа</Radio.Button>
-                <Radio.Button style={{marginTop:'10px'}}>Edit</Radio.Button>
-              </Card>
-            </Col>  
-            )
-          })}
-           
+          <Row style={{ marginTop: "10px" }} gutter={16}>
+            {Voditel.map((item) => {
+              return (
+                <Col span={8}>
+                  <Card title={item.finishing?"Заказ выполнен":"Доставка"} bordered={false}>
+                    {item.mark == 4 ? (
+                      <p>
+                        <AiOutlineStar />
+                        <AiOutlineStar />
+                        <AiOutlineStar />
+                        <AiOutlineStar />
+                      </p>
+                    ) : item.mark == 5 ? (
+                      <p>
+                        <AiOutlineStar />
+                        <AiOutlineStar />
+                        <AiOutlineStar />
+                        <AiOutlineStar />
+                        <AiOutlineStar />
+                      </p>
+                    ) : (
+                      ""
+                    )}
+                    <p style={{ display: "flex", gap: "0.5px" }}>
+                      Driver:
+                      {Users1.map((item1) => {
+                        return (
+                          <p>{item1.id == item.car_id ? item1.surname : ""}</p>
+                        );
+                      })}
+                    </p>
+                    <div style={{ display: "flex", gap: "1px" }}>
+                      Operator:
+                      {Users.map((item1) => {
+                        return (
+                          <p>
+                            {item.operator_id == item1.id ? item1.surname : ""}
+                          </p>
+                        );
+                      })}
+                    </div>
+                    {item.finishing ? (
+                      <Radio.Button style={{ marginTop: "10px" }}>
+                        Заказ выполнен
+                      </Radio.Button>
+                    ) : (
+                      <Radio.Button
+                        onClick={() => ZakazTugadi(item)}
+                        style={{ marginTop: "10px" }}
+                      >
+                        Завершение заказа
+                      </Radio.Button>
+                    )}
+                    <Radio.Button onClick={()=>showModal1(item)} style={{ marginTop: "10px" }}>
+                      Edit
+                    </Radio.Button>
+                  </Card>
+                </Col>
+              );
+            })}
           </Row>
         </div>
       ) : (
@@ -469,21 +567,59 @@ export default function Zakaz() {
       >
         <label>
           <p>Car</p>
-          <select name="" id="CarVod" style={{width:"90%",height:'35px',border:'1px solid grey'}}>
-          {mashina.map(item=>{
-            return<option value={item.id}>{item.m3}</option>
-          })}
+          <select
+            name=""
+            id="CarVod"
+            style={{ width: "90%", height: "35px", border: "1px solid grey" }}
+          >
+            {mashina.map((item) => {
+              return <option value={item.id}>{item.surname}</option>;
+            })}
           </select>
         </label>
         <label>
           <p>Operator</p>
-          <select name="" style={{width:"90%",height:'35px',border:'1px solid grey'}} id="OperatorVod">
-          {Users.map(item=>{
-            return<option value={item.id}>{item.surname}</option>
-          })}
+          <select
+            name=""
+            style={{ width: "90%", height: "35px", border: "1px solid grey" }}
+            id="OperatorVod"
+          >
+            {Users.map((item) => {
+              return <option value={item.id}>{item.surname}</option>;
+            })}
           </select>
         </label>
       </Modal>
+      <Modal
+      title="Modal"
+      visible={isModalOpen1}
+      onOk={() => putZakaz()}
+      onCancel={() => showModalClose1()}
+    >
+      <label>
+        <p>Car</p>
+        <select
+          name=""
+          id="CarVod1"
+          style={{ width: "90%", height: "35px", border: "1px solid grey" }}
+        >
+          {mashina.map((item) => {
+            return <option value={item.id}>{item.surname}</option>;
+          })}
+        </select>
+      </label>
+      <label>
+        <p>Finishing</p>
+        <select
+          name=""
+          style={{ width: "90%", height: "35px", border: "1px solid grey" }}
+          id="OperatorFini"
+        >
+          <option value={false}>Не доставлен</option>
+          <option value={true}>Доставленный</option>
+        </select>
+      </label>
+    </Modal>
     </div>
   );
 }
