@@ -11,6 +11,7 @@ import {
   Typography,
   Input,
   Modal,
+  Space,
 } from "antd";
 import url from "./host";
 
@@ -20,16 +21,30 @@ export default function Zakaz() {
   var [table, setInfo] = useState([]);
   var [information, setInformation] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  var [zakazId,setZakazId] =useState()
-  var [Catgeory,setCatgeory] =useState([])
+  // var [zakazId, setZakazId] = useState();
+  var [Catgeory, setCatgeory] = useState([]);
+  var [page, setPage] = useState(0);
+  var [VoditelId, setVoditelId] = useState([]);
+  var [Voditel,setVoditel]=useState([])
+  var [mashina,setMashina]=useState([])
+  var [Users,setUsers]=useState([])
+  var [Zakaz_id,setZakaz_id]=useState([])
 
   function abbas(params) {
     setInformation(params);
     document.querySelector("#modalInformation").style = "display:flex";
   }
 
-  function newUser() {
-    document.querySelector("#modalMaybe").style = "background-color:blue";
+  function Page(item) {
+    setVoditelId(item)
+    axios.get(`${url}/api/voditel_zakaz`).then(res=>{
+      const Filter=res.data.filter(item1=>item1.zakaz_id==item.id)
+      setVoditel(Filter)
+      // res.data.map(item1=>{
+
+      // })
+    })
+    setPage(1);
   }
 
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
@@ -73,7 +88,10 @@ export default function Zakaz() {
       title: "document_mashina",
       key: "document_mashina",
       render: (_, item) => (
-        <a href={item.document_mashina}> {item.document_mashina?item.document_mashina:"document not"} </a>
+        <a href={item.document_mashina}>
+          {" "}
+          {item.document_mashina ? item.document_mashina : "document not"}{" "}
+        </a>
       ),
       width: "2%",
     },
@@ -132,12 +150,7 @@ export default function Zakaz() {
     {
       title: "information",
       key: "information",
-      render: (_, item) => (
-        <Radio.Button
-        >
-          information
-        </Radio.Button>
-      ),
+      render: (_, item) => <Radio.Button>information</Radio.Button>,
       width: "10%",
     },
   ];
@@ -219,7 +232,7 @@ export default function Zakaz() {
       dataIndex: "shving",
       width: "12%",
     },
-        {
+    {
       title: "marka",
       key: "marka",
       dataIndex: "marka",
@@ -237,46 +250,30 @@ export default function Zakaz() {
       // render: (_, item) => (
       //   <p style={{width:'100px',overflowX:'scroll'}}>{item.description}</p>
       // ),
-      dataIndex:"description",
+      dataIndex: "description",
       width: "4%",
     },
     {
       title: "Edit",
       key: "Edit",
       render: (_, item) => (
-        <Radio.Button
-          onClick={()=>showModal(item)}
-        >
-        Edit
-        </Radio.Button>
+        <Radio.Button onClick={() => Page(item)}>Voditel</Radio.Button>
       ),
       width: "10%",
     },
     {
       title: "Delete",
       key: "Delete",
-      render: (_, item) => (
-        <Radio.Button
-         
-        >
-        Delete
-        </Radio.Button>
-      ),
+      render: (_, item) => <Radio.Button>Delete</Radio.Button>,
       width: "10%",
     },
     {
       title: "information",
       key: "information",
-      render: (_, item) => (
-        <Radio.Button
-        >
-          information
-        </Radio.Button>
-      ),
+      render: (_, item) => <Radio.Button>information</Radio.Button>,
       width: "10%",
     },
   ];
-
 
   function all1(id) {
     axios.get(`${url}/auth/users`).then((res) => {
@@ -299,133 +296,188 @@ export default function Zakaz() {
     axios.get(`${url}/api/category`).then((res) => {
       setCatgeory(res.data);
     });
+    axios.get(`${url}/api/mashina`).then((res) => {
+      setMashina(res.data);
+    });
+    axios.get(`${url}/auth/users`).then((res) => {
+      const Filter=res.data.filter(item=>item.position_id==2)
+      setUsers(Filter);
+    });
   }, []);
 
-  function putZakaz(){
-  var formdata=new FormData()
-  formdata.append("status",document.querySelector("#statusZakaz").value)
+  function postZakaz() {
+    var formdata = new FormData();
+    formdata.append("status", document.querySelector("#statusZakaz").value);
 
-  axios.put(`${url}/api/zakaz/${zakazId}`,formdata).then(res=>{
-    alert('ishladi')
-  }).catch(err=>{
-    alert('Xato')
-  })
+    axios
+      .put(`${url}/api/voditel_zakaz`, formdata)
+      .then((res) => {
+        alert("ishladi");
+      })
+      .catch((err) => {
+        alert("Xato");
+      });
   }
   const showModalClose = () => {
     setIsModalOpen(false);
   };
   const showModal = (item) => {
     setIsModalOpen(true);
-    setZakazId(item.id)
-    setTimeout(()=>{
-    document.querySelector("#statusZakaz").value=item.status
-   },1000)
   };
 
   return (
     <div>
-      <div className="tabled">
-        <Row gutter={[24, 0]}>
-          <Col xs="24" xl={24}>
-            <Card
-              bordered={false}
-              className="criclebox tablespace mb-24"
-              title="All users"
-              extra={
-                <div>
-                  <Radio.Group onChange={onChange} defaultValue="a">
-                    <Radio.Button onClick={() => all1(0)} value="a1">
-                      Все
-                    </Radio.Button>
-                    <Radio.Button onClick={() => all1(2)} value="a2">
-                      Юридическое лицо
-                    </Radio.Button>
-                    <Radio.Button onClick={() => all1(1)} value="a3">
-                      Физическое лицо
-                    </Radio.Button>
-                    <Radio.Button onClick={() => all1(3)} value="a4">
-                      Менеджер
-                    </Radio.Button>
-                    <Radio.Button
-                      onClick={() => {
-                        document.querySelector("#modalMaybe").style =
-                          "display:flex";
-                      }}
-                      value="b"
-                    >
-                      create
-                    </Radio.Button>
-                  </Radio.Group>
-                </div>
-              }
-            >
-              <div className="table-responsive">
-                <Table
-                  columns={columns}
-                  dataSource={data}
-                  pagination={{pageSize:'7'}}
-                  className="ant-border-space"
-                />
-              </div>
-            </Card>
-          </Col>
-        </Row>
-
-      </div>
-      <div className="tabled">
-      <Row gutter={[24, 0]}>
-        <Col xs="24" xl={24}>
-          <Card
-            bordered={false}
-            className="criclebox tablespace mb-24"
-            title="All users"
-            // extra={
-            //   <div>
-            //     <Radio.Group onChange={onChange} defaultValue="a">
-            //       <Radio.Button onClick={() => all1(0)} value="a1">
-            //         Все
-            //       </Radio.Button>
-            //       <Radio.Button onClick={() => all1(2)} value="a2">
-            //         Юридическое лицо
-            //       </Radio.Button>
-            //       <Radio.Button onClick={() => all1(1)} value="a3">
-            //         Физическое лицо
-            //       </Radio.Button>
-            //       <Radio.Button onClick={() => all1(3)} value="a4">
-            //         Менеджер
-            //       </Radio.Button>
-            //       <Radio.Button
-            //         onClick={() => {
-            //           document.querySelector("#modalMaybe").style =
-            //             "display:flex";
-            //         }}
-            //         value="b"
-            //       >
-            //         create
-            //       </Radio.Button>
-            //     </Radio.Group>
-            //   </div>
-            // }
+      {page == 1 ? (
+        <div>
+          <Radio.Button
+            onClick={() => {
+              setPage(0);
+            }}
+            ghost
           >
-            <div className="table-responsive">
-              <Table
-                columns={zakaz1}
-                dataSource={zakaz}
-                pagination={{pageSize:'7'}}
-                className="ant-border-space"
-              />
-            </div>
-          </Card>
-        </Col>
-      </Row>
+            Exit
+          </Radio.Button>
+          {Voditel.length!==0?(""):(<Radio.Button onClick={()=>showModal()} ghost>Add</Radio.Button>)}
 
-    </div>
-    <Modal title="Zakaz Modal" visible={isModalOpen} onOk={()=>putZakaz()} onCancel={()=>showModalClose()}>
-    <label>
-    <p>status</p>
-    <input id='statusZakaz'    />
-    </label>
-    </Modal>
+          <Row style={{marginTop:'10px'}} gutter={16}>
+          {Voditel.map(item=>{
+            return(
+             <Col span={8}>
+              <Card title="Доставка" bordered={false}>
+                <p>{item.zakaz_id}</p>
+                <p>{item.car_id}</p>
+                <p>{item.operator_id}</p>
+                <Radio.Button style={{marginTop:'10px'}}>Zakaz tugatish</Radio.Button>
+                <Radio.Button style={{marginTop:'10px'}}>Edit</Radio.Button>
+              </Card>
+            </Col>  
+            )
+          })}
+           
+          </Row>
+        </div>
+      ) : (
+        <div>
+          <div className="tabled">
+            <Row gutter={[24, 0]}>
+              <Col xs="24" xl={24}>
+                <Card
+                  bordered={false}
+                  className="criclebox tablespace mb-24"
+                  title="All users"
+                  extra={
+                    <div>
+                      <Radio.Group onChange={onChange} defaultValue="a">
+                        <Radio.Button onClick={() => all1(0)} value="a1">
+                          Все
+                        </Radio.Button>
+                        <Radio.Button onClick={() => all1(2)} value="a2">
+                          Юридическое лицо
+                        </Radio.Button>
+                        <Radio.Button onClick={() => all1(1)} value="a3">
+                          Физическое лицо
+                        </Radio.Button>
+                        <Radio.Button onClick={() => all1(3)} value="a4">
+                          Менеджер
+                        </Radio.Button>
+                        <Radio.Button
+                          onClick={() => {
+                            document.querySelector("#modalMaybe").style =
+                              "display:flex";
+                          }}
+                          value="b"
+                        >
+                          create
+                        </Radio.Button>
+                      </Radio.Group>
+                    </div>
+                  }
+                >
+                  <div className="table-responsive">
+                    <Table
+                      columns={columns}
+                      dataSource={data}
+                      pagination={{ pageSize: "7" }}
+                      className="ant-border-space"
+                    />
+                  </div>
+                </Card>
+              </Col>
+            </Row>
+          </div>
+          <div className="tabled">
+            <Row gutter={[24, 0]}>
+              <Col xs="24" xl={24}>
+                <Card
+                  bordered={false}
+                  className="criclebox tablespace mb-24"
+                  title="All Zakaz"
+                  // extra={
+                  //   <div>
+                  //     <Radio.Group onChange={onChange} defaultValue="a">
+                  //       <Radio.Button onClick={() => all1(0)} value="a1">
+                  //         Все
+                  //       </Radio.Button>
+                  //       <Radio.Button onClick={() => all1(2)} value="a2">
+                  //         Юридическое лицо
+                  //       </Radio.Button>
+                  //       <Radio.Button onClick={() => all1(1)} value="a3">
+                  //         Физическое лицо
+                  //       </Radio.Button>
+                  //       <Radio.Button onClick={() => all1(3)} value="a4">
+                  //         Менеджер
+                  //       </Radio.Button>
+                  //       <Radio.Button
+                  //         onClick={() => {
+                  //           document.querySelector("#modalMaybe").style =
+                  //             "display:flex";
+                  //         }}
+                  //         value="b"
+                  //       >
+                  //         create
+                  //       </Radio.Button>
+                  //     </Radio.Group>
+                  //   </div>
+                  // }
+                >
+                  <div className="table-responsive">
+                    <Table
+                      columns={zakaz1}
+                      dataSource={zakaz}
+                      pagination={{ pageSize: "7" }}
+                      className="ant-border-space"
+                    />
+                  </div>
+                </Card>
+              </Col>
+            </Row>
+          </div>
+        </div>
+      )}
+
+      <Modal
+        title="Modal"
+        visible={isModalOpen}
+        onOk={() => postZakaz()}
+        onCancel={() => showModalClose()}
+      >
+        <label>
+          <p>Car</p>
+          <select name="" id="CarVod" style={{width:"90%",height:'35px',border:'1px solid grey'}}>
+          {mashina.map(item=>{
+            return<option value={item.id}>{item.m3}</option>
+          })}
+          </select>
+        </label>
+        <label>
+          <p>Operator</p>
+          <select name="" style={{width:"90%",height:'35px',border:'1px solid grey'}} id="OperatorVod">
+          {Users.map(item=>{
+            return<option value={item.id}>{item.surname}</option>
+          })}
+          </select>
+        </label>
+      </Modal>
     </div>
   );
 }
