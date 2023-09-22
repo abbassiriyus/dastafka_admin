@@ -1,4 +1,4 @@
-import { Button, Card, Col, Modal, Radio, Row, Table, message } from 'antd';
+import { Button, Card, Col, Image, Modal, Radio, Row, Table, message } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import url from './host';
@@ -21,9 +21,9 @@ if(params==0){
     for (let i = 0; i < res.data.length; i++) {
       res.data[i].mashina1=""
       res.data[i].shving1=""
-     for (let j = 0; j < res1.data.length; j++) {
-       if(res.data[i].mashina==res1.data[j].id){
-    res.data[i].mashina1=res1.data[j]
+     for (let j = 0; j < res2.data.length; j++) {
+       if(res.data[i].mashina==res2.data[j].id){
+    res.data[i].mashina1=res2.data[j]
        }    
         }
     for (let j = 0; j < res2.data.length; j++) {
@@ -48,12 +48,12 @@ const columns = [
     },
     {
       title: "mashina",
-      dataIndex: "mashina",
+      render: (_,item)=>(<div>{(item.mashina1).length!==0?(<div>{item.mashina1.m3}m<sup>3</sup> <Image width="40px" src={item.mashina1.image} /></div>):(<div>not mashina</div>)}</div>),
       width: "12%",
     },
     {
         title: "shving",
-        dataIndex: "shving",
+       render: (_,item)=>(<div>{(item.shving1).length!==0?(<div>{item.shving1.m}m <Image width="40px" src={item.shving1.image} /></div>):(<div>not shving</div>)}</div>),
         width: "12%",
       },
     {
@@ -96,9 +96,9 @@ const columns = [
       for (let i = 0; i < res.data.length; i++) {
         res.data[i].mashina1=""
         res.data[i].shving1=""
-       for (let j = 0; j < res1.data.length; j++) {
-         if(res.data[i].mashina==res1.data[j].id){
-      res.data[i].mashina1=res1.data[j]
+       for (let j = 0; j < res2.data.length; j++) {
+         if(res.data[i].mashina==res2.data[j].id){
+        res.data[i].mashina1=res2.data[j]
          }    
           }
       for (let j = 0; j < res2.data.length; j++) {
@@ -108,6 +108,7 @@ const columns = [
       }
       }
       setLoading(false)
+    console.log(res.data);
           setData(res.data)
       })})})
   }
@@ -129,7 +130,7 @@ getData()
 },[])
   return (
     <div>
-  {loading?(<div style={{width:'100%',height:"100vh",background:"#00000024",position:'absolute',top:'0px',left:'0px',zIndex:'213123'}}><p></p></div>):(<></>)}
+  {loading?(<div style={{width:'100%',height:"100vh",background:"#00000024",position:'fixed',top:'0px',left:'0px',zIndex:'213123'}}><p></p></div>):(<></>)}
     <div className="tabled">
       <Row gutter={[24, 0]}>
         <Col xs="24" xl={24}>
@@ -143,10 +144,10 @@ getData()
                   <Radio.Button onClick={() => all1(0)} value="a1">
                     Все
                   </Radio.Button>
-                  <Radio.Button onClick={() => all1(1)} value="a2">
+                   <Radio.Button onClick={() => all1(1)} value="a2">
                   Без машины
-                  </Radio.Button>
-                  <Radio.Button onClick={() => all1(2)} value="a3">
+                   </Radio.Button>
+                   <Radio.Button onClick={() => all1(2)} value="a3">
                   Фирма
                   </Radio.Button>
                   <Radio.Button onClick={() => all1(3)} value="a4">
