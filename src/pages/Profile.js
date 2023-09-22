@@ -12,6 +12,8 @@ import {
   Switch,
   Upload,
   message,
+  Select,
+  Modal,
 } from "antd";
 
 import {
@@ -33,7 +35,10 @@ import project2 from "../assets/images/home-decor-2.jpeg";
 import project3 from "../assets/images/home-decor-3.jpeg";
 
 function Profile() {
+
   const [imageURL, setImageURL] = useState(false);
+  const [isModalOpen1,setIsModalOpen1] = useState(false);
+
   const [, setLoading] = useState(false);
 
   const getBase64 = (img, callback) => {
@@ -53,7 +58,9 @@ function Profile() {
     }
     return isJpgOrPng && isLt2M;
   };
+const PostProduct=()=>{
 
+}
   const handleChange = (info) => {
     if (info.file.status === "uploading") {
       setLoading(false);
@@ -177,18 +184,13 @@ function Profile() {
                 justifyContent: "flex-end",
               }}
             >
-              <Radio.Group defaultValue="a">
-                <Radio.Button value="a">OVERVIEW</Radio.Button>
-                <Radio.Button value="b">TEAMS</Radio.Button>
-                <Radio.Button value="c">PROJECTS</Radio.Button>
-              </Radio.Group>
             </Col>
           </Row>
         }
       ></Card>
 
       <Row gutter={[24, 0]}>
-        <Col span={24} md={8} className="mb-24 ">
+        <Col span={24} md={12} className="mb-24 ">
           <Card
             bordered={false}
             className="header-solid h-full"
@@ -231,12 +233,12 @@ function Profile() {
             </ul>
           </Card>
         </Col>
-        <Col span={24} md={8} className="mb-24">
+        <Col span={24} md={12} className="mb-24">
           <Card
             bordered={false}
             title={<h6 className="font-semibold m-0">Profile Information</h6>}
             className="header-solid h-full card-profile-information"
-            extra={<Button type="link">{pencil}</Button>}
+            extra={<Button onClick={()=>{setIsModalOpen1(true)}} type="link">{pencil}</Button>}
             bodyStyle={{ paddingTop: 0, paddingBottom: 16 }}
           >
             <p className="text-dark">
@@ -274,32 +276,7 @@ function Profile() {
             </Descriptions>
           </Card>
         </Col>
-        <Col span={24} md={8} className="mb-24">
-          <Card
-            bordered={false}
-            title={<h6 className="font-semibold m-0">Conversations</h6>}
-            className="header-solid h-full"
-            bodyStyle={{ paddingTop: 0, paddingBottom: 16 }}
-          >
-            <List
-              itemLayout="horizontal"
-              dataSource={data}
-              split={false}
-              className="conversations-list"
-              renderItem={(item) => (
-                <List.Item actions={[<Button type="link">REPLY</Button>]}>
-                  <List.Item.Meta
-                    avatar={
-                      <Avatar shape="square" size={48} src={item.avatar} />
-                    }
-                    title={item.title}
-                    description={item.description}
-                  />
-                </List.Item>
-              )}
-            />
-          </Card>
-        </Col>
+    
       </Row>
       <Card
         bordered={false}
@@ -357,6 +334,22 @@ function Profile() {
           </Col>
         </Row>
       </Card>
+      <Modal title="Create Product" open={isModalOpen1} onOk={() =>PostProduct()} onCancel={setIsModalOpen1(false)}>
+          <input placeholder="цена ц3" id="s3_sena" type="number" showCount maxLength={30}  />
+          <br />
+          <br />
+          <input placeholder="цена ц4" id="s4_sena" type="number" showCount maxLength={30}  />
+          <br />
+          <br />
+          <textarea placeholder="description" id="description"  />
+          <br />
+          <br />
+          <input id="hydrophobic_additive_sena" placeholder="Гидрофобная добавка цена" type="number" showCount maxLength={30} allowClear  />
+          <br />
+          <br />
+          <input placeholder="Фиброволокно цена" id="Fiber_fiber" type="number" showCount maxLength={30}  />
+   
+        </Modal>
     </>
   );
 }
