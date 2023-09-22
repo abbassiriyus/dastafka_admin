@@ -84,6 +84,34 @@
     box-shadow: 1px 0.7px 3px 0.5px rgba(0, 132, 255, 0.322);
     color: rgb(0, 132, 255);
 }
+.ModalHomiy{
+  background-color: #11101060;
+  width: 100%;
+  transition: 0.4s;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  bottom: 0;  
+  z-index: 1000;
+  display: flex;
+  justify-content: end;
+}
+.ModalHomiyDivImg{
+  display: block;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.ModalHomiyDivImg_div{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+.ModalHomiyDiv{
+  background-color: #fff;
+  width: 300px;
+  padding: 10px;
+  height: 100%;
+}
 .modalInformation{
     width: 70%;
     max-width: 400px;

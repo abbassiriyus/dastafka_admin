@@ -10,13 +10,18 @@ import {
   Avatar,
   Typography,
   Input,
+  Modal,
 } from "antd";
 import url from "./host";
 
 export default function Zakaz() {
   var [data, setData] = useState([]);
+  var [zakaz, setZakaz] = useState([]);
   var [table, setInfo] = useState([]);
   var [information, setInformation] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  var [zakazId,setZakazId] =useState()
+  var [Catgeory,setCatgeory] =useState([])
 
   function abbas(params) {
     setInformation(params);
@@ -129,9 +134,141 @@ export default function Zakaz() {
       key: "information",
       render: (_, item) => (
         <Radio.Button
-          onClick={() => {
-            abbas(item);
-          }}
+        >
+          information
+        </Radio.Button>
+      ),
+      width: "10%",
+    },
+  ];
+  const zakaz1 = [
+    {
+      title: "address",
+      dataIndex: "address",
+      key: "address",
+      width: "12%",
+    },
+    {
+      title: "day",
+      dataIndex: "day",
+      width: "12%",
+    },
+    {
+      title: "time",
+      key: "time",
+      dataIndex: "time",
+      width: "12%",
+    },
+    {
+      title: "category",
+      key: "category",
+      dataIndex: "category",
+      width: "12%",
+    },
+    {
+      title: "positsiya",
+      key: "positsiya",
+      dataIndex: "positsiya",
+      width: "12%",
+    },
+    {
+      title: "m3",
+      key: "m3",
+      dataIndex: "m3",
+      width: "12%",
+    },
+    {
+      title: "payment",
+      key: "payment",
+      dataIndex: "payment",
+      width: "12%",
+    },
+    {
+      title: "tarif",
+      key: "tarif",
+      dataIndex: "tarif",
+      width: "12%",
+    },
+    {
+      title: "mashina",
+      key: "mashina",
+      dataIndex: "mashina",
+      width: "12%",
+    },
+    {
+      title: "work_time_shving",
+      key: "work_time_shving",
+      dataIndex: "work_time_shving",
+      width: "12%",
+    },
+    {
+      title: "price",
+      key: "price",
+      dataIndex: "price",
+      width: "12%",
+    },
+    {
+      title: "status",
+      key: "status",
+      dataIndex: "status",
+      width: "12%",
+    },
+    {
+      title: "shving",
+      key: "shving",
+      dataIndex: "shving",
+      width: "12%",
+    },
+        {
+      title: "marka",
+      key: "marka",
+      dataIndex: "marka",
+      width: "12%",
+    },
+    {
+      title: "bonus",
+      key: "bonus",
+      dataIndex: "bonus",
+      width: "12%",
+    },
+    {
+      title: "description",
+      key: "description",
+      // render: (_, item) => (
+      //   <p style={{width:'100px',overflowX:'scroll'}}>{item.description}</p>
+      // ),
+      dataIndex:"description",
+      width: "4%",
+    },
+    {
+      title: "Edit",
+      key: "Edit",
+      render: (_, item) => (
+        <Radio.Button
+          onClick={()=>showModal(item)}
+        >
+        Edit
+        </Radio.Button>
+      ),
+      width: "10%",
+    },
+    {
+      title: "Delete",
+      key: "Delete",
+      render: (_, item) => (
+        <Radio.Button
+         
+        >
+        Delete
+        </Radio.Button>
+      ),
+      width: "10%",
+    },
+    {
+      title: "information",
+      key: "information",
+      render: (_, item) => (
+        <Radio.Button
         >
           information
         </Radio.Button>
@@ -140,37 +277,6 @@ export default function Zakaz() {
     },
   ];
 
-  function DeleteData(key) {
-    axios.delete(`${url}/auth/users/${key}`).then((res) => {
-      alert("o`chirildi");
-      axios.get(`${url}/auth/users`).then((res1) => {
-        setData(res1.data);
-      });
-    });
-  }
-  function postData() {
-    var data = new FormData();
-    data.append("patronymic", document.querySelector("#patronymic").value);
-    data.append("surname", document.querySelector("#surname").value);
-    data.append("username", document.querySelector("#username").value);
-    data.append("phone", document.querySelector("#phone").value);
-    data.append("email", document.querySelector("#email").value);
-    data.append("login", document.querySelector("#login").value);
-    data.append("position_id", document.querySelector("#position").value);
-    data.append("password", document.querySelector("#password").value);
-    axios
-      .post(`${url}/auth/users`, data)
-      .then((res) => {
-        alert("saqlandi");
-        axios.get(`${url}/auth/users`).then((res) => {
-          setData(res.data);
-          console.log(res.data);
-        });
-      })
-      .catch((err) => {
-        alert("Ma`lumot yetarli emas");
-      });
-  }
 
   function all1(id) {
     axios.get(`${url}/auth/users`).then((res) => {
@@ -187,7 +293,34 @@ export default function Zakaz() {
     axios.get(`${url}/auth/users`).then((res) => {
       setData(res.data);
     });
+    axios.get(`${url}/api/zakaz`).then((res) => {
+      setZakaz(res.data);
+    });
+    axios.get(`${url}/api/category`).then((res) => {
+      setCatgeory(res.data);
+    });
   }, []);
+
+  function putZakaz(){
+  var formdata=new FormData()
+  formdata.append("status",document.querySelector("#statusZakaz").value)
+
+  axios.put(`${url}/api/zakaz/${zakazId}`,formdata).then(res=>{
+    alert('ishladi')
+  }).catch(err=>{
+    alert('Xato')
+  })
+  }
+  const showModalClose = () => {
+    setIsModalOpen(false);
+  };
+  const showModal = (item) => {
+    setIsModalOpen(true);
+    setZakazId(item.id)
+    setTimeout(()=>{
+    document.querySelector("#statusZakaz").value=item.status
+   },1000)
+  };
 
   return (
     <div>
@@ -238,120 +371,6 @@ export default function Zakaz() {
           </Col>
         </Row>
 
-        <div id="modalMaybe" className="Modal">
-          <div className="modalMaybe" style={{ position: "relative" }}>
-            <div className="twoOneModal">
-              <div className="one">
-                <br />
-                <label htmlFor="patronymic">Patronymic</label>
-                <br />
-                <input type="text" placeholder="patronymic" id="patronymic" />
-                <br />
-                <label htmlFor="surname">Surname</label>
-                <br />
-                <input type="text" placeholder="surname" id="surname" />
-                <br />
-                <label htmlFor="username">Username</label>
-                <br />
-                <input type="text" placeholder="username" id="username" />
-                <br />
-                <label htmlFor="phone">Phone</label>
-                <br />
-                <input type="text" placeholder="phone" id="phone" />
-
-                <br />
-                <label htmlFor="email">Email</label>
-                <br />
-                <input type="text" placeholder="email" id="email" />
-                <br />
-                <label htmlFor="position">Position</label>
-                <br />
-                <input type="number" placeholder="position" id="position" />
-                <br />
-                <label htmlFor="login">Login</label>
-                <br />
-                <input type="text" placeholder="login" id="login" />
-                <br />
-                <label htmlFor="password">Password</label>
-                <br />
-                <input type="text" placeholder="password" id="password" />
-              </div>
-              <Button
-                className="buttonExit"
-                onClick={() => {
-                  document.querySelector("#modalMaybe").style = "display:none";
-                }}
-              >
-                x
-              </Button>
-            </div>
-            <br />
-            <div className="buttonsSend">
-              <Button
-                className="buttonSend"
-                type="primary"
-                onClick={() => {
-                  postData();
-                  newUser();
-                }}
-              >
-                Create
-              </Button>
-            </div>
-          </div>
-        </div>
-        <div id="modalInformation" className="Modal">
-          <div className="modalInformation">
-            <button
-              className="exitInformation"
-              onClick={() => {
-                document.querySelector("#modalInformation").style =
-                  "display:none";
-              }}
-            >
-              x
-            </button>
-            <div className="photoText">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1200px-User_icon_2.svg.png"
-                alt=""
-              />
-              <div className="writtenInfo">
-                <h2>
-                  <b>Full name: </b>{" "}
-                  <span>
-                    {information.username}, {information.surname},{" "}
-                    {information.patronymic}
-                  </span>
-                </h2>
-                <h2>
-                  <b>Phone number: </b>
-                  <span>{information.phone}</span>
-                </h2>
-                <h2>
-                  <b>Email address: </b>
-                  <span>{information.email}</span>
-                </h2>
-                <h2>
-                  <b>INN: </b>
-                  <span>{information.inn}</span>
-                </h2>
-                <h2>
-                  <b>Requisite: </b>
-                  <span>{information.recvizit}</span>
-                </h2>
-                <h2>
-                  <b>Login/email: </b>
-                  <span>{information.login}</span>
-                </h2>
-                <h2>
-                  <b>Password: </b>
-                  <span>{information.password}</span>
-                </h2>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       <div className="tabled">
       <Row gutter={[24, 0]}>
@@ -360,38 +379,38 @@ export default function Zakaz() {
             bordered={false}
             className="criclebox tablespace mb-24"
             title="All users"
-            extra={
-              <div>
-                <Radio.Group onChange={onChange} defaultValue="a">
-                  <Radio.Button onClick={() => all1(0)} value="a1">
-                    Все
-                  </Radio.Button>
-                  <Radio.Button onClick={() => all1(2)} value="a2">
-                    Юридическое лицо
-                  </Radio.Button>
-                  <Radio.Button onClick={() => all1(1)} value="a3">
-                    Физическое лицо
-                  </Radio.Button>
-                  <Radio.Button onClick={() => all1(3)} value="a4">
-                    Менеджер
-                  </Radio.Button>
-                  <Radio.Button
-                    onClick={() => {
-                      document.querySelector("#modalMaybe").style =
-                        "display:flex";
-                    }}
-                    value="b"
-                  >
-                    create
-                  </Radio.Button>
-                </Radio.Group>
-              </div>
-            }
+            // extra={
+            //   <div>
+            //     <Radio.Group onChange={onChange} defaultValue="a">
+            //       <Radio.Button onClick={() => all1(0)} value="a1">
+            //         Все
+            //       </Radio.Button>
+            //       <Radio.Button onClick={() => all1(2)} value="a2">
+            //         Юридическое лицо
+            //       </Radio.Button>
+            //       <Radio.Button onClick={() => all1(1)} value="a3">
+            //         Физическое лицо
+            //       </Radio.Button>
+            //       <Radio.Button onClick={() => all1(3)} value="a4">
+            //         Менеджер
+            //       </Radio.Button>
+            //       <Radio.Button
+            //         onClick={() => {
+            //           document.querySelector("#modalMaybe").style =
+            //             "display:flex";
+            //         }}
+            //         value="b"
+            //       >
+            //         create
+            //       </Radio.Button>
+            //     </Radio.Group>
+            //   </div>
+            // }
           >
             <div className="table-responsive">
               <Table
-                columns={columns}
-                dataSource={data}
+                columns={zakaz1}
+                dataSource={zakaz}
                 pagination={{pageSize:'7'}}
                 className="ant-border-space"
               />
@@ -401,6 +420,12 @@ export default function Zakaz() {
       </Row>
 
     </div>
+    <Modal title="Zakaz Modal" visible={isModalOpen} onOk={()=>putZakaz()} onCancel={()=>showModalClose()}>
+    <label>
+    <p>status</p>
+    <input id='statusZakaz'    />
+    </label>
+    </Modal>
     </div>
   );
 }

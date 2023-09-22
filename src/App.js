@@ -31,7 +31,9 @@ function App() {
            <Route exact path="/profile" component={Profile} />
            <Route exact path="/configProduct" component={MarkaAndSponsor} />
 
-           <Redirect from="*" to="/dashboard" /></Main>
+           <Redirect from="*" to="/dashboard" />
+           
+           </Main>
          ):(
       <div>
             <Route exact path="/login" component={SignIn} />
