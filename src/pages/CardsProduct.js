@@ -205,11 +205,11 @@ function putData() {
         md: 24,
         lg: 32,
       }}>{category.map((item, key) => {
-        return <Col onClick={() => { setCheck(key) }} span={4} xs={24} xl={4} sm={6} md={6} >
+        return <Col style={{flex:'100%',maxWidth:'240px',marginBottom:'10px'}} onClick={() => { setCheck(key) }} span={4} xs={24} xl={4} sm={6} md={6} >
           <div className="imgNameFour">
             <Card bordered={false} >
               <div className="tickCircle">{item.check?(<i class='bx bx-check'></i>):(<div></div>)}</div>
-              <center><Image width={'100%'} height={'120px'} src={item.image.includes("http") ? item.image : `${url}/${item.image}`} alt="no image" className='imgProductFour' />
+              <center><Image width={'100%'} height={'120px'} src={item.image} alt="no image" className='imgProductFour' />
                 <h4>{item.title}</h4>
                 <p>{item.description}</p>
                 <div className="icons"  style={{fontSize:'23px',display:'flex',justifyContent:'space-around'}}><i class='bx bxs-trash' style={{cursor:'pointer'}} onClick={()=>{deteteData(item.id)}} ></i><i class='bx bx-edit' onClick={()=>showModal2(item.id)} ></i></div>

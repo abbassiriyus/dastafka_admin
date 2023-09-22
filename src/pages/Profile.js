@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Row,
@@ -33,13 +33,25 @@ import convesionImg5 from "../assets/images/face-2.jpg";
 import project1 from "../assets/images/home-decor-1.jpeg";
 import project2 from "../assets/images/home-decor-2.jpeg";
 import project3 from "../assets/images/home-decor-3.jpeg";
+import axios from "axios";
+import url from "./host";
 
 function Profile() {
 
   const [imageURL, setImageURL] = useState(false);
-  const [isModalOpen1,setIsModalOpen1] = useState(false);
+  const [isModalOpen,setIsModalOpen] = useState(false);
+  const [User,setUser]=useState([])
 
   const [, setLoading] = useState(false);
+
+
+  useEffect(()=>{
+    axios.get(`${url}/auth/oneuser`,{headers:{Authorization:"Bearer "+sessionStorage.getItem("token")}}).then(res=>{
+      res.data.map(item=>{
+        setUser(item)
+      })
+    })
+  },[])
 
   const getBase64 = (img, callback) => {
     const reader = new FileReader();
@@ -58,9 +70,44 @@ function Profile() {
     }
     return isJpgOrPng && isLt2M;
   };
-const PostProduct=()=>{
+  
+  function putModal(){
+    setIsModalOpen(true)
+    setTimeout(() => {
+      document.querySelector("#patronymic").value=User.patronymic
+      document.querySelector("#surname").value=User.surname
+      document.querySelector("#username").value=User.username
+      document.querySelector("#phone").value=User.phone
+      document.querySelector("#email").value=User.email
+      document.querySelector("#login").value=User.login
+      document.querySelector("#password").value=User.password
+    }, 100);
+  }
 
-}
+  function putUsers(){
+    var data=new FormData()
+    data.append("patronymic",document.querySelector("#patronymic").value)
+    data.append("surname",document.querySelector("#surname").value)
+    data.append("username",document.querySelector("#username").value)
+    data.append("phone",document.querySelector("#phone").value)
+    data.append("email",document.querySelector("#email").value)
+    data.append("login",document.querySelector("#login").value)
+    data.append("position_id",User.position_id)
+    data.append("password",document.querySelector("#password").value)
+    axios.put(`${url}/auth/users/${User.id}`,data,{headers:{Authorization:"Bearer "+sessionStorage.getItem("token")}}).then(res=>{
+    alert("Измененный")
+    setIsModalOpen(false)
+    axios.get(`${url}/auth/oneuser`,{headers:{Authorization:"Bearer "+sessionStorage.getItem("token")}}).then(res=>{
+    res.data.map(item=>{
+      setUser(item)
+    })
+    })
+    })
+    .catch(err=>{
+    alert("Не изменилось")
+    })
+  }
+
   const handleChange = (info) => {
     if (info.file.status === "uploading") {
       setLoading(false);
@@ -161,17 +208,18 @@ const PostProduct=()=>{
       ></div>
 
       <Card
+        style={{padding:'10px'}}
         className="card-profile-head"
         bodyStyle={{ display: "none" }}
         title={
           <Row justify="space-between" align="middle" gutter={[24, 0]}>
             <Col span={24} md={12} className="col-info">
               <Avatar.Group>
-                <Avatar size={74} shape="square" src={profilavatar} />
+                <Avatar size={74} shape="square" src="https://storage.kun.uz/source/3/ABLFUWSTx_SmVnLejVpTqCrNPvDfHD27.jpg" />
 
                 <div className="avatar-info">
-                  <h4 className="font-semibold m-0">Sarah Jacob</h4>
-                  <p>CEO / Co-Founder</p>
+                  <h4 className="font-semibold m-0">{User.username}</h4>
+                  <p>SuperAdmin</p>
                 </div>
               </Avatar.Group>
             </Col>
@@ -188,8 +236,10 @@ const PostProduct=()=>{
           </Row>
         }
       ></Card>
-
+       
+      
       <Row gutter={[24, 0]}>
+       {/*
         <Col span={24} md={12} className="mb-24 ">
           <Card
             bordered={false}
@@ -233,36 +283,33 @@ const PostProduct=()=>{
             </ul>
           </Card>
         </Col>
-        <Col span={24} md={12} className="mb-24">
+*/}
+        <Col style={{maxWidth: '100%',flex:'100%'}} span={24} md={12} className="mb-24">
           <Card
             bordered={false}
             title={<h6 className="font-semibold m-0">Profile Information</h6>}
             className="header-solid h-full card-profile-information"
-            extra={<Button onClick={()=>{setIsModalOpen1(true)}} type="link">{pencil}</Button>}
+            extra={<Button onClick={()=>{putModal()}} type="link">{pencil}</Button>}
             bodyStyle={{ paddingTop: 0, paddingBottom: 16 }}
           >
             <p className="text-dark">
-              {" "}
-              Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer
-              is no. If two equally difficult paths, choose the one more painful
-              in the short term (pain avoidance is creating an illusion of
-              equality).{" "}
+             {User.login}
             </p>
             <hr className="my-25" />
-            <Descriptions title="Oliver Liam">
+            <Descriptions title={User.username}>
               <Descriptions.Item label="Full Name" span={3}>
-                Sarah Emily Jacob
+                {User.surname} {User.username}
               </Descriptions.Item>
               <Descriptions.Item label="Mobile" span={3}>
-                (44) 123 1234 123
+               {User.phone}
               </Descriptions.Item>
               <Descriptions.Item label="Email" span={3}>
-                sarahjacob@mail.com
+               {User.email}
               </Descriptions.Item>
-              <Descriptions.Item label="Location" span={3}>
-                USA
+              <Descriptions.Item label="Inn" span={3}>
+                {User.inn}
               </Descriptions.Item>
-              <Descriptions.Item label="Social" span={3}>
+              {/*<Descriptions.Item label="Social" span={3}>
                 <a href="#pablo" className="mx-5 px-5">
                   {<TwitterOutlined />}
                 </a>
@@ -272,12 +319,33 @@ const PostProduct=()=>{
                 <a href="#pablo" className="mx-5 px-5">
                   {<InstagramOutlined style={{ color: "#e1306c" }} />}
                 </a>
-              </Descriptions.Item>
+              </Descriptions.Item>*/}
             </Descriptions>
           </Card>
         </Col>
     
       </Row>
+
+      <Modal title="Users" visible={isModalOpen} onOk={()=>putUsers()} onCancel={()=>setIsModalOpen(false)}>
+      <div className="one">
+      <br /><label htmlFor="patronymic">Patronymic</label><br />
+      <input type="text" placeholder="patronymic" id="patronymic"/>
+      <br /><label htmlFor="surname">Surname</label><br />
+      <input type="text" placeholder="surname" id="surname"/>
+      <br /><label htmlFor="username">Username</label><br />
+      <input type="text" placeholder="username" id="username"/>
+      <br /><label htmlFor="phone">Phone</label><br />
+      <input type="text" placeholder="phone" id="phone"/>
+     
+      <br /><label htmlFor="email">Email</label><br />
+      <input type="text" placeholder="email" id="email"/>
+      <br /><label htmlFor="login">Login</label><br />
+      <input type="text" placeholder="login" id="login"/>
+      <br /><label htmlFor="password">Password</label><br />
+      <input type="text" placeholder="password" id="password"/>
+      </div>
+      </Modal>
+      {/*
       <Card
         bordered={false}
         className="header-solid mb-24"
@@ -297,7 +365,7 @@ const PostProduct=()=>{
                 cover={<img alt="example" src={p.img} />}
               >
                 <div className="card-tag">{p.titlesub}</div>
-                <h5>{p.titile}</h5>
+                <h5>{p.title}</h5>
                 <p>{p.disciption}</p>
                 <Row gutter={[6, 0]} className="card-footer">
                   <Col span={12}>
@@ -334,22 +402,7 @@ const PostProduct=()=>{
           </Col>
         </Row>
       </Card>
-      <Modal title="Create Product" open={isModalOpen1} onOk={() =>PostProduct()} onCancel={setIsModalOpen1(false)}>
-          <input placeholder="цена ц3" id="s3_sena" type="number" showCount maxLength={30}  />
-          <br />
-          <br />
-          <input placeholder="цена ц4" id="s4_sena" type="number" showCount maxLength={30}  />
-          <br />
-          <br />
-          <textarea placeholder="description" id="description"  />
-          <br />
-          <br />
-          <input id="hydrophobic_additive_sena" placeholder="Гидрофобная добавка цена" type="number" showCount maxLength={30} allowClear  />
-          <br />
-          <br />
-          <input placeholder="Фиброволокно цена" id="Fiber_fiber" type="number" showCount maxLength={30}  />
-   
-        </Modal>
+      */}
     </>
   );
 }
