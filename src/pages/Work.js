@@ -47,6 +47,12 @@ const columns = [
       width: "12%",
     },
     {
+      title: "phone",
+      dataIndex: "phone",
+      key: "phone",
+      width: "12%",
+    },
+    {
       title: "mashina",
       render: (_,item)=>(<div>{(item.mashina1).length!==0?(<div>{item.mashina1.m3}m<sup>3</sup> <Image width="40px" src={item.mashina1.image} /></div>):(<div>not mashina</div>)}</div>),
       width: "12%",
