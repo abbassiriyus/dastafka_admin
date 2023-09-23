@@ -13,10 +13,14 @@
 import ReactApexChart from "react-apexcharts";
 import { Row, Col, Typography } from "antd";
 import eChart from "./configs/eChart";
+import axios from "axios";
+import url from "../../pages/host";
+import { useEffect, useState } from "react";
 
 function EChart() {
+  const [loading,setloading]=useState(true)
   const { Title, Paragraph } = Typography;
-
+var [chart,setChart]=useState(eChart)
   const items = [
     {
       Title: "3,6K",
@@ -35,18 +39,37 @@ function EChart() {
       user: "Items",
     },
   ];
-
+useEffect(()=>{
+  var diogramma=[]
+  axios.get(`${url}/api/zakaz`).then(res=>{
+    for (let j = 0; j < 12; j++) {
+     diogramma.push(0)
+      for (let i = 0; i < res.data.length; i++) {
+      if (res.data[i].time_create.slice(5,7)==`${j}`.padStart(2,"0")) {
+        diogramma[j]=diogramma[j]+res.data[i].price
+      }
+      }
+  }
+  var a=eChart
+  setloading(false)
+  a.series[0].data=diogramma
+  setChart(a) 
+   console.log(a);
+  })
+},[])
   return (
     <>
-      <div id="chart">
-        <ReactApexChart
-          className="bar-chart"
-          options={eChart.options}
-          series={eChart.series}
-          type="bar"
-          height={220}
-        />
-      </div>
+  {loading?<div>salom</div>:<div>
+  <div id="chart">
+  <ReactApexChart
+    className="bar-chart"
+    options={chart.options}
+    series={chart.series}
+    type="bar"
+    height={220}
+  />
+</div>
+  </div>}
       {/*
       <div className="chart-vistior">
         <Title level={5}>Active Users</Title>

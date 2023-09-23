@@ -236,9 +236,9 @@ useEffect(()=>{
                   <Radio.Group onChange={onChange} defaultValue="a">
 
                      <Radio.Button onClick={()=>all1(0)} value="a1">Все</Radio.Button> 
-                     <Radio.Button onClick={()=>all1(2)} value="a2">Юридическое лицо</Radio.Button> 
+                     <Radio.Button onClick={()=>all1(3)} value="a2">Водитель</Radio.Button> 
                      <Radio.Button onClick={()=>all1(1)} value="a3">Физическое лицо</Radio.Button> 
-                     <Radio.Button onClick={()=>all1(3)} value="a4">Менеджер</Radio.Button> 
+                     <Radio.Button onClick={()=>all1(2)} value="a4">Менеджер</Radio.Button> 
                     <Radio.Button onClick={()=>{document.querySelector("#modalMaybe").style="display:flex"}} value="b">create</Radio.Button>
 
                   </Radio.Group>

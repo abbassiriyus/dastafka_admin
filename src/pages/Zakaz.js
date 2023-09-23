@@ -434,8 +434,15 @@ export default function Zakaz() {
     }, 1000);
   };
 
-  function ZakazTugadi() {
-    axios.get(`${url}/voditel_zakaz/finishing`).then((res) => {});
+  function ZakazTugadi(item) {
+    axios.get(`${url}/api/voditel_zakaz/finishing/${item.id}`).then((res) => {
+      axios.get(`${url}/api/voditel_zakaz`).then((res) => {
+        const Filter = res.data.filter((item1) => item1.zakaz_id == VoditelId.id);
+        setVoditel(Filter);
+      });
+    }).catch(err=>{
+      alert("xato")
+    })
   }
 
   return (
