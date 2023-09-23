@@ -94,7 +94,7 @@ function Profile() {
     data.append("login",document.querySelector("#login").value)
     data.append("position_id",User.position_id)
     data.append("password",document.querySelector("#password").value)
-    axios.put(`${url}/auth/users/${User.id}`,data,{headers:{Authorization:"Bearer "+sessionStorage.getItem("token")}}).then(res=>{
+    axios.put(`${url}/auth/users/super/${User.id}`,data,{headers:{Authorization:"Bearer "+sessionStorage.getItem("token")}}).then(res=>{
     alert("Измененный")
     setIsModalOpen(false)
     axios.get(`${url}/auth/oneuser`,{headers:{Authorization:"Bearer "+sessionStorage.getItem("token")}}).then(res=>{
