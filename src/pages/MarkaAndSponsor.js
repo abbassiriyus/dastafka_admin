@@ -1153,11 +1153,13 @@ export default function MarkaAndSponsor() {
                 create
               </Button>{" "}
             </div>
+            <div className="table-responsive">
             <Table
               columns={homiycolumn}
               style={{ width: "100%" }}
               dataSource={homiy}
             />
+            </div>
           </div>
 
           <div style={{ width: "100%", maxWidth: "700px" }}>
@@ -1179,12 +1181,13 @@ export default function MarkaAndSponsor() {
                 create
               </Button>{" "}
             </div>
+            <div className="table-responsive">
             <Table
               columns={markcolumn}
               pagination={{ pageSize: "4" }}
               style={{ width: "100%" }}
               dataSource={marka}
-            />
+            /></div>
           </div>
 
           <div style={{ width: "100%", maxWidth: "700px" }}>
@@ -1206,12 +1209,13 @@ export default function MarkaAndSponsor() {
                 create
               </Button>{" "}
             </div>
+            <div className="table-responsive">
             <Table
               pagination={{ pageSize: "4" }}
               columns={skachat_pridlachenucolumn}
               style={{ width: "100%" }}
               dataSource={skachat_pridlachenu}
-            />
+            /></div>
           </div>
 
           <div style={{ width: "100%", maxWidth: "700px" }}>
@@ -1233,12 +1237,13 @@ export default function MarkaAndSponsor() {
                 create
               </Button>{" "}
             </div>
+            <div className="table-responsive">
             <Table
               pagination={{ pageSize: "4" }}
               columns={preferencescolumn}
               style={{ width: "100%" }}
               dataSource={preferences}
-            />
+            /></div>
           </div>
 
           <div style={{ width: "100%", maxWidth: "700px" }}>
@@ -1255,12 +1260,13 @@ export default function MarkaAndSponsor() {
                 create
               </Button>
             </div>
+            <div className="table-responsive">
             <Table
               pagination={{ pageSize: "4" }}
               columns={sovuqlikcolumn}
               style={{ width: "100%" }}
               dataSource={sovuqlik}
-            />
+            /></div>
           </div>
 
           <div style={{ width: "100%", maxWidth: "700px" }}>
@@ -1282,12 +1288,13 @@ export default function MarkaAndSponsor() {
                 create
               </Button>{" "}
             </div>
+            <div className="table-responsive">
             <Table
               pagination={{ pageSize: "4" }}
               columns={aksiyacolumn}
               style={{ width: "100%" }}
               dataSource={aksiya}
-            />
+            /></div>
           </div>
 
           <div style={{ width: "100%" }}>
@@ -1309,12 +1316,14 @@ export default function MarkaAndSponsor() {
                 create
               </Button>{" "}
             </div>
+            <div className="table-responsive">
             <Table
               pagination={{ pageSize: "4" }}
               columns={newscolumn}
               style={{ width: "100%" }}
               dataSource={news}
             />
+          </div>
           </div>
         </div>
       )}

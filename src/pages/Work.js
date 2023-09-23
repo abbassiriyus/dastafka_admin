@@ -136,7 +136,7 @@ getData()
 },[])
   return (
     <div>
-  {loading?(<div style={{width:'100%',height:"100vh",background:"#00000024",position:'fixed',top:'0px',left:'0px',zIndex:'213123'}}><p></p></div>):(<></>)}
+  {loading?(<div style={{width:'100%',height:"100vh",background:"#00000024",position:'fixed',top:'0px',left:'0px',zIndex:'213123'}}><p></p></div>):(<div></div>)}
     <div className="tabled">
       <Row gutter={[24, 0]}>
         <Col xs="24" xl={24}>

@@ -78,19 +78,19 @@ const columns = [
   {
     title: "document_mashina",
     key: "document_mashina",
-    render:(_,item)=><a href={item.document_mashina}> {item.document_mashina} a</a>,
+    render:(_,item)=><div >{item.document_mashina.length>10?(<a href={item.document_mashina} style={{textDecoration:'none'}} >open</a>):("no file")}</div>,
     width: "2%",
   },
   {
     title: "prava",
     key: "prava",
-    dataIndex: "prava",
+    render:(_,item)=><div >{item.prava.length>10?(<a href={item.prava} style={{textDecoration:'none'}}>open</a>):("no file")}</div>,
     width: "12%",
   },
   {
     title: "fomo",
     key: "fomo",
-    dataIndex: "fomo",
+    render:(_,item)=><div>{item.fomo.length>10?(<a href={item.fomo} style={{textDecoration:'none'}}>open</a>):("no file")}</div>,
     width: "12%",
   },
   {
@@ -135,6 +135,10 @@ document.querySelector("#username1").value=item.username
 document.querySelector("#phone1").value=item.phone
 document.querySelector("#email1").value=item.email
 document.querySelector("#login1").value=item.login
+document.querySelector("#bonus1").value=item.bonus
+document.querySelector("#skidka1").value=item.skitka
+document.querySelector("#inn1").value=item.inn
+
 document.querySelector("#position1").value=item.position_id
 document.querySelector("#password1").value=item.password
 }, 1000);
@@ -148,6 +152,9 @@ function putUser(){
   data.append("phone",document.querySelector("#phone1").value)
   data.append("email",document.querySelector("#email1").value)
   data.append("login",document.querySelector("#login1").value)
+  data.append("bonus",document.querySelector("#bonus1").value)
+  data.append("skitka",document.querySelector("#skidka1").value)
+  data.append("inn",document.querySelector("#inn1").value)
   data.append("position_id",document.querySelector("#position1").value)
   data.append("password",document.querySelector("#password1").value)
 axios.put(`${url}/auth/users/${userId}`,data).then(res=>{
@@ -272,8 +279,11 @@ useEffect(()=>{
           <option value={2}>Менеджер</option>
           <option value={3}>Водитель</option>
           </select>
+            <br /><label htmlFor="bonus">bonus</label><br />
+          <input type="text" placeholder="bonus" id="bonus"/>
           <br /><label htmlFor="login">Login</label><br />
           <input type="text" placeholder="login" id="login"/>
+        
           <br /><label htmlFor="password">Password</label><br />
           <input type="text" placeholder="password" id="password"/>
           </div>
@@ -323,6 +333,12 @@ useEffect(()=>{
       <option value={2}>Менеджер</option>
       <option value={3}>Водитель</option>
       </select>
+      <br /><label htmlFor="bonus1">Bonus</label><br />
+      <input type="text" placeholder="Bonus" id="bonus1"/>
+      <br /><label htmlFor="inn1">INN</label><br />
+      <input type="text" placeholder="INN" id="inn1"/>
+      <br /><label htmlFor="skidka1">Skidka</label><br />
+      <input type="text" placeholder="Skidka" id="skidka1"/>
       <br /><label htmlFor="login1">Login</label><br />
       <input type="text" placeholder="login" id="login1"/>
       <br /><label htmlFor="password1">Password</label><br />

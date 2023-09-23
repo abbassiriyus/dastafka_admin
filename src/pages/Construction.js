@@ -682,34 +682,38 @@ axios.get(`${url}/api/mashina`).then(res8=>{
     setIsModalOpen11(true)
    }
    } >create</Button>  </div>
-  <Table  columns={filialcolumn} pagination={{pageSize:'4'}} style={{width:'100%'}} dataSource={filial} /></div>
+   <div className="table-responsive">  <Table  columns={filialcolumn} pagination={{pageSize:'4'}} style={{width:'100%'}} dataSource={filial} /></div></div>
 <div style={{width:'100%',maxWidth:'700px',marginTop:'40px'}}>
    <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}> <h2 >Швинг</h2> <Button type='primary'  onClick={()=>{
     setIsModalOpen21(true)
    }
    } >create</Button>  </div>
-  <Table  columns={shvingcolumn} pagination={{pageSize:'4'}} style={{width:'100%'}} dataSource={shving} /></div>
+   <div className="table-responsive">
+  <Table  columns={shvingcolumn} pagination={{pageSize:'4'}} style={{width:'100%'}} dataSource={shving} /></div></div>
 <div style={{width:'100%',maxWidth:'700px',marginTop:'40px'}}>
    <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}> <h2 >Машина</h2> <Button type='primary'  onClick={()=>{
     setIsModalOpen31(true)
    }
    } >create</Button>  </div>
-  <Table  columns={mashinacolumn} pagination={{pageSize:'4'}} style={{width:'100%'}} dataSource={mashina} /></div>  
+   <div className="table-responsive">
+  <Table  columns={mashinacolumn} pagination={{pageSize:'4'}} style={{width:'100%'}} dataSource={mashina} /></div>  </div>
 
 <div style={{width:'100%',maxWidth:'700px',marginTop:'40px'}}>
    <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}> <h2 >Sena</h2> 
   {sena.length<1?(<Button type='primary'  onClick={()=>{
     setIsModalOpen41(true)
    }
-   } >create</Button> ):(<></>)}
+   } >create</Button> ):(<div></div>)}
     </div>
-  <Table  columns={senacolumn} pagination={false} style={{width:'100%'}} dataSource={[sena[0]]} /></div>
+    <div className="table-responsive">
+  <Table  columns={senacolumn} pagination={false} style={{width:'100%'}} dataSource={[sena[0]]} /></div></div>
     <div style={{width:'100%',maxWidth:'700px',marginTop:'40px'}}>
    <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}> <h2 >Позиция</h2> <Button type='primary'  onClick={()=>{
     setIsModalOpen(true)
    }
    } >create</Button>  </div>
-    <Table  columns={positoincolumn} pagination={{pageSize:'4'}} style={{width:'100%'}} dataSource={position} /></div>
+   <div className="table-responsive"><Table  columns={positoincolumn} pagination={{pageSize:'4'}} style={{width:'100%'}} dataSource={position} />
+   </div></div>
 
 
 </div>
