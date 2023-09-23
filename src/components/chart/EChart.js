@@ -59,7 +59,7 @@ useEffect(()=>{
 },[])
   return (
     <>
-  {loading?<div>salom</div>:<div>
+  {loading?<div>Loading..</div>:<div>
   <div id="chart">
   <ReactApexChart
     className="bar-chart"

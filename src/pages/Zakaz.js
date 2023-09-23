@@ -226,17 +226,29 @@ export default function Zakaz() {
       title: "Edit",
       key: "Edit",
       render: (_, item) => (
-        <Radio.Button onClick={() => Page(item)}>Voditel</Radio.Button>
+        <Radio.Button onClick={() => Page(item)}>Водитель</Radio.Button>
       ),
       width: "10%",
     },
     {
       title: "Delete",
       key: "Delete",
-      render: (_, item) => <Radio.Button>Delete</Radio.Button>,
+      render: (_, item) => <Radio.Button onClick={()=>deleteZakaz(item.id)}>Delete</Radio.Button>,
       width: "10%",
     },
   ];
+
+  function deleteZakaz(id){
+    axios.delete(`${url}/api/zakaz/${id}`).then(res=>{
+       alert("Удалено")
+       axios.get(`${url}/api/zakaz`).then((res) => {
+        setZakaz(res.data);
+      });
+    }).catch(err=>{
+        alert("Не удалось удалить")
+    })
+  }
+
   const zakazUser = [
     {
       title: "address",
