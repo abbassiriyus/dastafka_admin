@@ -115,7 +115,6 @@ export default function Zakaz() {
         axios.get(`${url}/api/zakaz`).then((res) => {
           const FIlter=res.data.filter(item1=>item1.user_id==item.id)
           setZakazUser(FIlter);
-          alert("zor")
         });
       }
     }

@@ -170,6 +170,13 @@ export default function MarkaAndSponsor() {
     setTimeout(() => {
       document.querySelector("#title3").value = key.title;
       document.querySelector("#link3").value = key.link;
+      document.querySelector("#gis_mark3").value = key.gis_mark;
+      document.querySelector("#betomtaxi_mark3").value = key.betomtaxi_mark;
+      document.querySelector("#description3").value = key.description;
+      document.querySelector("#email3").value = key.email;
+      document.querySelector("#phone3").value = key.phone;
+
+
       console.log(key);
       document.querySelector("#file3").value = key.image;
     }, 900);
@@ -276,6 +283,12 @@ export default function MarkaAndSponsor() {
     var postdata = new FormData();
     postdata.append("title", document.querySelector("#title").value);
     postdata.append("link", document.querySelector("#link").value);
+    postdata.append("gis_mark", document.querySelector("#gis_mark").value);
+    postdata.append("betomtaxi_mark", document.querySelector("#betomtaxi_mark").value);
+    postdata.append("description", document.querySelector("#description").value);
+    postdata.append("email", document.querySelector("#email").value);
+    postdata.append("phone", document.querySelector("#phone").value);
+
     if (checkFile) {
       postdata.append("image", document.querySelector("#file").files[0]);
     } else {
@@ -498,6 +511,12 @@ export default function MarkaAndSponsor() {
     var postdata = new FormData();
     postdata.append("title", document.querySelector("#title3").value);
     postdata.append("link", document.querySelector("#link3").value);
+    postdata.append("gis_mark", document.querySelector("#gis_mark3").value);
+    postdata.append("betomtaxi_mark", document.querySelector("#betomtaxi_mark3").value);
+    postdata.append("description", document.querySelector("#description3").value);
+    postdata.append("email", document.querySelector("#email3").value);
+    postdata.append("phone", document.querySelector("#phone3").value);
+
     if (checkFile) {
       postdata.append("image", document.querySelector("#file3").files[0]);
     } else {
@@ -701,6 +720,31 @@ export default function MarkaAndSponsor() {
       key: "title",
     },
     {
+      title: "Gis_mark",
+      dataIndex: "gis_mark",
+      key: "gis_mark",
+    }, {
+      title: "Betomtaxi_mark",
+      dataIndex: "betomtaxi_mark",
+      key: "betomtaxi_mark",
+    },
+    {
+      title: "Description",
+      dataIndex: "description",
+      render: (_, text) => <><p style={{textWrap:'wrap',maxHeight:'100px',overflowY:'auto',scrollbarWidth:'1px !important'}}>{text.description}</p></>,
+      key: "description",
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+    },
+    {
+      title: "Phone",
+      dataIndex: "phone",
+      key: "phone",
+    },
+    {
       title: "web-sayt",
       dataIndex: "link",
       key: "link",
@@ -748,6 +792,7 @@ export default function MarkaAndSponsor() {
     {
       title: "Опции",
       dataIndex: "deskription",
+      render: (_, text) => <><p style={{textWrap:'wrap',maxHeight:'100px',overflowY:'auto',scrollbarWidth:'1px !important'}}>{text.deskription}</p></>,
       key: "deskription",
     },
     {
@@ -784,28 +829,11 @@ export default function MarkaAndSponsor() {
   ];
   const markcolumn = [
     {
-      title: 'Image',
-      dataIndex: 'name',
-      width:'10%',
-      render: (_,text) => <Image src={text.image} height={"40px"}/>,
-    },
-    {
       title: 'Title',
       dataIndex: 'title',
       key: 'title',
       render:(_,item)=><p style={{textWrap: "wrap"}}>{item.title}</p>,
-      width:'20%',
-    },
-    {
-        title: 'Опции',
-        dataIndex: 'description',
-        key: 'description',
-        render:(_,item)=><p style={{textWrap: "wrap"}}>{item.description}</p>,
-        width:'40%',
-      },
-    {
-      title: 'Для лиц',
-      render: (_,item)=> <div>{item.liso==="f"?("физических лиц"):("юридических лиц")}</div>
+      width:'70%',
     },
     {
       title: 'Action',
@@ -851,6 +879,7 @@ export default function MarkaAndSponsor() {
     {
       title: "Опции",
       dataIndex: "description",
+      render: (_, text) => <><p style={{textWrap:'wrap',maxHeight:'100px',overflowY:'auto',scrollbarWidth:'1px !important'}}>{text.description}</p></>,
       key: "description",
     },
     {
@@ -897,11 +926,13 @@ export default function MarkaAndSponsor() {
       title: "Цена",
       dataIndex: "sena",
       key: "sena",
+      width:'40%',
     },
     {
       title: "°C",
       dataIndex: "gradus",
       key: "gradus",
+      width:'35%',
     },
 
     {
@@ -950,19 +981,16 @@ export default function MarkaAndSponsor() {
     },
     {
       title: "description",
-      render: (_, item) => (
-        <p style={{ textWrap: "wrap" }}>{item.description}</p>
-      ),
+      render: (_, text) => <><p style={{textWrap:'wrap',maxHeight:'100px',overflowY:'auto',scrollbarWidth:'1px !important'}}>{text.min_description}</p></>,
       key: "min_description",
-      width: "40%",
+      width: "30%",
     },
     {
       title: "min_description",
-      render: (_, item) => (
-        <p style={{ textWrap: "wrap" }}>{item.min_description}</p>
-      ),
+      render: (_, text) => <><p style={{textWrap:'wrap',maxHeight:'100px',overflowY:'auto',scrollbarWidth:'1px !important'}}>{text.description}</p></>,
+
       key: "min_description",
-      width: "20%",
+      width: "30%",
     },
     {
       title: "Action",
@@ -1015,7 +1043,8 @@ export default function MarkaAndSponsor() {
       title: 'description',
       dataIndex: 'description',
       key: 'description',
-      render:(_,item)=><p style={{textWrap: "wrap"}}>{item.description}</p>,
+      render: (_, text) => <><p style={{textWrap:'wrap',maxHeight:'100px',overflowY:'auto',scrollbarWidth:'1px !important'}}>{text.description}</p></>,
+
     },
     {
       title: "start_day",
@@ -1131,10 +1160,10 @@ export default function MarkaAndSponsor() {
             display: "flex",
             flexWrap: "wrap",
             alignItems: "stretch",
-            justifyContent: "space-between",
+            justifyContent: "space-around",
           }}
         >
-          <div style={{ width: "100%", maxWidth: "700px" }}>
+          <div style={{ width: "100%"}}>
             <div
               style={{
                 display: "flex",
@@ -1189,8 +1218,29 @@ export default function MarkaAndSponsor() {
               dataSource={marka}
             /></div>
           </div>
-
           <div style={{ width: "100%", maxWidth: "700px" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              {" "}
+              <h2>Противоморозная добавка</h2>{" "}
+              <Button onClick={() => setIsModalOpen41(true)} type="primary">
+                create
+              </Button>
+            </div>
+            <div className="table-responsive">
+            <Table
+              pagination={{ pageSize: "4" }}
+              columns={sovuqlikcolumn}
+              style={{ width: "100%" }}
+              dataSource={sovuqlik}
+            /></div>
+          </div>
+          <div style={{ width: "100%"}}>
             <div
               style={{
                 display: "flex",
@@ -1218,7 +1268,7 @@ export default function MarkaAndSponsor() {
             /></div>
           </div>
 
-          <div style={{ width: "100%", maxWidth: "700px" }}>
+          <div style={{ width: "100%"}}>
             <div
               style={{
                 display: "flex",
@@ -1246,30 +1296,7 @@ export default function MarkaAndSponsor() {
             /></div>
           </div>
 
-          <div style={{ width: "100%", maxWidth: "700px" }}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              {" "}
-              <h2>Противоморозная добавка</h2>{" "}
-              <Button onClick={() => setIsModalOpen41(true)} type="primary">
-                create
-              </Button>
-            </div>
-            <div className="table-responsive">
-            <Table
-              pagination={{ pageSize: "4" }}
-              columns={sovuqlikcolumn}
-              style={{ width: "100%" }}
-              dataSource={sovuqlik}
-            /></div>
-          </div>
-
-          <div style={{ width: "100%", maxWidth: "700px" }}>
+          <div style={{ width: "100%"}}>
             <div
               style={{
                 display: "flex",
@@ -1337,6 +1364,21 @@ export default function MarkaAndSponsor() {
         <input id="title" showCount maxLength={50} placeholder="title" />
         <br />
         <br />
+           <input id="gis_mark" type="number" showCount maxLength={50} placeholder="gis_mark" />
+        <br />
+        <br />
+        <input id="betomtaxi_mark" type="number" showCount maxLength={50} placeholder="betomtaxi_mark" />
+        <br />
+        <br />
+        <input id="email"  showCount maxLength={50} placeholder="email" />
+        <br />
+        <br />
+        <input id="phone" type="phone" showCount maxLength={50} placeholder="phone" />
+        <br />
+        <br />
+        <textarea style={{width:'90%',border:'1px solid grey',outline:'none',padding:'5px',borderRadius:'5px'}}  id="description" type="text"  placeholder="description" />
+        <br />
+        <br />
         <input id="link" showCount maxLength={50} placeholder="link" />
         <br />
         <br />
@@ -1361,6 +1403,21 @@ export default function MarkaAndSponsor() {
         onCancel={() => handleCancel3()}
       >
         <input id="title3" showCount maxLength={50} placeholder="title" />
+        <br />
+        <br />
+           <input id="gis_mark3" type="number" showCount maxLength={50} placeholder="gis_mark" />
+        <br />
+        <br />
+        <input id="betomtaxi_mark3" type="number" showCount maxLength={50} placeholder="betomtaxi_mark" />
+        <br />
+        <br />
+        <input id="email3"  showCount maxLength={50} placeholder="email" />
+        <br />
+        <br />
+        <input id="phone3" type="phone" showCount maxLength={50} placeholder="phone" />
+        <br />
+        <br />
+        <textarea style={{width:'90%',border:'1px solid grey',outline:'none',padding:'5px',borderRadius:'5px'}}  id="description3" type="text"  placeholder="description" />
         <br />
         <br />
         <input id="link3" showCount maxLength={50} placeholder="link" />
