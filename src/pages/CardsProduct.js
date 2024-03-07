@@ -69,7 +69,6 @@ setTimeout(() => {
   }else{
     document.querySelector("#file1").value=url+'/'+a[0].image  
   }
-  document.querySelector("#deck1").value=a[0].description
 }, 900);
   };
 
@@ -94,7 +93,6 @@ function postData(){
   }else{
   data.append("image",document.querySelector("#file").value)
   }
-  data.append("description",document.querySelector("#deck").value)
   axios.post(`${url}/api/category`,data).then(res=>{
    message.success(" Created ")
    axios.get(`${url}/api/category`).then(res => {
@@ -145,7 +143,6 @@ function putData() {
   }else{
   data.append("image",document.querySelector("#file1").value)
   }
-  data.append("description",document.querySelector("#deck1").value)
   axios.put(`${url}/api/category/${deleteid}`,data).then(res=>{
    message.success(" Update ")
    handleCancel2()
@@ -196,7 +193,6 @@ function putData() {
     <input type='text' id='file' placeholder='image'  />
     <br />
     <br />
-    <TextArea showCount id='deck' maxLength={400}  placeholder='deckription' />
       </Modal>
 
       {category.length === 0 ? (<div>no category beton</div>) : (<Row gutter={{
@@ -211,7 +207,6 @@ function putData() {
               <div className="tickCircle">{item.check?(<i class='bx bx-check'></i>):(<div></div>)}</div>
               <center><Image width={'100%'} height={'120px'} src={item.image} alt="no image" className='imgProductFour' />
                 <h4>{item.title}</h4>
-                <p>{item.description}</p>
                 <div className="icons"  style={{fontSize:'23px',display:'flex',justifyContent:'space-around'}}><i class='bx bxs-trash' style={{cursor:'pointer'}} onClick={()=>{deteteData(item.id)}} ></i><i class='bx bx-edit' onClick={()=>showModal2(item.id)} ></i></div>
                 </center>
             </Card>
@@ -226,7 +221,6 @@ function putData() {
     <input type='text' id='file1' placeholder='image'  />
     <br />
     <br />
-    <TextArea showCount id='deck1' maxLength={400}  placeholder='deckription' />
       </Modal>
       <Modal title="Осторожность" visible={isModalOpen1} onOk={handleOk1} onCancel={handleCancel1}>
     <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>

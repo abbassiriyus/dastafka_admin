@@ -15,7 +15,6 @@ import "./assets/styles/responsive.css";
 import { useState } from "react";
 import CardsProduct from "./pages/CardsProduct";
 import MarkaAndSponsor from "./pages/MarkaAndSponsor";
-import Work from "./pages/Work";
 
 function App() {
   const [token,setToken]=useState(sessionStorage.getItem("token"))
@@ -31,7 +30,7 @@ function App() {
            <Route exact path="/Construction" component={Construction} />
            <Route exact path="/profile" component={Profile} />
            <Route exact path="/configProduct" component={MarkaAndSponsor} />
-           <Route exact path="/work" component={Work} />
+       
 
 
            <Redirect from="*" to="/dashboard" />

@@ -222,7 +222,7 @@ function Tables(props) {
       SetMark(res.data)
       axios.get(`${url}/api/homeiy`).then(res1 => {
         SetHomiy(res1.data)
-        axios.get(`${url}/api/product`).then(res2 => {
+        axios.get(`${url}/api/foods`).then(res2 => {
           for (let i = 0; i < res2.data.length; i++) {
             for (let j = 0; j < res.data.length; j++) {
               if (res.data[j].id === res2.data[i].marka) {

@@ -10,6 +10,7 @@ import {
   Typography,
   Input,
   Modal,
+  Image,
 
 } from "antd";
 
@@ -29,28 +30,45 @@ function newUser() {
 function Tables() {
 
   var [data,setData]=useState([])
-  var [table,setInfo]=useState([])
-  var [information,setInformation] = useState([])
   var [userModal,setUserModal] =useState(false)
   var [userId,setUserId]=useState()
 
-  function abbas(params) {
-  setInformation(params)
-document.querySelector('#modalInformation').style='display:flex'
-  }
+
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
 const columns = [
   {
-    title: "patronymic",
-    dataIndex: "patronymic",
-    key: "patronymic",
+    title: "id",
+    dataIndex: "id",
+    key: "id",
     width: "12%",
   },
   {
-    title: "Surname",
-    dataIndex: "surname",
+    title: "image",
+    dataIndex: "image",
+    render: (_,item)=><Image src={item.image} style={{width:'40px',height:'40px'}} />,
     width: "12%",
   },
+  {
+    title: "name",
+    dataIndex: "name",
+    width: "12%",
+  },
+  {
+    title: "address",
+    dataIndex: "address",
+    width: "12%",
+  },
+   {
+    title: "city",
+    dataIndex: "city",
+    width: "12%",
+  },
+  {
+    title: "country",
+    dataIndex: "country",
+    width: "12%",
+  },
+  
   {
     title: "username",
     key: "username",
@@ -67,36 +85,6 @@ const columns = [
     title: "email",
     key: "email",
     dataIndex: "email",
-    width: "12%",
-  },
-  {
-    title: "inn",
-    key: "inn",
-    dataIndex: "inn",
-    width: "12%",
-  },
-  {
-    title: "document_mashina",
-    key: "document_mashina",
-    render:(_,item)=><div >{item.document_mashina.length>10?(<a href={item.document_mashina} style={{textDecoration:'none'}} >open</a>):("no file")}</div>,
-    width: "2%",
-  },
-  {
-    title: "prava",
-    key: "prava",
-    render:(_,item)=><div >{item.prava.length>10?(<a href={item.prava} style={{textDecoration:'none'}}>open</a>):("no file")}</div>,
-    width: "12%",
-  },
-  {
-    title: "fomo",
-    key: "fomo",
-    render:(_,item)=><div>{item.fomo.length>10?(<a href={item.fomo} style={{textDecoration:'none'}}>open</a>):("no file")}</div>,
-    width: "12%",
-  },
-  {
-    title: "login",
-    key: "login",
-    dataIndex: "login",
     width: "12%",
   },
   {
@@ -117,50 +105,43 @@ const columns = [
     render: (_,item)=><Radio.Button onClick={()=>{UserEditOpen(item)}}>edit</Radio.Button>,
     width: "10%",
   },
-  {
-    title: "information",
-    key: "information",
-    render: (_,item)=><Radio.Button onClick={()=>{abbas(item)}}>information</Radio.Button>,
-    width: "10%",
-  }
+
 ]; 
 
 function UserEditOpen(item){
 setUserModal(true)
 setUserId(item.id)
 setTimeout(() => {
-document.querySelector("#patronymic1").value=item.patronymic
-document.querySelector("#surname1").value=item.surname
+document.querySelector("#name1").value=item.name
+document.querySelector("#lastname1").value=item.lastname
 document.querySelector("#username1").value=item.username
 document.querySelector("#phone1").value=item.phone
 document.querySelector("#email1").value=item.email
-document.querySelector("#login1").value=item.login
-document.querySelector("#bonus1").value=item.bonus
-document.querySelector("#skidka1").value=item.skitka
-document.querySelector("#inn1").value=item.inn
-
-document.querySelector("#position1").value=item.position_id
+document.querySelector("#about_me1").value=item.about_me
+document.querySelector("#address1").value=item.address
+document.querySelector("#country1").value=item.country
+document.querySelector("#city1").value=item.city
 document.querySelector("#password1").value=item.password
 }, 1000);
 }
 
 function putUser(){
   var data=new FormData()
-  data.append("patronymic",document.querySelector("#patronymic1").value)
-  data.append("surname",document.querySelector("#surname1").value)
+  data.append("name",document.querySelector("#name1").value)
+  data.append("lastname",document.querySelector("#lastname1").value)
   data.append("username",document.querySelector("#username1").value)
   data.append("phone",document.querySelector("#phone1").value)
   data.append("email",document.querySelector("#email1").value)
-  data.append("login",document.querySelector("#login1").value)
-  data.append("bonus",document.querySelector("#bonus1").value)
-  data.append("skitka",document.querySelector("#skidka1").value)
-  data.append("inn",document.querySelector("#inn1").value)
-  data.append("position_id",document.querySelector("#position1").value)
+  data.append("about_me",document.querySelector("#about_me1").value)
+  data.append("address",document.querySelector("#address1").value)
+  data.append("skitka",document.querySelector("#country1").value)
+  data.append("city",document.querySelector("#city1").value)
+
   data.append("password",document.querySelector("#password1").value)
-axios.put(`${url}/auth/users/${userId}`,data).then(res=>{
+axios.put(`${url}/api/users/${userId}`,data).then(res=>{
 alert("Сохранено в нашей базе данных")
 setUserModal(false)
-axios.get(`${url}/auth/users`).then(res=>{
+axios.get(`${url}/api/users`).then(res=>{
   setData(res.data)
   console.log(res.data);
 })
@@ -172,9 +153,9 @@ axios.get(`${url}/auth/users`).then(res=>{
 
 
 function DeleteData(key){
-  axios.delete(`${url}/auth/users/${key}`).then(res=>{
+  axios.delete(`${url}/api/users/${key}`).then(res=>{
     alert("Удалено")
-    axios.get(`${url}/auth/users`).then(res1=>{
+    axios.get(`${url}/api/users`).then(res1=>{
       setData(res1.data)
     })
   
@@ -184,17 +165,17 @@ function DeleteData(key){
 }
 function postData() {
   var data=new FormData()
-  data.append("patronymic",document.querySelector("#patronymic").value)
-  data.append("surname",document.querySelector("#surname").value)
+  data.append("name",document.querySelector("#name").value)
+  data.append("lastname",document.querySelector("#lastname").value)
   data.append("username",document.querySelector("#username").value)
   data.append("phone",document.querySelector("#phone").value)
   data.append("email",document.querySelector("#email").value)
-  data.append("login",document.querySelector("#login").value)
-  data.append("position_id",document.querySelector("#position").value)
+  data.append("about_me",document.querySelector("#about_me").value)
+
   data.append("password",document.querySelector("#password").value)
-axios.post(`${url}/auth/users`,data).then(res=>{
+axios.post(`${url}/api/users`,data).then(res=>{
 alert("Сохранено в нашей базе данных")
-axios.get(`${url}/auth/users`).then(res=>{
+axios.get(`${url}/api/users`).then(res=>{
   setData(res.data)
   console.log(res.data);
 })
@@ -206,18 +187,41 @@ axios.get(`${url}/auth/users`).then(res=>{
 }
 
 function all1(id) {
-  axios.get(`${url}/auth/users`).then(res=>{
+  axios.get(`${url}/api/users`).then(res=>{
     if(id==0){
     setData(res.data)
     }else{
-     var a=res.data.filter(item=>item.position_id==id)
-    setData(a)  
+  var pover=[]
+  var user=[]
+axios.get(`${url}/api/user_povar`).then(res2=>{
+
+for (let i = 0; i < res.data.length; i++) {
+var userb=true
+for (let j = 0;j<res2.data.length; j++) {
+if(res.data[i].id===res2.data[j].user_id){
+userb=false
+}
+}
+if(userb){
+user.push(res.data[i])
+}else{
+pover.push(res.data[i])
+}
+} 
+if(id==1){
+setData(pover)
+  }
+  if(id==2){
+setData(user)
+  }
+})
+ 
     }
   })
 }
 
 useEffect(()=>{
-  axios.get(`${url}/auth/users`).then(res=>{
+  axios.get(`${url}/api/users`).then(res=>{
     setData(res.data)
   })
 },[])
@@ -236,9 +240,8 @@ useEffect(()=>{
                   <Radio.Group onChange={onChange} defaultValue="a">
 
                      <Radio.Button onClick={()=>all1(0)} value="a1">Все</Radio.Button> 
-                     <Radio.Button onClick={()=>all1(3)} value="a2">Водитель</Radio.Button> 
-                     <Radio.Button onClick={()=>all1(1)} value="a3">Физическое лицо</Radio.Button> 
-                     <Radio.Button onClick={()=>all1(2)} value="a4">Менеджер</Radio.Button> 
+                     <Radio.Button onClick={()=>all1(1)} value="a2">Шеф-повар</Radio.Button> 
+                     <Radio.Button onClick={()=>all1(2)} value="a3">Пользователь</Radio.Button> 
                     <Radio.Button onClick={()=>{document.querySelector("#modalMaybe").style="display:flex"}} value="b">create</Radio.Button>
 
                   </Radio.Group>
@@ -262,10 +265,10 @@ useEffect(()=>{
         <div className="modalMaybe" style={{position:'relative'}}  >
           <div className="twoOneModal">
             <div className="one">
-          <br /><label htmlFor="patronymic">Patronymic</label><br />
-          <input type="text" placeholder="patronymic" id="patronymic"/>
-          <br /><label htmlFor="surname">Surname</label><br />
-          <input type="text" placeholder="surname" id="surname"/>
+          <br /><label htmlFor="name">name</label><br />
+          <input type="text" placeholder="name" id="name"/>
+          <br /><label htmlFor="lastname">lastname</label><br />
+          <input type="text" placeholder="lastname" id="lastname"/>
           <br /><label htmlFor="username">Username</label><br />
           <input type="text" placeholder="username" id="username"/>
           <br /><label htmlFor="phone">Phone</label><br />
@@ -273,16 +276,11 @@ useEffect(()=>{
          
           <br /><label htmlFor="email">Email</label><br />
           <input type="text" placeholder="email" id="email"/>
-          <br /><label htmlFor="position">Position</label><br />
-          <select style={{width:'85%',height:'35px',border:'1px solid grey'}} name="" id="position">
-          <option value={1}>Пользователь</option>
-          <option value={2}>Менеджер</option>
-          <option value={3}>Водитель</option>
-          </select>
-            <br /><label htmlFor="bonus">bonus</label><br />
-          <input type="text" placeholder="bonus" id="bonus"/>
-          <br /><label htmlFor="login">Login</label><br />
-          <input type="text" placeholder="login" id="login"/>
+         
+            <br /><label htmlFor="address">address</label><br />
+          <input type="text" placeholder="address" id="address"/>
+          <br /><label htmlFor="about_me">about_me</label><br />
+          <input type="text" placeholder="about_me" id="about_me"/>
         
           <br /><label htmlFor="password">Password</label><br />
           <input type="text" placeholder="password" id="password"/>
@@ -295,31 +293,14 @@ useEffect(()=>{
     </div>
         </div>
         </div>
-        <div id="modalInformation" className="Modal">
-        <div className="modalInformation">
-          <button className="exitInformation" onClick={()=>{;document.querySelector("#modalInformation").style="display:none"}}>x</button>
-          <div className="photoText">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1200px-User_icon_2.svg.png" alt="" />
-          <div className="writtenInfo">
-          <h2><b>Full name: </b> <span>{information.username}, {information.surname}, {information.patronymic}</span></h2>
-          <h2><b>Phone number: </b><span>{information.phone}</span></h2>
-          <h2><b>Email address: </b><span>{information.email}</span></h2>
-          <h2><b>INN: </b><span>{information.inn}</span></h2>
-          <h2><b>Requisite: </b><span>{information.recvizit}</span></h2>
-          <h2><b>Login/email: </b><span>{information.login}</span></h2>
-          <h2><b>Password: </b><span>{information.password}</span></h2>
-          </div>
-          </div>
-        </div>
-        </div>
-
+     
       </div>
       <Modal title="User" visible={userModal} onOk={()=>putUser()} onCancel={()=>setUserModal(false)}>
       <div className="one">
-      <br /><label htmlFor="patronymic1">Patronymic</label><br />
-      <input type="text" placeholder="patronymic" id="patronymic1"/>
-      <br /><label htmlFor="surname1">Surname</label><br />
-      <input type="text" placeholder="surname" id="surname1"/>
+      <br /><label htmlFor="name1">name</label><br />
+      <input type="text" placeholder="name" id="name1"/>
+      <br /><label htmlFor="lastname1">lastname</label><br />
+      <input type="text" placeholder="lastname" id="lastname1"/>
       <br /><label htmlFor="username1">Username</label><br />
       <input type="text" placeholder="username" id="username1"/>
       <br /><label htmlFor="phone1">Phone</label><br />
@@ -327,20 +308,16 @@ useEffect(()=>{
      
       <br /><label htmlFor="email1">Email</label><br />
       <input type="text" placeholder="email" id="email1"/>
-      <br /><label htmlFor="position1">Position</label><br />
-      <select style={{width:'90%',height:'35px',border:'1px solid grey'}} name="" id="position1">
-      <option value={1}>Пользователь</option>
-      <option value={2}>Менеджер</option>
-      <option value={3}>Водитель</option>
-      </select>
-      <br /><label htmlFor="bonus1">Bonus</label><br />
-      <input type="text" placeholder="Bonus" id="bonus1"/>
-      <br /><label htmlFor="inn1">INN</label><br />
-      <input type="text" placeholder="INN" id="inn1"/>
-      <br /><label htmlFor="skidka1">Skidka</label><br />
-      <input type="text" placeholder="Skidka" id="skidka1"/>
-      <br /><label htmlFor="login1">Login</label><br />
-      <input type="text" placeholder="login" id="login1"/>
+    
+    
+      <br /><label htmlFor="address1">address</label><br />
+      <input type="text" placeholder="address" id="address1"/>
+      <br /><label htmlFor="city1">city</label><br />
+      <input type="text" placeholder="city" id="city1"/>
+      <br /><label htmlFor="country1">country</label><br />
+      <input type="text" placeholder="country" id="country1"/>
+      <br /><label htmlFor="about_me1">about_me</label><br />
+      <textarea style={{width:'90%',border:'1px solid grey',paddingTop:'10px',paddingBottom:'10px'}} type="text" placeholder="about_me" id="about_me1"/>
       <br /><label htmlFor="password1">Password</label><br />
       <input type="text" placeholder="password" id="password1"/>
       </div>

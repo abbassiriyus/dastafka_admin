@@ -350,7 +350,7 @@ export default function Zakaz() {
   ];
 
   function all1(id) {
-    axios.get(`${url}/auth/users`).then((res) => {
+    axios.get(`${url}/api/users`).then((res) => {
       if (id == 0) {
         setData(res.data);
       } else {
@@ -361,23 +361,11 @@ export default function Zakaz() {
   }
 
   useEffect(() => {
-    axios.get(`${url}/auth/users`).then((res) => {
+    axios.get(`${url}/api/users`).then((res) => {
       setData(res.data);
     });
     axios.get(`${url}/api/zakaz`).then((res) => {
       setZakaz(res.data);
-    });
-    axios.get(`${url}/api/category`).then((res) => {
-      setCatgeory(res.data);
-    });
-    axios.get(`${url}/auth/users`).then((res) => {
-      const Filter = res.data.filter((item) => item.position_id == 2);
-      setUsers(Filter);
-    });
-    axios.get(`${url}/auth/users`).then((res) => {
-      const Filter = res.data.filter((item) => item.position_id == 3);
-      setMashina(Filter);
-      setUsers1(res.data);
     });
   }, []);
 

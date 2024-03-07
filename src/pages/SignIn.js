@@ -32,9 +32,9 @@ export default class SignIn extends Component {
 
 function loginIn() {
   var data =new FormData()
-  data.append("login",document.querySelector("#email").value)
+  data.append("phone",document.querySelector("#email").value)
   data.append("password",document.querySelector("#parol").value)
-  axios.post(`${url}/auth/login`,data).then(res=>{
+  axios.post(`${url}/api/login`,data).then(res=>{
     sessionStorage.setItem('token',res.data.access)
     window.location.reload()
   }).catch(err=>{
@@ -65,16 +65,16 @@ function loginIn() {
                 >
                   <Form.Item
                     className="username"
-                    label="Email"
+                    label="Phone"
                     name="email"
                     rules={[
                       {
                         required: true,
-                        message: "Please input your email!",
+                        message: "Please input your phone!",
                       },
                     ]}
                   >
-                    <input style={{width:'100%'}} placeholder="Email" id-="email" />
+                    <input style={{width:'100%'}} placeholder="phone" id-="email" />
                   </Form.Item>
 
                   <Form.Item
