@@ -41,10 +41,11 @@ function onFile13(e){
       var postdata=new FormData()
       postdata.append("email",document.querySelector("#email1").value)
       postdata.append("whatsapp",document.querySelector("#whatsapp1").value)
-      postdata.append("vkontakt",document.querySelector("#vkantakt1").value)
+      postdata.append("vkantakt",document.querySelector("#vkantakt1").value)
       postdata.append("telegram",document.querySelector("#telegram1").value)
       postdata.append("playmarket",document.querySelector("#playmarket1").value)
       postdata.append("app_store",document.querySelector("#app_store1").value)
+      postdata.append("okru",document.querySelector("#okru1").value)
 
       if(checkFile){
       postdata.append("image",document.querySelector("#image1").files[0])   
@@ -52,7 +53,7 @@ function onFile13(e){
       postdata.append("image",document.querySelector("#image1").value)    
       }
       axios.put(`${url}/api/company/${company[0].id}`,postdata).then(res=>{
-          message.success("create new sponsor")
+          message.success("update] new company")
           setIsModalOpen5(false)
       axios.get(`${url}/api/compony`).then(res=>{
           setCompany(res.data)
@@ -74,9 +75,8 @@ function onFile13(e){
       var postdata=new FormData()
       postdata.append("email",document.querySelector("#email").value)
       postdata.append("whatsapp",document.querySelector("#whatsapp").value)
-      postdata.append("vkontakt",document.querySelector("#vkantakt").value)
+      postdata.append("vkantakt",document.querySelector("#vkantakt").value)
       postdata.append("telegram",document.querySelector("#telegram").value)
-    
       if(checkFile){
       postdata.append("image",document.querySelector("#image").files[0])   
       }else{

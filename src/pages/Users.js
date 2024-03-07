@@ -136,7 +136,6 @@ function putUser(){
   data.append("address",document.querySelector("#address1").value)
   data.append("skitka",document.querySelector("#country1").value)
   data.append("city",document.querySelector("#city1").value)
-
   data.append("password",document.querySelector("#password1").value)
 axios.put(`${url}/api/users/${userId}`,data).then(res=>{
 alert("Сохранено в нашей базе данных")
@@ -177,7 +176,6 @@ axios.post(`${url}/api/users`,data).then(res=>{
 alert("Сохранено в нашей базе данных")
 axios.get(`${url}/api/users`).then(res=>{
   setData(res.data)
-  console.log(res.data);
 })
 })
 .catch(err=>{
