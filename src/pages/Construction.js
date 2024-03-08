@@ -2,7 +2,7 @@ import { Button, Checkbox, Image, Input, Modal, Space, Table, message } from 'an
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import url from './host'
-
+import SizUchun  from "./Consturction/SizUchun"
 export default function Construction() {
 const [isModalOpen4,setIsModalOpen4]=useState(false)
 const [isModalOpen5,setIsModalOpen5]=useState(false)
@@ -14,9 +14,6 @@ const [selectId,setSelectId]=useState(0)
 const [userCount,setUserCount]=useState(0)
 const [gl_desert,setgl_desert]=useState(0)
 
-const [homiy,setHomiy]=useState(0)
-
-const [manegerCount,setManegerCount]=useState(0)
 const [company,setCompany]=useState([])
 
 function onFile11(e){
@@ -265,17 +262,8 @@ axios.get(`${url}/api/company`).then(res=>{
 </div>):(
 <Button onClick={()=>{setIsModalOpen4(true)
 }} type="primary">Create company</Button>)}
-<div style={{display:'flex',
-flexWrap:'wrap',
-justifyContent:'space-around'}}>
-<div style={{width:'100%',maxWidth:'700px',marginTop:'40px'}}>
-   <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}> <h2 >Ветвь</h2> <Button type='primary'  onClick={()=>{
-    setIsModalOpen11(true)
-   }
-   } >create</Button>  </div>
-   <div className="table-responsive">  <Table  columns={gl_desertcolumn} pagination={{pageSize:'4'}} style={{width:'100%'}} dataSource={gl_desert} /></div></div>
-</div>
 
+<SizUchun/>
     {/* Company */}
     <Modal title="Осторожность" visible={isModalOpen4} onOk={()=>createCompany()} onCancel={()=>setIsModalOpen4(false)}>
    <input id='email' showCount maxLength={50} placeholder='email'  />

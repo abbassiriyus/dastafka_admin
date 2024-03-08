@@ -1,11 +1,9 @@
-import { Button, Checkbox, Image, Input, Modal, Space, Table, message } from 'antd'
+import { Button, Checkbox, Image, Modal, Space, Table, message } from 'antd'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import url from './host'
+import url from '../host'
 
-export default function Construction() {
-const [isModalOpen4,setIsModalOpen4]=useState(false)
-const [isModalOpen5,setIsModalOpen5]=useState(false)
+export default function SizUchun() {
 const [isModalOpen11,setIsModalOpen11]=useState(false)
 const [isModalOpen12,setIsModalOpen12]=useState(false)
 const [isModalOpen13,setIsModalOpen13]=useState(false)
@@ -29,24 +27,6 @@ function onFile13(e){
        document.querySelector("#image13").type="file"
        }else{
          document.querySelector("#image13").type="text"
-       }
-     }
-
-    function onFile62(e){
-      setCheckFile(e.target.checked)
-         if(e.target.checked){
-         document.querySelector("#image1").type="file"
-         }else{
-           document.querySelector("#image1").type="text"
-         }
-       }
-  
-    function onFile61(e){
-    setCheckFile(e.target.checked)
-       if(e.target.checked){
-       document.querySelector("#image").type="file"
-       }else{
-         document.querySelector("#image").type="text"
        }
      }
 function getgl_desert(params) {
