@@ -329,7 +329,7 @@ axios.get(`${url}/api/foods`).then(res=>{
           </Col>
         </Row>
   <Modal title="Create food" open={isModalOpen} onOk={() => PostProduct()} onCancel={handleCancel}>
-          <input placeholder="foods_name" id="foods_name" type="number" showCount  onChange={onChange} />
+          <input placeholder="foods_name" id="foods_name" type="text" showCount  onChange={onChange} />
           <br />
           <br />
           <input placeholder="portion" id="portion" type="text" showCount  onChange={onChange} />
@@ -396,7 +396,7 @@ axios.get(`${url}/api/foods`).then(res=>{
           <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
         </Modal>
         <Modal title="Edit foods" open={isModalOpen12} onOk={() => PutProduct()} onCancel={handleCancel12}>
-        <input placeholder="foods_name" id="foods_name1" type="number" showCount  onChange={onChange} />
+        <input placeholder="foods_name" id="foods_name1" type="text" showCount  onChange={onChange} />
           <br />
           <br />
           <input placeholder="portion" id="portion1" type="text" showCount  onChange={onChange} />

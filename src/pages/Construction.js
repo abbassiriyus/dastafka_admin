@@ -85,6 +85,12 @@ function onFile13(e){
       postdata.append("whatsapp",document.querySelector("#whatsapp").value)
       postdata.append("vkantakt",document.querySelector("#vkantakt").value)
       postdata.append("telegram",document.querySelector("#telegram").value)
+      postdata.append("okru",document.querySelector("#okru").value)
+      postdata.append("app_store",document.querySelector("#app_store").value)
+      postdata.append("playmarket",document.querySelector("#playmarket").value)
+
+
+
       if(checkFile){
       postdata.append("image",document.querySelector("#image").files[0])   
       }else{
@@ -305,7 +311,7 @@ axios.get(`${url}/api/company`).then(res=>{
     <input id='app_store' showCount maxLength={50} placeholder='app_store'  />
     <br />
     <br />
-    <input id='app_store' showCount maxLength={50} placeholder='app_store'  />
+    <input id='okru' showCount maxLength={50} placeholder='okru'  />
     <br />
     <br />
     <br />
