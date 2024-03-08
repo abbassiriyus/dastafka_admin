@@ -8,6 +8,7 @@ import Shirinliklar  from './Consturction1/Shirinliklar.js'
 import Soglom  from './Consturction1/Soglom.js'
 import GlFood  from './Consturction1/GlFood.js'
 import GlDesert  from './Consturction1/GlDesert.js'
+import GlProduct from './Consturction1/GlProduct.js'
 
 
 export default function Construction() {
@@ -269,14 +270,15 @@ axios.get(`${url}/api/company`).then(res=>{
 </div>):(
 <Button onClick={()=>{setIsModalOpen4(true)
 }} type="primary">Create company</Button>)}
-
+<div style={{width:'100%', maxWidth:'1000px', justifyContent:'space-between', margin:"auto", display:'flex',flexWrap:'wrap',gap:'20px'}}>
 <SizUchun/>
 <OshpazdanTaom/>
 <Shirinliklar/>
 <Soglom/>
 <GlFood/>
 <GlDesert/>
-
+<GlProduct/>
+</div>
     {/* Company */}
     <Modal title="Осторожность" visible={isModalOpen4} onOk={()=>createCompany()} onCancel={()=>setIsModalOpen4(false)}>
    <input id='email' showCount maxLength={50} placeholder='email'  />

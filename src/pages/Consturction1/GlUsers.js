@@ -3,13 +3,13 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import url from '../host'
 
-export default function GlDesert() {
+export default function GlUsers() {
 const [isModalOpen11,setIsModalOpen11]=useState(false)
 const [isModalOpen12,setIsModalOpen12]=useState(false)
 const [isModalOpen13,setIsModalOpen13]=useState(false)
 const [checkFile,setCheckFile]=useState()
-const [selectId,setSelectId]=useState(0)
-const [gl_desert,setgl_desert]=useState(0)
+// const [selectId,setSelectId]=useState(0)
+const [gl_users,setgl_users]=useState(0)
 const [foods,setfoods]=useState([])
 function onFile11(e){
   setCheckFile(e.target.checked)
@@ -29,19 +29,19 @@ function onFile13(e){
          document.querySelector("#image13").type="text"
        }
      }
-function getgl_desert(params) {
-  axios.get(`${url}/api/gl_desert`).then(res=>{
-    setgl_desert(res.data)
+function getgl_users(params) {
+  axios.get(`${url}/api/gl_users`).then(res=>{
+    setgl_users(res.data)
   }) 
 }
-function creategl_desert() {
+function creategl_users() {
   var postdata=new FormData()
   postdata.append("food_ca_id",Selectfoods)
-  axios.post(`${url}/api/gl_desert`,postdata).then(res=>{
+  axios.post(`${url}/api/gl_users`,postdata).then(res=>{
       message.success("create new data")
       setIsModalOpen11(false)
-  axios.get(`${url}/api/gl_desert`).then(res=>{
-      setgl_desert(res.data)
+  axios.get(`${url}/api/gl_users`).then(res=>{
+      setgl_users(res.data)
   })
   }).catch(err=>{
   message.error("not create")
@@ -49,14 +49,14 @@ function creategl_desert() {
   })
  
    }
-function updategl_desert() {
+function updategl_users() {
     var postdata=new FormData()
     postdata.append("food_ca_id",Selectfoods)
-    axios.put(`${url}/api/gl_desert/${selectId}`,postdata).then(res=>{
+    axios.put(`${url}/api/gl_users/${selectId}`,postdata).then(res=>{
         message.success("create new data")
         setIsModalOpen13(false)
-    axios.get(`${url}/api/gl_desert`).then(res=>{
-        setgl_desert(res.data)
+    axios.get(`${url}/api/gl_users`).then(res=>{
+        setgl_users(res.data)
     })
     }).catch(err=>{
     message.error("not create")
@@ -65,20 +65,20 @@ function updategl_desert() {
    
      }
 
-function deletegl_desert() {
-  axios.delete(`${url}/api/gl_desert/${selectId}`,).then(res=>{
+function deletegl_users() {
+  axios.delete(`${url}/api/gl_users/${selectId}`,).then(res=>{
     setIsModalOpen12(false)
-    axios.get(`${url}/api/gl_desert`).then(res2=>{
-      setgl_desert(res2.data)
+    axios.get(`${url}/api/gl_users`).then(res2=>{
+      setgl_users(res2.data)
     })
-    message.success("delete gl_desert")
+    message.success("delete gl_users")
   }).catch(err=>{
     message.error("NOT delete")
     setIsModalOpen12(false)
   })  
 }
 
-const gl_desertcolumn = [
+const gl_userscolumn = [
   {
     title: 'id',
     dataIndex: 'id',
@@ -123,8 +123,8 @@ const gl_desertcolumn = [
 
 var [Selectfoods,SetSelectfoods]=useState()
 useEffect(()=>{
-axios.get(`${url}/api/gl_desert`).then(res=>{
-setgl_desert(res.data)
+axios.get(`${url}/api/gl_users`).then(res=>{
+setgl_users(res.data)
 axios.get(`${url}/api/foods`).then(res=>{
   setfoods(res.data)
   })
@@ -148,14 +148,14 @@ justifyContent:'space-around'}}>
    }
    } >create</Button>  </div>
    <div className="table-responsive">  
-   <Table  columns={gl_desertcolumn} pagination={{pageSize:'4'}} style={{width:'100%'}} dataSource={gl_desert} /></div></div>
+   <Table  columns={gl_userscolumn} pagination={{pageSize:'4'}} style={{width:'100%'}} dataSource={gl_users} /></div></div>
 </div>
 
 
 
 
-{/* gl_desert */}
-<Modal title="Осторожность" visible={isModalOpen11} onOk={()=>creategl_desert()} onCancel={()=>setIsModalOpen11(false)}>
+{/* gl_users */}
+<Modal title="Осторожность" visible={isModalOpen11} onOk={()=>creategl_users()} onCancel={()=>setIsModalOpen11(false)}>
 <label htmlFor="">foods</label><br />
           <Select style={{width:'90%'}} id="marka" onChange={(e) => {
             SetSelectfoods(e);console.log(e);
@@ -165,10 +165,10 @@ justifyContent:'space-around'}}>
             })}
           </Select>
 </Modal>
-<Modal title="Осторожность" visible={isModalOpen12} onOk={()=>deletegl_desert()} onCancel={()=>setIsModalOpen12(false)}>
+<Modal title="Осторожность" visible={isModalOpen12} onOk={()=>deletegl_users()} onCancel={()=>setIsModalOpen12(false)}>
     <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
 </Modal>
- <Modal title="Осторожность" visible={isModalOpen13} onOk={()=>updategl_desert()} onCancel={()=>setIsModalOpen13(false)}>
+ <Modal title="Осторожность" visible={isModalOpen13} onOk={()=>updategl_users()} onCancel={()=>setIsModalOpen13(false)}>
  <Select style={{width:'90%'}} id="marka" onChange={(value) => {
             SetSelectfoods(value)
           }} >
