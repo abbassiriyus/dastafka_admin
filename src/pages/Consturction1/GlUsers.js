@@ -3,12 +3,12 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import url from '../host'
 
-export default function GlUsers() {
+export default function GlFood() {
 const [isModalOpen11,setIsModalOpen11]=useState(false)
 const [isModalOpen12,setIsModalOpen12]=useState(false)
 const [isModalOpen13,setIsModalOpen13]=useState(false)
 const [checkFile,setCheckFile]=useState()
-// const [selectId,setSelectId]=useState(0)
+const [selectId,setSelectId]=useState(0)
 const [gl_users,setgl_users]=useState(0)
 const [foods,setfoods]=useState([])
 function onFile11(e){
@@ -36,7 +36,7 @@ function getgl_users(params) {
 }
 function creategl_users() {
   var postdata=new FormData()
-  postdata.append("food_ca_id",Selectfoods)
+  postdata.append("user_ca_id",Selectfoods)
   axios.post(`${url}/api/gl_users`,postdata).then(res=>{
       message.success("create new data")
       setIsModalOpen11(false)
@@ -51,7 +51,7 @@ function creategl_users() {
    }
 function updategl_users() {
     var postdata=new FormData()
-    postdata.append("food_ca_id",Selectfoods)
+    postdata.append("user_ca_id",Selectfoods)
     axios.put(`${url}/api/gl_users/${selectId}`,postdata).then(res=>{
         message.success("create new data")
         setIsModalOpen13(false)
@@ -125,11 +125,11 @@ var [Selectfoods,SetSelectfoods]=useState()
 useEffect(()=>{
 axios.get(`${url}/api/gl_users`).then(res=>{
 setgl_users(res.data)
-axios.get(`${url}/api/foods`).then(res=>{
+axios.get(`${url}/api/users`).then(res=>{
   setfoods(res.data)
   })
 }).catch(err=>{
-  axios.get(`${url}/api/foods`).then(res=>{
+  axios.get(`${url}/api/users`).then(res=>{
     setfoods(res.data)
     })
 })
@@ -143,7 +143,7 @@ axios.get(`${url}/api/foods`).then(res=>{
 flexWrap:'wrap',
 justifyContent:'space-around'}}>
 <div style={{width:'100%',maxWidth:'700px',marginTop:'40px'}}>
-   <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}> <h2 >Десерты от кондитеров</h2> <Button type='primary'  onClick={()=>{
+   <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}> <h2>Users</h2> <Button type='primary'  onClick={()=>{
     setIsModalOpen11(true)
    }
    } >create</Button>  </div>
@@ -161,7 +161,7 @@ justifyContent:'space-around'}}>
             SetSelectfoods(e);console.log(e);
           }} >
             {foods.map(item => {
-              return <Select.Option value={item.id}> {item.id} {item.foods_name}</Select.Option>
+              return <Select.Option value={item.id}> {item.id} {item.name}</Select.Option>
             })}
           </Select>
 </Modal>
@@ -173,9 +173,9 @@ justifyContent:'space-around'}}>
             SetSelectfoods(value)
           }} >
             {foods.map(item => {
-              return <Select.Option value={item.id}> {item.id} {item.title}</Select.Option>
+              return <Select.Option value={item.id}> {item.id} {item.name}</Select.Option>
             })}
-          </Select>
+  </Select>
 
 </Modal>
     </div>

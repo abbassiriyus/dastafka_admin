@@ -9,6 +9,9 @@ import Soglom  from './Consturction1/Soglom.js'
 import GlFood  from './Consturction1/GlFood.js'
 import GlDesert  from './Consturction1/GlDesert.js'
 import GlProduct from './Consturction1/GlProduct.js'
+import GlUsers from './Consturction1/GlUsers.js'
+import Glotzif from './Consturction/Glotzif.js'
+import Userprog from './Consturction1/Userprog.js'
 
 
 export default function Construction() {
@@ -278,6 +281,9 @@ axios.get(`${url}/api/company`).then(res=>{
 <GlFood/>
 <GlDesert/>
 <GlProduct/>
+<GlUsers/>
+<Glotzif/>
+<Userprog/>
 </div>
     {/* Company */}
     <Modal title="Осторожность" visible={isModalOpen4} onOk={()=>createCompany()} onCancel={()=>setIsModalOpen4(false)}>

@@ -78,6 +78,19 @@ function deletegl_desert() {
   })  
 }
 
+function deletegl_desert() {
+  axios.delete(`${url}/api/gl_desert/${selectId}`,).then(res=>{
+    setIsModalOpen13(false)
+    axios.get(`${url}/api/gl_desert`).then(res=>{
+      setgl_desert(res.data)
+    })
+    message.success("delete gl_desert")
+  }).catch(err=>{
+    message.error("NOT delete")
+    setIsModalOpen13(false)
+  })  
+}
+
 const gl_desertcolumn = [
   {
     title: 'id',
@@ -143,7 +156,7 @@ axios.get(`${url}/api/foods`).then(res=>{
 flexWrap:'wrap',
 justifyContent:'space-around'}}>
 <div style={{width:'100%',maxWidth:'700px',marginTop:'40px'}}>
-   <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}> <h2 >Десерты от кондитеров</h2> <Button type='primary'  onClick={()=>{
+   <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}> <h2>ПОПУЛЯРНЫЕ ДЕСЕРТЫ</h2> <Button type='primary'  onClick={()=>{
     setIsModalOpen11(true)
    }
    } >create</Button>  </div>

@@ -143,7 +143,7 @@ axios.get(`${url}/api/foods`).then(res=>{
 flexWrap:'wrap',
 justifyContent:'space-around'}}>
 <div style={{width:'100%',maxWidth:'700px',marginTop:'40px'}}>
-   <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}> <h2 >Десерты от кондитеров</h2> <Button type='primary'  onClick={()=>{
+   <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}> <h2 >ПОПУЛЯРНЫЕ БЛЮДА</h2> <Button type='primary'  onClick={()=>{
     setIsModalOpen11(true)
    }
    } >create</Button>  </div>
