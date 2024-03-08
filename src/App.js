@@ -6,7 +6,7 @@ import Construction from "./pages/Construction";
 import Profile from "./pages/Profile";
 import SignIn from "./pages/SignIn";
 import Zakaz from "./pages/Zakaz";
-
+import Glotzif from "./pages/Consturction/Glotzif.js"
 
 import Main from "./components/layout/Main";
 // import "antd/dist/antd.css";
@@ -20,6 +20,7 @@ function App() {
   const [token,setToken]=useState(sessionStorage.getItem("token"))
   return (
     <div className="App">
+      <Glotzif/>
       <Switch>
        
          {token?( <Main>
