@@ -2,7 +2,14 @@ import { Button, Checkbox, Image, Input, Modal, Space, Table, message } from 'an
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import url from './host'
-import SizUchun  from "./Consturction/SizUchun"
+import SizUchun  from './Consturction1/SizUchun.js'
+import OshpazdanTaom  from './Consturction1/OshpazdanTaom.js'
+import Shirinliklar  from './Consturction1/Shirinliklar.js'
+import Soglom  from './Consturction1/Soglom.js'
+import GlFood  from './Consturction1/GlFood.js'
+import GlDesert  from './Consturction1/GlDesert.js'
+
+
 export default function Construction() {
 const [isModalOpen4,setIsModalOpen4]=useState(false)
 const [isModalOpen5,setIsModalOpen5]=useState(false)
@@ -264,6 +271,12 @@ axios.get(`${url}/api/company`).then(res=>{
 }} type="primary">Create company</Button>)}
 
 <SizUchun/>
+<OshpazdanTaom/>
+<Shirinliklar/>
+<Soglom/>
+<GlFood/>
+<GlDesert/>
+
     {/* Company */}
     <Modal title="Осторожность" visible={isModalOpen4} onOk={()=>createCompany()} onCancel={()=>setIsModalOpen4(false)}>
    <input id='email' showCount maxLength={50} placeholder='email'  />
