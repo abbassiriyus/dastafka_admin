@@ -5,7 +5,7 @@ import url from './host.js';
 import axios from 'axios';
 import Products from "./Products.js"
 const { TextArea } = Input;
-export default function CardsProduct() {
+export default function CardsProduct({ post }) {
   var [category, setCategory] = useState([])
   var [checkFile, setCheckFile] = useState(false)
   var [checkFile1, setCheckFile1] = useState(false)
