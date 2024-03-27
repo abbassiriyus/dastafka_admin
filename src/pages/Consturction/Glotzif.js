@@ -91,6 +91,11 @@ function deletegl_otzif() {
 
 const gl_otzifcolumn = [
   {
+    title: 'id',
+    dataIndex: 'id',
+    key: 'id',
+  },
+  {
     title: 'Image',
     dataIndex: 'name',
     render: (_,text) => <Image src={text.image} height={"40px"}/>,
@@ -105,9 +110,9 @@ const gl_otzifcolumn = [
   key: 'servis',
 },
 {
-  title: 'title',
-  dataIndex: 'title',
-  key: 'title',
+  title: 'deskription',
+  dataIndex: 'deskription',
+  key: 'deskription',
 },
 
 {
@@ -145,14 +150,14 @@ setgl_otzif(res.data)
 },[])
 
   return (
-    <div>
+    <div style={{width:'100%',maxWidth:'700px'}}>
 
 
 <div style={{display:'flex',
 flexWrap:'wrap',
 justifyContent:'space-around'}}>
 <div style={{width:'100%',maxWidth:'700px',marginTop:'40px'}}>
-   <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}> <h2 >User mark</h2> <Button type='primary'  onClick={()=>{
+   <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}> <h2 >User mark in header</h2> <Button type='primary'  onClick={()=>{
     setIsModalOpen11(true)
    }
    } >create</Button>  </div>
@@ -163,7 +168,7 @@ justifyContent:'space-around'}}>
 
 
 {/* gl_otzif */}
-<Modal title="Осторожность" visible={isModalOpen11} onOk={()=>creategl_otzif()} onCancel={()=>setIsModalOpen11(false)}>
+<Modal title="Осторожность" open={isModalOpen11} onOk={()=>creategl_otzif()} onCancel={()=>setIsModalOpen11(false)}>
     <input id='fullname11' showCount maxLength={50} placeholder='fullname'  />
     <br />
     <br />
@@ -178,10 +183,10 @@ justifyContent:'space-around'}}>
     <Checkbox onChange={(e)=>onFile11(e)}>file</Checkbox>
     <input type='text' id='image11' placeholder='image'  />
 </Modal>
-<Modal title="Осторожность" visible={isModalOpen12} onOk={()=>deletegl_otzif()} onCancel={()=>setIsModalOpen12(false)}>
+<Modal title="Осторожность" open={isModalOpen12} onOk={()=>deletegl_otzif()} onCancel={()=>setIsModalOpen12(false)}>
     <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
 </Modal>
- <Modal title="Осторожность" visible={isModalOpen13} onOk={()=>updategl_otzif()} onCancel={()=>setIsModalOpen13(false)}>
+ <Modal title="Осторожность" open={isModalOpen13} onOk={()=>updategl_otzif()} onCancel={()=>setIsModalOpen13(false)}>
  <input id='fullname13' showCount maxLength={50} placeholder='fullname'  />
     <br />
     <br />

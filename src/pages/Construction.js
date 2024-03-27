@@ -12,6 +12,13 @@ import GlProduct from './Consturction1/GlProduct.js'
 import GlUsers from './Consturction1/GlUsers.js'
 import Glotzif from './Consturction/Glotzif.js'
 import Userprog from './Consturction1/Userprog.js'
+import IshYonalishi from './Consturction1/IshYonalishi.js'
+import Advantages from './Consturction1/Advantages.js'
+import Necessary from './Consturction1/Necessary.js'
+import FoodMark from './Consturction1/FoodMark.js'
+
+
+
 
 
 export default function Construction() {
@@ -279,7 +286,7 @@ axios.get(`${url}/api/company`).then(res=>{
 </div>):(
 <Button onClick={()=>{setIsModalOpen4(true)
 }} type="primary">Create company</Button>)}
-<div style={{width:'100%', maxWidth:'1000px', justifyContent:'space-between', margin:"auto", display:'flex',flexWrap:'wrap',gap:'20px'}}>
+<div style={{width:'100%', justifyContent:'space-between', margin:"auto", display:'flex',flexWrap:'wrap',}}>
 <SizUchun/>
 <OshpazdanTaom/>
 <Shirinliklar/>
@@ -290,6 +297,11 @@ axios.get(`${url}/api/company`).then(res=>{
 <GlUsers/>
 <Glotzif/>
 <Userprog/>
+<IshYonalishi/>
+<Advantages/>
+<Necessary/>
+<FoodMark/>
+
 </div>
     {/* Company */}
     <Modal title="Осторожность" visible={isModalOpen4} onOk={()=>createCompany()} onCancel={()=>setIsModalOpen4(false)}>

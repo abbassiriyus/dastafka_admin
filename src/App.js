@@ -23,6 +23,7 @@ function App() {
       <Switch>
        
          {token?( <Main>
+          <Route exact path="/" component={Home} />
            <Route exact path="/dashboard" component={Home} />
            <Route exact path="/zakaz" component={Zakaz} />
            <Route exact path="/tables" component={Users} />
@@ -30,16 +31,13 @@ function App() {
            <Route exact path="/Construction" component={Construction} />
            <Route exact path="/profile" component={Profile} />
            <Route exact path="/configProduct" component={MarkaAndSponsor} />
-       
-
-
-           <Redirect from="*" to="/dashboard" />
-           
+           <Redirect from="*" to="/" />
            </Main>
          ):(
       <div>
+            <Route exact path="/" component={SignIn} />
             <Route exact path="/login" component={SignIn} />
-          <Redirect from="*" to="/login" />
+          <Redirect from="*" to="/" />
       </div>
          )}
         

@@ -128,9 +128,9 @@ export default function Zakaz() {
   ];
 
   function deleteZakaz(id){
-    axios.delete(`${url}/api/zakaz/${id}`).then(res=>{
+    axios.delete(`${url}/api/food_seller/${id}`).then(res=>{
        alert("Удалено")
-       axios.get(`${url}/api/zakaz`).then((res) => {
+       axios.get(`${url}/api/food_seller`).then((res) => {
         setZakaz(res.data);
       });
     }).catch(err=>{

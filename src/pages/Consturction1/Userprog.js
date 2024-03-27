@@ -45,7 +45,7 @@ function createuser_prog() {
   axios.post(`${url}/api/userprog`,postdata).then(res=>{
       message.success("create new data")
       setIsModalOpen11(false)
-  axios.get(`${url}/api/user_prog`).then(res=>{
+  axios.get(`${url}/api//userprog/header`).then(res=>{
       setuser_prog(res.data)
   })
   }).catch(err=>{
@@ -92,6 +92,11 @@ function deleteuser_prog() {
 
 const user_progcolumn = [
   {
+    title: 'id',
+    dataIndex: 'id',
+    key: 'id',
+  },
+  {
     title: 'Image',
     dataIndex: 'name',
     render: (_,text) => <Image src={text.image} height={"40px"}/>,
@@ -105,11 +110,7 @@ const user_progcolumn = [
   dataIndex: 'food_id',
   key: 'food_id',
 },
-{
-  title: 'title',
-  dataIndex: 'title',
-  key: 'title',
-},
+
 
 {
   title: 'Action',
@@ -152,7 +153,7 @@ axios.get(`${url}/api/users`).then(res=>{
 },[])
 
   return (
-    <div>
+    <div style={{width:'100%',maxWidth:'700px'}}>
 
 
 <div style={{display:'flex',
@@ -170,7 +171,7 @@ justifyContent:'space-around'}}>
 
 
 {/* user_prog */}
-<Modal title="Осторожность" visible={isModalOpen11} onOk={()=>createuser_prog()} onCancel={()=>setIsModalOpen11(false)}>
+<Modal title="Осторожность" open={isModalOpen11} onOk={()=>createuser_prog()} onCancel={()=>setIsModalOpen11(false)}>
 <label htmlFor="">users</label><br />
 <Select style={{width:'90%'}} id="marka" onChange={(value) => {
             SetSelectUsers(value)
@@ -193,18 +194,25 @@ justifyContent:'space-around'}}>
     <Checkbox onChange={(e)=>onFile11(e)}>file</Checkbox>
     <input type='text' id='image11' placeholder='image'  />
 </Modal>
-<Modal title="Осторожность" visible={isModalOpen12} onOk={()=>deleteuser_prog()} onCancel={()=>setIsModalOpen12(false)}>
+<Modal title="Осторожность" open={isModalOpen12} onOk={()=>deleteuser_prog()} onCancel={()=>setIsModalOpen12(false)}>
     <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
 </Modal>
- <Modal title="Осторожность" visible={isModalOpen13} onOk={()=>updateuser_prog()} onCancel={()=>setIsModalOpen13(false)}>
- <input id='user_id13' showCount maxLength={50} placeholder='user_id'  />
-    <br />
-    <br />
-    <input id='food_id13' showCount maxLength={50} placeholder='food_id'  />
-    <br />
-    <br />
-    <br />
-    <br />
+ <Modal title="Осторожность" open={isModalOpen13} onOk={()=>updateuser_prog()} onCancel={()=>setIsModalOpen13(false)}>
+ <Select style={{width:'90%'}} id="user_id13" onChange={(value) => {
+            SetSelectUsers(value)
+          }} >
+            {users.map(item => {
+              return <Select.Option value={item.id}> {item.id} {item.name}</Select.Option>
+            })}
+</Select><br />
+          <label htmlFor="">foods</label><br />
+          <Select style={{width:'90%'}} id="food_id13" onChange={(value) => {
+            SetSelectfoods(value)
+          }} >
+            {foods.map(item => {
+              return <Select.Option value={item.id}> {item.id} {item.foods_name}</Select.Option>
+            })}
+          </Select>
     <Checkbox onChange={(e)=>onFile13(e)}>file</Checkbox>
     <input type='text' id='image13' placeholder='image'  />
 </Modal>

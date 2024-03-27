@@ -36,7 +36,9 @@ function loginIn() {
   data.append("password",document.querySelector("#parol").value)
   axios.post(`${url}/api/login`,data).then(res=>{
     sessionStorage.setItem('token',res.data.access)
+   setTimeout(() => {
     window.location.reload()
+   }, 1000);
   }).catch(err=>{
     alert("xato")
   })

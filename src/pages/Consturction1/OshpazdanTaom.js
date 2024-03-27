@@ -40,9 +40,7 @@ function createoshpazdan_taom() {
   axios.post(`${url}/api/oshpazdan_taom`,postdata).then(res=>{
       message.success("create new data")
       setIsModalOpen11(false)
-  axios.get(`${url}/api/oshpazdan_taom`).then(res=>{
-      setoshpazdan_taom(res.data)
-  })
+      getoshpazdan_taom()
   }).catch(err=>{
   message.error("not create")
   setIsModalOpen11(false)
@@ -55,9 +53,7 @@ function updateoshpazdan_taom() {
     axios.put(`${url}/api/oshpazdan_taom/${selectId}`,postdata).then(res=>{
         message.success("create new data")
         setIsModalOpen13(false)
-    axios.get(`${url}/api/oshpazdan_taom`).then(res=>{
-        setoshpazdan_taom(res.data)
-    })
+        getoshpazdan_taom()
     }).catch(err=>{
     message.error("not create")
     setIsModalOpen13(false)
@@ -68,9 +64,7 @@ function updateoshpazdan_taom() {
 function deleteoshpazdan_taom() {
   axios.delete(`${url}/api/oshpazdan_taom/${selectId}`,).then(res=>{
     setIsModalOpen12(false)
-    axios.get(`${url}/api/oshpazdan_taom`).then(res2=>{
-      setoshpazdan_taom(res2.data)
-    })
+    getoshpazdan_taom()
     message.success("delete oshpazdan_taom")
   }).catch(err=>{
     message.error("NOT delete")
@@ -127,7 +121,7 @@ axios.get(`${url}/api/category`).then(res=>{
 },[])
 
   return (
-    <div>
+    <div style={{width:'100%',maxWidth:'700px'}}>
 
 
 <div style={{display:'flex',

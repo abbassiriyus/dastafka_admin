@@ -127,7 +127,7 @@ axios.get(`${url}/api/category`).then(res=>{
 },[])
 
   return (
-    <div>
+    <div style={{width:'100%',maxWidth:'700px'}}>
 
 
 <div style={{display:'flex',

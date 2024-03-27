@@ -40,9 +40,7 @@ function creategl_foods() {
   axios.post(`${url}/api/gl_foods`,postdata).then(res=>{
       message.success("create new data")
       setIsModalOpen11(false)
-  axios.get(`${url}/api/gl_foods`).then(res=>{
-      setgl_foods(res.data)
-  })
+      getgl_foods()
   }).catch(err=>{
   message.error("not create")
   setIsModalOpen11(false)
@@ -55,9 +53,7 @@ function updategl_foods() {
     axios.put(`${url}/api/gl_foods/${selectId}`,postdata).then(res=>{
         message.success("create new data")
         setIsModalOpen13(false)
-    axios.get(`${url}/api/gl_foods`).then(res=>{
-        setgl_foods(res.data)
-    })
+        getgl_foods()
     }).catch(err=>{
     message.error("not create")
     setIsModalOpen13(false)
@@ -136,7 +132,7 @@ axios.get(`${url}/api/foods`).then(res=>{
 },[])
 
   return (
-    <div>
+    <div style={{width:'100%',maxWidth:'700px'}}>
 
 
 <div style={{display:'flex',

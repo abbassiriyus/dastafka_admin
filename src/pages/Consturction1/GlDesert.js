@@ -1,4 +1,4 @@
-import { Button, Checkbox, Image, Modal, Select, Space, Table, message } from 'antd'
+import { Button,  Image, Modal, Select, Space, Table, message } from 'antd'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import url from '../host'
@@ -7,32 +7,22 @@ export default function GlDesert() {
 const [isModalOpen11,setIsModalOpen11]=useState(false)
 const [isModalOpen12,setIsModalOpen12]=useState(false)
 const [isModalOpen13,setIsModalOpen13]=useState(false)
-const [checkFile,setCheckFile]=useState()
+
 const [selectId,setSelectId]=useState(0)
 const [gl_desert,setgl_desert]=useState(0)
 const [foods,setfoods]=useState([])
-function onFile11(e){
-  setCheckFile(e.target.checked)
-     if(e.target.checked){
-     document.querySelector("#image11").type="file"
-     }else{
-       document.querySelector("#image11").type="text"
-     }
-   }
 
-
-function onFile13(e){
-    setCheckFile(e.target.checked)
-       if(e.target.checked){
-       document.querySelector("#image13").type="file"
-       }else{
-         document.querySelector("#image13").type="text"
-       }
-     }
 function getgl_desert(params) {
   axios.get(`${url}/api/gl_desert`).then(res=>{
     setgl_desert(res.data)
-  }) 
+    axios.get(`${url}/api/foods`).then(res=>{
+      setfoods(res.data)
+      })
+    }).catch(err=>{
+      axios.get(`${url}/api/foods`).then(res=>{
+        setfoods(res.data)
+        })
+    }) 
 }
 function creategl_desert() {
   var postdata=new FormData()
@@ -40,9 +30,7 @@ function creategl_desert() {
   axios.post(`${url}/api/gl_desert`,postdata).then(res=>{
       message.success("create new data")
       setIsModalOpen11(false)
-  axios.get(`${url}/api/gl_desert`).then(res=>{
-      setgl_desert(res.data)
-  })
+      getgl_desert()
   }).catch(err=>{
   message.error("not create")
   setIsModalOpen11(false)
@@ -55,9 +43,7 @@ function updategl_desert() {
     axios.put(`${url}/api/gl_desert/${selectId}`,postdata).then(res=>{
         message.success("create new data")
         setIsModalOpen13(false)
-    axios.get(`${url}/api/gl_desert`).then(res=>{
-        setgl_desert(res.data)
-    })
+        getgl_desert()
     }).catch(err=>{
     message.error("not create")
     setIsModalOpen13(false)
@@ -68,9 +54,7 @@ function updategl_desert() {
 function deletegl_desert() {
   axios.delete(`${url}/api/gl_desert/${selectId}`,).then(res=>{
     setIsModalOpen12(false)
-    axios.get(`${url}/api/gl_desert`).then(res2=>{
-      setgl_desert(res2.data)
-    })
+    getgl_desert()
     message.success("delete gl_desert")
   }).catch(err=>{
     message.error("NOT delete")
@@ -149,7 +133,7 @@ axios.get(`${url}/api/foods`).then(res=>{
 },[])
 
   return (
-    <div>
+    <div style={{width:'100%',maxWidth:'700px'}}>
 
 
 <div style={{display:'flex',

@@ -40,9 +40,7 @@ function creategl_users() {
   axios.post(`${url}/api/gl_users`,postdata).then(res=>{
       message.success("create new data")
       setIsModalOpen11(false)
-  axios.get(`${url}/api/gl_users`).then(res=>{
-      setgl_users(res.data)
-  })
+      getgl_users()
   }).catch(err=>{
   message.error("not create")
   setIsModalOpen11(false)
@@ -55,9 +53,7 @@ function updategl_users() {
     axios.put(`${url}/api/gl_users/${selectId}`,postdata).then(res=>{
         message.success("create new data")
         setIsModalOpen13(false)
-    axios.get(`${url}/api/gl_users`).then(res=>{
-        setgl_users(res.data)
-    })
+        getgl_users()
     }).catch(err=>{
     message.error("not create")
     setIsModalOpen13(false)
@@ -68,9 +64,7 @@ function updategl_users() {
 function deletegl_users() {
   axios.delete(`${url}/api/gl_users/${selectId}`,).then(res=>{
     setIsModalOpen12(false)
-    axios.get(`${url}/api/gl_users`).then(res2=>{
-      setgl_users(res2.data)
-    })
+    getgl_users()
     message.success("delete gl_users")
   }).catch(err=>{
     message.error("NOT delete")
@@ -89,11 +83,7 @@ const gl_userscolumn = [
     dataIndex: 'name',
     render: (_,text) => <Image src={text.image} height={"40px"}/>,
   },
-{
-  title: 'foods_name',
-  dataIndex: 'foods_name',
-  key: 'foods_name',
-},
+
 {
   title: 'name',
   dataIndex: 'name',
@@ -136,7 +126,7 @@ axios.get(`${url}/api/users`).then(res=>{
 },[])
 
   return (
-    <div>
+    <div style={{width:'100%',maxWidth:'700px'}}>
 
 
 <div style={{display:'flex',
@@ -155,7 +145,7 @@ justifyContent:'space-around'}}>
 
 
 {/* gl_users */}
-<Modal title="Осторожность" visible={isModalOpen11} onOk={()=>creategl_users()} onCancel={()=>setIsModalOpen11(false)}>
+<Modal title="Осторожность" open={isModalOpen11} onOk={()=>creategl_users()} onCancel={()=>setIsModalOpen11(false)}>
 <label htmlFor="">foods</label><br />
           <Select style={{width:'90%'}} id="marka" onChange={(e) => {
             SetSelectfoods(e);console.log(e);
@@ -165,10 +155,10 @@ justifyContent:'space-around'}}>
             })}
           </Select>
 </Modal>
-<Modal title="Осторожность" visible={isModalOpen12} onOk={()=>deletegl_users()} onCancel={()=>setIsModalOpen12(false)}>
+<Modal title="Осторожность" open={isModalOpen12} onOk={()=>deletegl_users()} onCancel={()=>setIsModalOpen12(false)}>
     <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
 </Modal>
- <Modal title="Осторожность" visible={isModalOpen13} onOk={()=>updategl_users()} onCancel={()=>setIsModalOpen13(false)}>
+ <Modal title="Осторожность" open={isModalOpen13} onOk={()=>updategl_users()} onCancel={()=>setIsModalOpen13(false)}>
  <Select style={{width:'90%'}} id="marka" onChange={(value) => {
             SetSelectfoods(value)
           }} >

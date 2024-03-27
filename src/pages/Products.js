@@ -27,8 +27,6 @@ function Tables(props) {
   const [homiy, SetHomiy] = useState([])
   const [selectMarka, SetSelectMarka] = useState(null)
   const [selectcategory, SetSelectCategory] = useState(null)
-
-  const [selecthomiy, SetSelectHomiy] = useState(null)
   const [deleteid, setDeleteId] = useState()
   const [isModalOpen12, setIsModalOpen12] = useState(false)
   const showModal1 = () => {
@@ -39,7 +37,16 @@ function Tables(props) {
     showModal1()
   }
   const handleOk1 = () => {
- 
+ axios.delete(`${url}/api/foods/${deleteid}`).then(res=>{
+  message.success("delete data")
+  handleCancel1()
+  axios.get(`${url}/api/foods`).then(res => {
+    setData(res.data)
+
+  })
+ }).catch(err=>{
+  message.error("no delete")
+ })
   };
 
   const handleCancel1 = () => {
@@ -392,7 +399,7 @@ axios.get(`${url}/api/foods`).then(res=>{
           <br />
           <br />
         </Modal>
-        <Modal title="Осторожность" open={isModalOpen1} onOk={() => handleOk1} onCancel={handleCancel1}>
+        <Modal title="Осторожность" open={isModalOpen1} onOk={() => handleOk1()} onCancel={handleCancel1}>
           <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
         </Modal>
         <Modal title="Edit foods" open={isModalOpen12} onOk={() => PutProduct()} onCancel={handleCancel12}>

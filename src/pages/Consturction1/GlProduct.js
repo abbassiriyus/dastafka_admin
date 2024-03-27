@@ -40,9 +40,7 @@ function creategl_product() {
   axios.post(`${url}/api/gl_product`,postdata).then(res=>{
       message.success("create new data")
       setIsModalOpen11(false)
-  axios.get(`${url}/api/gl_product`).then(res=>{
-      setgl_product(res.data)
-  })
+      getgl_product()
   }).catch(err=>{
   message.error("not create")
   setIsModalOpen11(false)
@@ -55,9 +53,7 @@ function updategl_product() {
     axios.put(`${url}/api/gl_product/${selectId}`,postdata).then(res=>{
         message.success("create new data")
         setIsModalOpen13(false)
-    axios.get(`${url}/api/gl_product`).then(res=>{
-        setgl_product(res.data)
-    })
+        getgl_product()
     }).catch(err=>{
     message.error("not create")
     setIsModalOpen13(false)
@@ -136,13 +132,13 @@ axios.get(`${url}/api/foods`).then(res=>{
 },[])
 
   return (
-    <div>
+    <div style={{width:'100%',maxWidth:'700px'}}>
 
 
 <div style={{display:'flex',
 flexWrap:'wrap',
 justifyContent:'space-around'}}>
-<div style={{width:'100%',maxWidth:'700px',marginTop:'40px'}}>
+<div style={{width:'100%',maxWidth:'600px',marginTop:'40px'}}>
    <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}> <h2 >Десерты от кондитеров</h2> <Button type='primary'  onClick={()=>{
     setIsModalOpen11(true)
    }
