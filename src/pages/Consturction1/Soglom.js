@@ -102,13 +102,13 @@ const soglomcolumn = [
     <Space size="middle">
      <Button  type="dashed"
      onClick={()=>{
-      setSelectId(record.id)
+      setSelectId(record.food_ca_id)
       setIsModalOpen13(true)
      }}
      >  Edit</Button>
     <Button danger onClick={()=>{
       setIsModalOpen12(true)
-      setSelectId(record.id)
+      setSelectId(record.food_ca_id)
     }} >Delete</Button>
     </Space>
   ),
