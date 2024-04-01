@@ -135,7 +135,7 @@ justifyContent:'space-around'}}>
 
 {/* advantages */}
 <Modal title="Осторожность" visible={isModalOpen11} onOk={()=>createadvantages()} onCancel={()=>setIsModalOpen11(false)}>
-    <input id='title11' showCount maxLength={50} placeholder='title'  />
+    <input id='title11' showCount   placeholder='title'  />
     <br />
     <br />
 </Modal>
@@ -143,7 +143,7 @@ justifyContent:'space-around'}}>
     <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
 </Modal>
  <Modal title="Осторожность" visible={isModalOpen13} onOk={()=>updateadvantages()} onCancel={()=>setIsModalOpen13(false)}>
- <input id='title13' showCount maxLength={50} placeholder='title'  />
+ <input id='title13' showCount   placeholder='title'  />
     <br />
     <br />
 </Modal>

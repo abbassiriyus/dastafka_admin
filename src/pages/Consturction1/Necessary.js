@@ -156,7 +156,7 @@ justifyContent:'space-around'}}>
 
 {/* necessary */}
 <Modal title="Осторожность" visible={isModalOpen11} onOk={()=>createnecessary()} onCancel={()=>setIsModalOpen11(false)}>
-    <input style={{width:'90%',border:'1px solid grey'}} id='title11' showCount maxLength={50} placeholder='title'  />
+    <input style={{width:'90%',border:'1px solid grey'}} id='title11' showCount   placeholder='title'  />
     <br />
     <br />
     <Checkbox onChange={(e)=>onFile11(e)}>file</Checkbox>
@@ -166,7 +166,7 @@ justifyContent:'space-around'}}>
     <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
 </Modal>
  <Modal title="Осторожность" visible={isModalOpen13} onOk={()=>updatenecessary()} onCancel={()=>setIsModalOpen13(false)}>
-    <input  style={{width:'90%',border:'1px solid grey'}} id='title13' showCount maxLength={50} placeholder='title'  />
+    <input  style={{width:'90%',border:'1px solid grey'}} id='title13' showCount   placeholder='title'  />
     <br />
     <br />
     <Checkbox onChange={(e)=>onFile13(e)}>file</Checkbox>

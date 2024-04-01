@@ -305,25 +305,25 @@ axios.get(`${url}/api/company`).then(res=>{
 </div>
     {/* Company */}
     <Modal title="Осторожность" visible={isModalOpen4} onOk={()=>createCompany()} onCancel={()=>setIsModalOpen4(false)}>
-   <input id='email' showCount maxLength={50} placeholder='email'  />
+   <input id='email' showCount   placeholder='email'  />
     <br />
     <br />
-    <input id='whatsapp' showCount maxLength={50} placeholder='whatsapp'  />
+    <input id='whatsapp' showCount   placeholder='whatsapp'  />
     <br />
     <br />
-    <input id='vkantakt' showCount maxLength={50} placeholder='vkantakt'  />
+    <input id='vkantakt' showCount   placeholder='vkantakt'  />
     <br />
     <br />
-    <input id='telegram' showCount maxLength={50} placeholder='telegram'  />
+    <input id='telegram' showCount   placeholder='telegram'  />
     <br />
     <br />
-    <input id='playmarket' showCount maxLength={50} placeholder='playmarket'  />
+    <input id='playmarket' showCount   placeholder='playmarket'  />
     <br />
     <br />
-    <input id='app_store' showCount maxLength={50} placeholder='app_store'  />
+    <input id='app_store' showCount   placeholder='app_store'  />
     <br />
     <br />
-    <input id='okru' showCount maxLength={50} placeholder='okru'  />
+    <input id='okru' showCount   placeholder='okru'  />
     <br />
     <br />
     <br />
@@ -333,25 +333,25 @@ axios.get(`${url}/api/company`).then(res=>{
 </Modal>
  <Modal title="Осторожность" visible={isModalOpen5} 
  onOk={()=>updateCompany()} onCancel={()=>setIsModalOpen5(false)}>
-   <input id='email1' showCount maxLength={50} placeholder='email'  />
+   <input id='email1' showCount   placeholder='email'  />
     <br />
     <br />
-    <input id='whatsapp1' showCount maxLength={50} placeholder='whatsapp'  />
+    <input id='whatsapp1' showCount   placeholder='whatsapp'  />
     <br />
     <br />
-    <input id='vkantakt1'  showCount maxLength={50} placeholder='vkantakt'  />
+    <input id='vkantakt1'  showCount   placeholder='vkantakt'  />
     <br />
     <br />
-    <input id='telegram1' showCount maxLength={50} placeholder='telegram'  />
+    <input id='telegram1' showCount   placeholder='telegram'  />
     <br />
     <br />
-    <input id='playmarket1' showCount maxLength={50} placeholder='playmarket'  />
+    <input id='playmarket1' showCount   placeholder='playmarket'  />
     <br />
     <br />
-    <input id='app_store1' showCount maxLength={50} placeholder='app_store'  />
+    <input id='app_store1' showCount   placeholder='app_store'  />
     <br />
     <br />
-    <input id='okru1' showCount maxLength={50} placeholder='okru'  />
+    <input id='okru1' showCount   placeholder='okru'  />
     <br />
     <br />
     <br />
@@ -364,13 +364,13 @@ axios.get(`${url}/api/company`).then(res=>{
 
 {/* gl_desert */}
 <Modal title="Осторожность" visible={isModalOpen11} onOk={()=>creategl_desert()} onCancel={()=>setIsModalOpen11(false)}>
-    <input id='latitude11' showCount maxLength={50} placeholder='latitude'  />
+    <input id='latitude11' showCount   placeholder='latitude'  />
     <br />
     <br />
-    <input id='title11' showCount maxLength={50} placeholder='title'  />
+    <input id='title11' showCount   placeholder='title'  />
     <br />
     <br />
-    <input id='longitude11' showCount maxLength={50} placeholder='longitude'  />
+    <input id='longitude11' showCount   placeholder='longitude'  />
     <br />
     <br />
     <br />
@@ -382,13 +382,13 @@ axios.get(`${url}/api/company`).then(res=>{
     <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
 </Modal>
  <Modal title="Осторожность" visible={isModalOpen13} onOk={()=>updategl_desert()} onCancel={()=>setIsModalOpen13(false)}>
- <input id='latitude13' showCount maxLength={50} placeholder='latitude'  />
+ <input id='latitude13' showCount   placeholder='latitude'  />
     <br />
     <br />
-    <input id='title13' showCount maxLength={50} placeholder='title'  />
+    <input id='title13' showCount   placeholder='title'  />
     <br />
     <br />
-    <input id='longitude13' showCount maxLength={50} placeholder='longitude'  />
+    <input id='longitude13' showCount   placeholder='longitude'  />
     <br />
     <br />
     <br />

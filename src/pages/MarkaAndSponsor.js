@@ -1361,25 +1361,25 @@ export default function MarkaAndSponsor() {
         onOk={() => createHomiy()}
         onCancel={() => handleCancel2()}
       >
-        <input id="title" showCount maxLength={50} placeholder="title" />
+        <input id="title" showCount   placeholder="title" />
         <br />
         <br />
-           <input id="gis_mark" type="number" showCount maxLength={50} placeholder="gis_mark" />
+           <input id="gis_mark" type="number" showCount   placeholder="gis_mark" />
         <br />
         <br />
-        <input id="betomtaxi_mark" type="number" showCount maxLength={50} placeholder="betomtaxi_mark" />
+        <input id="betomtaxi_mark" type="number" showCount   placeholder="betomtaxi_mark" />
         <br />
         <br />
-        <input id="email"  showCount maxLength={50} placeholder="email" />
+        <input id="email"  showCount   placeholder="email" />
         <br />
         <br />
-        <input id="phone" type="phone" showCount maxLength={50} placeholder="phone" />
+        <input id="phone" type="phone" showCount   placeholder="phone" />
         <br />
         <br />
         <textarea style={{width:'90%',border:'1px solid grey',outline:'none',padding:'5px',borderRadius:'5px'}}  id="description" type="text"  placeholder="description" />
         <br />
         <br />
-        <input id="link" showCount maxLength={50} placeholder="link" />
+        <input id="link" showCount   placeholder="link" />
         <br />
         <br />
         <Checkbox onChange={(e) => onFile1(e)}>file</Checkbox>
@@ -1402,25 +1402,25 @@ export default function MarkaAndSponsor() {
         onOk={() => PutHomeiy()}
         onCancel={() => handleCancel3()}
       >
-        <input id="title3" showCount maxLength={50} placeholder="title" />
+        <input id="title3" showCount   placeholder="title" />
         <br />
         <br />
-           <input id="gis_mark3" type="number" showCount maxLength={50} placeholder="gis_mark" />
+           <input id="gis_mark3" type="number" showCount   placeholder="gis_mark" />
         <br />
         <br />
-        <input id="betomtaxi_mark3" type="number" showCount maxLength={50} placeholder="betomtaxi_mark" />
+        <input id="betomtaxi_mark3" type="number" showCount   placeholder="betomtaxi_mark" />
         <br />
         <br />
-        <input id="email3"  showCount maxLength={50} placeholder="email" />
+        <input id="email3"  showCount   placeholder="email" />
         <br />
         <br />
-        <input id="phone3" type="phone" showCount maxLength={50} placeholder="phone" />
+        <input id="phone3" type="phone" showCount   placeholder="phone" />
         <br />
         <br />
         <textarea style={{width:'90%',border:'1px solid grey',outline:'none',padding:'5px',borderRadius:'5px'}}  id="description3" type="text"  placeholder="description" />
         <br />
         <br />
-        <input id="link3" showCount maxLength={50} placeholder="link" />
+        <input id="link3" showCount   placeholder="link" />
         <br />
         <br />
         <Checkbox onChange={(e) => onFile3(e)}>file</Checkbox>
@@ -1434,7 +1434,7 @@ export default function MarkaAndSponsor() {
         onOk={() => CreateMarka()}
         onCancel={() => setIsModalOpen11(false)}
       >
-        <input id="title11" showCount maxLength={50} placeholder="title" />
+        <input id="title11" showCount   placeholder="title" />
       </Modal>
       <Modal
         title="Осторожность"
@@ -1454,7 +1454,7 @@ export default function MarkaAndSponsor() {
         onOk={() => PutMarka()}
         onCancel={() => setIsModalOpen13(false)}
       >
-        <input id="title13" showCount maxLength={50} placeholder="title" />
+        <input id="title13" showCount   placeholder="title" />
       </Modal>
 
       {/* Скачать приложение */}
@@ -1464,13 +1464,13 @@ export default function MarkaAndSponsor() {
         onOk={() => postPred()}
         onCancel={() => setIsModalOpen21(false)}
       >
-        <input id="title21" showCount maxLength={50} placeholder="title" />
+        <input id="title21" showCount   placeholder="title" />
         <br />
         <br />
         <TextArea
           id="link21"
           showCount
-          maxLength={50}
+           
           placeholder="deskription"
         />
         <br />
@@ -1496,13 +1496,13 @@ export default function MarkaAndSponsor() {
         onOk={() => PutPred()}
         onCancel={() => setIsModalOpen23(false)}
       >
-        <input id="title23" showCount maxLength={50} placeholder="title" />
+        <input id="title23" showCount   placeholder="title" />
         <br />
         <br />
         <TextArea
           id="link23"
           showCount
-          maxLength={50}
+           
           placeholder="deskription"
         />
         <br />
@@ -1518,13 +1518,13 @@ export default function MarkaAndSponsor() {
         onOk={() => createPreferences()}
         onCancel={() => setIsModalOpen31(false)}
       >
-        <input id="title31" showCount maxLength={50} placeholder="title" />
+        <input id="title31" showCount   placeholder="title" />
         <br />
         <br />
         <TextArea
           id="link31"
           showCount
-          maxLength={400}
+           
           placeholder="description"
         />
         <br />
@@ -1562,13 +1562,13 @@ export default function MarkaAndSponsor() {
         onOk={() => PutPreferences()}
         onCancel={() => setIsModalOpen33(false)}
       >
-        <input id="title33" showCount maxLength={50} placeholder="title" />
+        <input id="title33" showCount   placeholder="title" />
         <br />
         <br />
         <TextArea
           id="link33"
           showCount
-          maxLength={400}
+           
           placeholder="description"
         />
         <br />
@@ -1600,7 +1600,7 @@ export default function MarkaAndSponsor() {
           id="sena41"
           type="number"
           showCount
-          maxLength={50}
+           
           placeholder="gradus"
         />
         <br />
@@ -1609,7 +1609,7 @@ export default function MarkaAndSponsor() {
           id="gradus41"
           type="number"
           showCount
-          maxLength={50}
+           
           placeholder="sena"
         />
       </Modal>
@@ -1635,7 +1635,7 @@ export default function MarkaAndSponsor() {
           id="sena43"
           type="number"
           showCount
-          maxLength={50}
+           
           placeholder="Sena"
         />
         <br />
@@ -1644,7 +1644,7 @@ export default function MarkaAndSponsor() {
           id="gradus43"
           type="number"
           showCount
-          maxLength={50}
+           
           placeholder="Gradus"
         />
       </Modal>
@@ -1656,7 +1656,7 @@ export default function MarkaAndSponsor() {
         onOk={() => craeteAksiya()}
         onCancel={() => setIsModalOpen51(false)}
       >
-        <input id="title51" showCount maxLength={50} placeholder="title" />
+        <input id="title51" showCount   placeholder="title" />
         <br />
         <br />
         <label htmlFor="">Дата начала</label>
@@ -1671,7 +1671,7 @@ export default function MarkaAndSponsor() {
         <TextArea
           id="link51"
           showCount
-          maxLength={400}
+           
           placeholder="deskription"
         />
         <br />
@@ -1697,7 +1697,7 @@ export default function MarkaAndSponsor() {
         onOk={() => putAksiya()}
         onCancel={() => setIsModalOpen53(false)}
       >
-        <input id="title53" showCount maxLength={50} placeholder="title" />
+        <input id="title53" showCount   placeholder="title" />
         <br />
         <br />
         <label htmlFor="">Дата начала</label>
@@ -1712,7 +1712,7 @@ export default function MarkaAndSponsor() {
         <TextArea
           id="link53"
           showCount
-          maxLength={400}
+           
           placeholder="deskription"
         />
         <br />
@@ -1728,7 +1728,7 @@ export default function MarkaAndSponsor() {
         onOk={() => createNews()}
         onCancel={() => setIsModalOpen61(false)}
       >
-        <input id="title61" showCount maxLength={50} placeholder="title" />
+        <input id="title61" showCount   placeholder="title" />
         <br />
         <br />
         <TextArea id="link61" placeholder="description" />
@@ -1737,7 +1737,7 @@ export default function MarkaAndSponsor() {
         <TextArea
           id="deck61"
           showCount
-          maxLength={400}
+           
           placeholder="min_description"
         />
         <br />
@@ -1764,7 +1764,7 @@ export default function MarkaAndSponsor() {
         onOk={() => PutNews()}
         onCancel={() => setIsModalOpen63(false)}
       >
-        <input id="title63" showCount maxLength={50} placeholder="title" />
+        <input id="title63" showCount   placeholder="title" />
         <br />
         <br />
         <TextArea id="link63" placeholder="description" />
@@ -1773,7 +1773,7 @@ export default function MarkaAndSponsor() {
         <TextArea
           id="deck63"
           showCount
-          maxLength={400}
+           
           placeholder="min_description"
         />
         <br />

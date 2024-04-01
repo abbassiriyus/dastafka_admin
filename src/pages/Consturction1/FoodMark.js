@@ -182,7 +182,7 @@ justifyContent:'space-around'}}>
           </Select>
           <br />
     <br />
-    <textarea style={{width:'90%',minHeight:'200px',border:'1px solid grey'}} id='description11' showCount maxLength={50} placeholder='title'  />
+    <textarea style={{width:'90%',minHeight:'200px',border:'1px solid grey'}} id='description11' showCount   placeholder='title'  />
     <br />
     <br />
     <input id='mark11'  type='number' placeholder='mark'  />
@@ -212,10 +212,10 @@ justifyContent:'space-around'}}>
               return <Select.Option value={item.id}> {item.id} {item.name}</Select.Option>
             })}
           </Select>
-    <textarea  style={{width:'90%',minHeight:'200px',border:'1px solid grey'}} id='description13' showCount maxLength={50} placeholder='title'  />
+    <textarea  style={{width:'90%',minHeight:'200px',border:'1px solid grey'}} id='description13' showCount   placeholder='title'  />
     <br />
     <br />
-    <input id='mark13' showCount maxLength={50} placeholder='mark'  />
+    <input id='mark13' showCount   placeholder='mark'  />
     <br />
     <br />
     <br />

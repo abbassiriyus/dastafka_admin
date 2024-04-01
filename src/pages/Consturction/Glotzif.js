@@ -169,13 +169,13 @@ justifyContent:'space-around'}}>
 
 {/* gl_otzif */}
 <Modal title="Осторожность" open={isModalOpen11} onOk={()=>creategl_otzif()} onCancel={()=>setIsModalOpen11(false)}>
-    <input id='fullname11' showCount maxLength={50} placeholder='fullname'  />
+    <input id='fullname11' showCount placeholder='fullname'  />
     <br />
     <br />
-    <textarea style={{width:'90%',minHeight:'200px',border:'1px solid grey'}} id='deskription11' showCount maxLength={50} placeholder='title'  />
+    <textarea style={{width:'90%',minHeight:'200px',border:'1px solid grey'}} id='deskription11' showCount placeholder='title'  />
     <br />
     <br />
-    <input id='servis11' showCount maxLength={50} placeholder='servis'  />
+    <input id='servis11' showCount placeholder='servis'  />
     <br />
     <br />
     <br />
@@ -187,13 +187,13 @@ justifyContent:'space-around'}}>
     <p>Вы уверены, что хотите удалить эту информацию? Это может привести к плохим последствиям.</p>
 </Modal>
  <Modal title="Осторожность" open={isModalOpen13} onOk={()=>updategl_otzif()} onCancel={()=>setIsModalOpen13(false)}>
- <input id='fullname13' showCount maxLength={50} placeholder='fullname'  />
+ <input id='fullname13' showCount placeholder='fullname'  />
     <br />
     <br />
-    <textarea  style={{width:'90%',minHeight:'200px',border:'1px solid grey'}} id='deskription13' showCount maxLength={50} placeholder='title'  />
+    <textarea  style={{width:'90%',minHeight:'200px',border:'1px solid grey'}} id='deskription13' showCount placeholder='title'  />
     <br />
     <br />
-    <input id='servis13' showCount maxLength={50} placeholder='servis'  />
+    <input id='servis13' showCount placeholder='servis'  />
     <br />
     <br />
     <br />
